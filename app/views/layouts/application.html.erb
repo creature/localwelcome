@@ -12,6 +12,20 @@
     <h1><%= link_to t("site.title"), root_path %></h1>
   </nav>
 
+  <% if flash.key?(:notice) || flash.key?(:alert) %>
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+        <% if flash.key? :notice %>
+          <p class="alert alert-info"><%= flash[:notice] %></p>
+        <% end %>
+
+        <% if flash.key? :alert %>
+          <p class="alert alert-danger"><%= flash[:alert] %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 <%= yield %>
 
 </body>
