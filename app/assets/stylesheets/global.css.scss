@@ -5,6 +5,15 @@ nav {
   margin-bottom: 3rem;
   background-color: $flat-lynch;
 
+  a, a:visited, a:hover {
+    color: $flat-silver;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: lighten($flat-silver, 20%);
+  }
+
   h1 {
     margin-top: 0;
     font-size: 400%;
