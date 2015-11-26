@@ -10,6 +10,12 @@
 <body>
   <nav>
     <h1><%= link_to t("site.title"), root_path %></h1>
+    <p class="links pull-right">
+    <% if user_signed_in? %>
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path %>
+    <% end %>
   </nav>
 
   <% if flash.key?(:notice) || flash.key?(:alert) %>
