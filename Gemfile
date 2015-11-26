@@ -18,6 +18,7 @@ gem 'cancancan' # Allow for different kinds of users
 gem 'devise' # Authentication framework
 gem 'twitter-bootstrap-rails' # CSS framework
 gem 'bourbon' # Useful CSS functions
+gem 'google-webfonts-rails' # Helpers for webfonts
 
 group :development, :test do
   gem 'byebug'
