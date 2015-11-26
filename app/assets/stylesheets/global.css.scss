@@ -29,3 +29,16 @@ body {
 h1, h2, h3 {
   font-family: 'Dosis', 'Helvetica Neue', sans-serif;
 }
+
+.system.message {
+  font-style: italic;
+  color: $flat-edward;
+
+  &:before {
+    content: "[";
+  }
+
+  &:after {
+    content: "]";
+  }
+}
