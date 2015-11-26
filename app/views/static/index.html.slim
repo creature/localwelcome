@@ -1,0 +1,13 @@
+.container
+  .row.overview
+    p
+      Local Welcome helps people who are new to an area make friends & get a head start in their community. It brings together new immigrants & local volunteers over coffee in a relaxed, low-stakes, friendly environment.
+
+  .row.chapters
+    ul
+      - @chapters.each do |chapter|
+        li
+          = chapter.name
+
+  .row.contact
+    p You can email us on localwelcome@example.com

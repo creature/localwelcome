@@ -21,6 +21,7 @@ gem 'bourbon' # Useful CSS functions
 
 group :development, :test do
   gem 'byebug'
+  gem 'faker' # Generate filler content
   gem 'pry-remote' # Connect to a debugger session remotely
 end
 
