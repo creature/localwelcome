@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Chapter.create(name: 'London', description: Faker::Lorem.paragraph)
+london = Chapter.create(name: 'London', description: Faker::Lorem.paragraph)
 Chapter.create(name: 'Birmingham', description: Faker::Lorem.paragraph)
 Chapter.create(name: 'Manchester', description: Faker::Lorem.paragraph)
+
+5.times do |i|
+  i -= 2
+  Event.create(chapter: london, title: Faker::Lorem.sentence, starts_at: i.months.from_now, ends_at: i.months.from_now + 2.hours)
+end
