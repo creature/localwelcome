@@ -7,7 +7,7 @@
     ul
       - @chapters.each do |chapter|
         li
-          = chapter.name
+          = link_to chapter.name, chapter_path(chapter)
 
   .row.contact
     p You can email us on localwelcome@example.com

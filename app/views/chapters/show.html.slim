@@ -1,0 +1,11 @@
+.container
+  .row
+    h1
+      = @chapter.name
+    - unless @chapter.description.blank?
+      p
+        = @chapter.description
+
+  .row
+    h2 Upcoming events
+    p.system.message No upcoming events
