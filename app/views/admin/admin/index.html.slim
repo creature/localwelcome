@@ -1,0 +1,15 @@
+h1 Some numbers
+p
+  = pluralize(@chapters.count, "chapter")
+  |,
+  =< pluralize(@events.count, "event")
+
+h2 Chapters
+ul
+  - @chapters.each do |chapter|
+    li
+      = link_to chapter.name, admin_chapter_path(chapter)
+      ul
+        - chapter.upcoming_events.first(3).each do |upcoming_event|
+          li
+            = link_to "#{short_friendly_date upcoming_event.starts_at} - #{upcoming_event.title}", admin_chapter_event_path(chapter, upcoming_event)
