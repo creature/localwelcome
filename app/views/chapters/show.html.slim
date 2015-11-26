@@ -11,9 +11,10 @@
     - if @chapter.upcoming_events.any?
       - @chapter.upcoming_events.each do |event|
         p
-          = event.starts_at.to_date
-          |:
-          =< event.title
+          = link_to chapter_event_path(@chapter, event) do
+            = short_friendly_date event.starts_at
+            |:
+            =< event.title
     - else
       p.system.message No upcoming events
 
@@ -22,8 +23,9 @@
     - if @chapter.past_events.any?
       - @chapter.past_events.each do |event|
         p
-          = event.starts_at.to_date
-          |:
-          =< event.title
+          = link_to chapter_event_path(@chapter, event) do
+            = short_friendly_date event.starts_at
+            |:
+            =< event.title
     - else
       p.system.message No past events

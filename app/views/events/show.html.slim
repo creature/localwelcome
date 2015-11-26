@@ -1,0 +1,15 @@
+.container
+  h1
+    |Local Welcome
+    =< link_to @event.chapter.name, chapter_path(@event.chapter)
+    |:
+    =< @event.title
+  h2.timing
+    | From
+    =<> long_friendly_date @event.starts_at
+    | to
+    =< long_friendly_date @event.ends_at
+
+  - unless @event.description.blank?
+    p.description
+      = @event.description
