@@ -7,6 +7,9 @@ class Event < ActiveRecord::Base
   validates :ends_at, presence: true
   validate :starts_before_it_ends
 
+  scope :chronological, -> { order({starts_at: :asc}) }
+  scope :archaeological, -> { order({starts_at: :desc}) }
+
   protected
 
   def starts_before_it_ends
