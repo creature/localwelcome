@@ -6,9 +6,13 @@
 
 .container
   .row.chapters
-    ul
-      - @chapters.each do |chapter|
-        li
+    h1 Find a welcome near you
+    - @chapters.each do |chapter|
+      .col-md-4
+        .chapter-block
+          = link_to chapter.name, chapter_path(chapter)
+      .col-md-4
+        .chapter-block
           = link_to chapter.name, chapter_path(chapter)
 
   .row.contact
