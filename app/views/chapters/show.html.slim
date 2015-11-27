@@ -8,8 +8,8 @@
 
   .row
     h2 Upcoming events
-    - if @chapter.upcoming_events.any?
-      - @chapter.upcoming_events.each do |event|
+    - if @chapter.upcoming_events.published.any?
+      - @chapter.upcoming_events.published.each do |event|
         p
           = link_to chapter_event_path(@chapter, event) do
             = short_friendly_date event.starts_at
@@ -20,8 +20,8 @@
 
   .row
     h2 Past events
-    - if @chapter.past_events.any?
-      - @chapter.past_events.each do |event|
+    - if @chapter.past_events.published.any?
+      - @chapter.past_events.published.each do |event|
         p
           = link_to chapter_event_path(@chapter, event) do
             = short_friendly_date event.starts_at
