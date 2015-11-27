@@ -1,17 +1,36 @@
 .container
-  h1
-    = @event.title
+  .row
+    .col-md-12
+      h1
+        => @event.title
+      - if @event.published?
+        span.info-label.bg-success Published
+      - else
+        span.info-label.bg-warning Not yet published
 
-  p
-    - if @event.description.blank?
-      p.system.message No description yet
-    - else
+  .row.buttons
+    .col-md-12
+      - if @event.published?
+        = form_for [:admin, @event.chapter, @event] do |f|
+          = f.hidden_field :published, value: false
+          = f.submit "Unpublish", class: "btn btn-warning"
+      - else
+        = form_for [:admin, @event.chapter, @event] do |f|
+          = f.hidden_field :published, value: true
+          = f.submit "Publish", class: "btn btn-success"
+
+  .row
+    .col-md-12
       p
-        = @event.description
+        - if @event.description.blank?
+          p.system.message No description yet
+        - else
+          p
+            = @event.description
 
-  p
-    |Starts at
-    =< long_friendly_date @event.starts_at
-    |, ends at
-    =< long_friendly_date @event.ends_at
+      p
+        |Starts at
+        =< long_friendly_date @event.starts_at
+        |, ends at
+        =< long_friendly_date @event.ends_at
 

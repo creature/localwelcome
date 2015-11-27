@@ -8,7 +8,7 @@ class Admin::EventsController < ApplicationController
   def create
     @event = Event.new(event_params.merge(chapter: @chapter))
     if @event.save
-      redirect_to admin_chapter_event_path(@chapter, @event), notice: "Event successfully created."
+      redirect_to admin_chapter_event_path(@chapter, @event), notice: "Event created!"
     else
       redirect_to :back, alert: "Couldn't create event."
     end
@@ -18,6 +18,11 @@ class Admin::EventsController < ApplicationController
   end
 
   def update
+    if @event.update(event_params)
+      redirect_to admin_chapter_event_path(@chapter, @event), notice: "Event updated!"
+    else
+      redirect_to :back, alert: "Couldn't update event."
+    end
   end
 
   protected
@@ -31,6 +36,6 @@ class Admin::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :starts_at, :ends_at)
+    params.require(:event).permit(:title, :description, :starts_at, :ends_at, :published)
   end
 end

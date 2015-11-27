@@ -48,3 +48,18 @@ h1, h2, h3 {
     content: "]";
   }
 }
+
+.info-label {
+  display: inline-block;
+  font-variant: small-caps;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+
+  &.bg-success {
+    border: 1px solid darken(#dff0d8, 33%);
+  }
+
+  &.bg-warning {
+    border: 1px solid darken(#FCF8E3, 33%);
+  }
+}

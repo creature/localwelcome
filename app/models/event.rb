@@ -9,6 +9,8 @@ class Event < ActiveRecord::Base
 
   scope :chronological, -> { order({starts_at: :asc}) }
   scope :archaeological, -> { order({starts_at: :desc}) }
+  scope :published, -> { where(published: true) }
+
 
   protected
 
