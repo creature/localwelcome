@@ -2,7 +2,9 @@
   .row
     .col-md-12
       h1
-        => @event.title
+        => link_to @event.chapter.name, admin_chapter_path(@event.chapter)
+        | &raquo;
+        =<> @event.title
       - if @event.published?
         span.info-label.bg-success Published
       - else
