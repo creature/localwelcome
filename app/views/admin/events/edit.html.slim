@@ -1,2 +1,7 @@
-h1 Admin::Events#edit
-p Find me in app/views/admin/events/edit.html.slim
+.container
+  .row.col-md-12
+    h1
+      | Editing
+      =< @event.title
+
+  = render partial: "form", locals: { chapter: @chapter, event: @event }

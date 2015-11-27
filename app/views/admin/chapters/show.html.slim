@@ -6,4 +6,4 @@
   p I'll put events here soon.
 
   h2 Add new event
-  = render partial: 'admin/events/form', locals: { chapter: @chapter }
+  = render partial: 'admin/events/form', locals: { chapter: @chapter, event: Event.new }
