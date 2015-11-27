@@ -10,10 +10,15 @@
     - @chapters.each do |chapter|
       .col-md-4
         .chapter-block
-          = link_to chapter.name, chapter_path(chapter)
-      .col-md-4
-        .chapter-block
-          = link_to chapter.name, chapter_path(chapter)
-
-  .row.contact
-    p You can email us on localwelcome@example.com
+          h2
+            = link_to chapter.name, chapter_path(chapter)
+          - if chapter.next_event.nil?
+            = link_to "Learn more about this welcome", chapter_path(chapter), class: "btn btn-large btn-default"
+          - else
+            h3
+              |Next event:
+              =<> chapter.next_event.title
+              |(in
+              =< distance_of_time_in_words(chapter.next_event.starts_at, Time.now)
+              |)
+            = link_to "Register to attend", chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"

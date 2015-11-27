@@ -10,4 +10,8 @@ class Chapter < ActiveRecord::Base
   def past_events
     events.archaeological.where("starts_at < ?", DateTime.now)
   end
+
+  def next_event
+    upcoming_events.first
+  end
 end
