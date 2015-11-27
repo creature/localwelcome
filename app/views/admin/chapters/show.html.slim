@@ -1,0 +1,9 @@
+.container
+  h1
+    = @chapter.name
+
+  h2 Events
+  p I'll put events here soon.
+
+  h2 Add new event
+  = render partial: 'admin/events/form', locals: { chapter: @chapter }

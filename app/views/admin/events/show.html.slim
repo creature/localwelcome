@@ -1,0 +1,17 @@
+.container
+  h1
+    = @event.title
+
+  p
+    - if @event.description.blank?
+      p.system.message No description yet
+    - else
+      p
+        = @event.description
+
+  p
+    |Starts at
+    =< long_friendly_date @event.starts_at
+    |, ends at
+    =< long_friendly_date @event.ends_at
+
