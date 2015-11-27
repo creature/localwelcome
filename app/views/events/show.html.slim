@@ -5,10 +5,11 @@
     |:
     =< @event.title
   h2.timing
-    | From
-    =<> long_friendly_date @event.starts_at
+    = long_friendly_date @event.starts_at
+  h2.timing
+    =<> friendly_time @event.starts_at
     | to
-    =< long_friendly_date @event.ends_at
+    =< friendly_time @event.ends_at
 
   - unless @event.description.blank?
     p.description
