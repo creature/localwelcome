@@ -1,2 +1,15 @@
-h1 Subscriptions#index
-p Find me in app/views/subscriptions/index.html.slim
+.container
+  .row.col-md-12
+    h1 Join the mailing list
+    p Pick some groups close to you from the list below. You'll get occasional emails when we announce events or need help.
+
+  .row.col-md-8.col-md-offset-2
+    - @chapters.each do |chapter|
+      - if current_user.subscribed_to? chapter
+        = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete do
+          = submit_tag "Subscribed to Local Welcome #{chapter.name}", class: "btn btn-success btn-lg"
+      - else
+        = form_for Subscription.new(chapter: chapter) do |f|
+          = f.hidden_field :chapter_id
+          = f.submit "Get emails from Local Welcome #{chapter.name}", class: "btn btn-default btn-lg"
+

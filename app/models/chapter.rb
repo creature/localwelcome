@@ -1,5 +1,7 @@
 class Chapter < ActiveRecord::Base
   has_many :events
+  has_many :subscriptions
+  has_many :users, through: :subscriptions
 
   validates :name, uniqueness: true, presence: true
 
