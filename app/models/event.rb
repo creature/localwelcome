@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :chapter
+  has_many :invitations
+  has_many :users, through: :invitations
 
   validates :chapter, presence: true
   validates :title, presence: true

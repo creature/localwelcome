@@ -1,3 +1,4 @@
+# Keeps track of user permissions. Users can be regular users (ie. they have no Roles), chapter organisers, or admins.
 class Role < ActiveRecord::Base
   belongs_to :user
   belongs_to :chapter

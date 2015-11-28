@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :subscriptions
+  resources :invitations
 
   namespace :admin do
     get '/', to: "admin#index"
