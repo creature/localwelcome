@@ -5,6 +5,10 @@ nav {
   margin-bottom: $nav-margin;
   background-color: $flat-lynch;
 
+  p {
+    color: darken($flat-silver, 20%);
+  }
+
   a, a:visited, a:hover {
     color: $flat-silver;
     text-decoration: none;
