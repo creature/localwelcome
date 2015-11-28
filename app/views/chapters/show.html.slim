@@ -29,3 +29,12 @@
             =< event.title
     - else
       p.system.message No past events
+
+  .row
+    h2
+      |Get involved with Local Welcome
+      =< @chapter.name
+    p Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
+    p
+      = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path, class: "btn btn-primary btn-lg"
+
