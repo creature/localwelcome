@@ -1,0 +1,51 @@
+.container
+  .row.col-md-12
+    h1 Your profile
+    p Filling this out helps us make sure we have people with the right skills at the meet-ups, and lets us know more about how you can help.
+
+    dl.dl-horizontal
+      dt Name
+      dd
+        - if current_user.name.blank?
+          span.system.message None set
+        - else
+          = current_user.name
+
+      dt Email address
+      dd = current_user.email
+
+      dt About you
+      dd
+        - if current_user.bio.blank?
+          span.system.message You haven't told us about yourself yet. :(
+        - else
+          = current_user.bio
+
+  .row.col-md-12
+    h1 Your events
+    - if current_user.events.any?
+      ul
+        - current_user.events.each do |ev|
+          li = link_to ev.title, chapter_event_path(ev.chapter, ev)
+    - else
+      ' You haven't signed up for any events yet.
+      - if current_user.subscriptions.any?
+        | Why not check out #{link_to "Local Welcome " + current_user.subscriptions.first.chapter.name, chapter_path(current_user.subscriptions.first.chapter)} and see if they're running an event soon?
+      - else
+        => link_to "Find a chapter near you", root_path
+        | and request an invite to a future event.
+
+
+  .row.col-md-12
+    h1 Mailing list subscriptions
+    - if current_user.subscriptions.any?
+      p You receive emails from the organisers of the following chapters:
+      ul
+        - current_user.subscriptions.each do |sub|
+          li = link_to sub.chapter.name, chapter_path(sub.chapter)
+    - else
+      p You haven't joined any chapters yet, so you won't hear about any of our events.
+      = link_to "Join a local chapter", subscriptions_path, class: "btn btn-primary btn-lg"
+
+
+

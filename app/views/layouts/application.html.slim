@@ -13,7 +13,9 @@ html
         = link_to t("site.title"), root_path
       p.links.pull-right
         - if user_signed_in?
-          | Signed in as #{current_user.email} |
+          | Signed in as
+          =<> link_to current_user.email, profile_path(current_user)
+          | |
           - if current_user.admin?
             =<> link_to "Admin dashboard", admin_path
             | |
