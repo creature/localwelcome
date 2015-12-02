@@ -34,6 +34,36 @@
       p
         |Starts at
         =< long_friendly_datetime @event.starts_at
-        |, ends at
+      p
+        | Ends at
         =< long_friendly_datetime @event.ends_at
 
+  .row
+    .col-md-12
+      h2 Attendees
+      table.table.table-striped
+        thead
+          tr
+            th Email address
+            th Status
+            th &nbsp;
+        tbody
+          - @event.invitations.each do |invite|
+            tr
+              td = invite.user.try(:email)
+              - if !invite.invited?
+                td
+                  | Invite requested
+                td
+                  button.btn.btn-success Send invitation
+              - else
+                  - if invite.attending.nil?
+                    | Invite sent, no response yet
+                  - elsif !invite.attending
+                    | Not attending
+                  - else
+                    td
+                      | Attending
+                    td
+                      button.btn.btn-success Mark as attended
+                      button.btn.btn-warning Mark as no-show
