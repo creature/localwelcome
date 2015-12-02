@@ -1,2 +1,16 @@
-h1 Profiles#edit
-p Find me in app/views/profiles/edit.html.slim
+.container
+  .row.col-md-12
+    h1 Edit your profile
+
+    = form_for current_user, url: profile_path(current_user), method: :patch do |f|
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      .form-group
+        = f.label :telephone, "Telephone number"
+        = f.telephone_field :telephone, class: "form-control"
+      .form-group
+        = f.label :bio, "Tell us a little about yourself"
+        = f.text_area :bio, class: "form-control", placeholder: "I'm a local dentist who'd love to help newly-arrived refugees get back into the community. I'm not fluent but I speak a little Arabic, and I can also help with some of the admin too."
+      .form-group
+        = f.submit "Save", class: "btn btn-primary"

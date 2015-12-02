@@ -1,6 +1,7 @@
 .container
   .row.col-md-12
-    h1 Your profile
+    h1
+      ' Your profile
     p Filling this out helps us make sure we have people with the right skills at the meet-ups, and lets us know more about how you can help.
 
     dl.dl-horizontal
@@ -20,6 +21,7 @@
           span.system.message You haven't told us about yourself yet. :(
         - else
           = current_user.bio
+    = link_to "Edit your profile...", edit_profile_path(current_user)
 
   .row.col-md-12
     h1 Your events
