@@ -14,6 +14,10 @@ class Event < ActiveRecord::Base
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
 
+  def in_the_past?
+    ends_at < Time.zone.now
+  end
+
 
   protected
 

@@ -15,11 +15,12 @@
     p.description
       = @event.description
 
-  - if @invite
-    | You've requested an invitation to this event.
-    = form_tag invitation_path(@invite), method: :delete do
-      = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
-  - else
-    = form_tag invitations_path, method: :post do
-      = hidden_field :invitation, :event_id, value: @event.id
-      = submit_tag "Request an invite", class: "btn btn-lg btn-primary"
+  - unless @event.in_the_past?
+    - if @invite
+      | You've requested an invitation to this event.
+      = form_tag invitation_path(@invite), method: :delete do
+        = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+    - else
+      = form_tag invitations_path, method: :post do
+        = hidden_field :invitation, :event_id, value: @event.id
+        = submit_tag "Request an invite", class: "btn btn-lg btn-primary"
