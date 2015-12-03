@@ -14,7 +14,7 @@ html
       p.links.pull-right
         - if user_signed_in?
           | Signed in as
-          =<> link_to current_user.email, profile_path(current_user)
+          =<> link_to current_user.email, profile_path
           | |
           - if current_user.admin?
             =<> link_to "Admin dashboard", admin_path

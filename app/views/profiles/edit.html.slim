@@ -2,7 +2,7 @@
   .row.col-md-12
     h1 Edit your profile
 
-    = form_for current_user, url: profile_path(current_user), method: :patch do |f|
+    = form_for current_user, url: profile_path, method: :patch do |f|
       .form-group
         = f.label :name
         = f.text_field :name, class: "form-control"

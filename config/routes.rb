@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: [:index, :create, :destroy]
   resources :invitations, only: [:create, :update, :destroy]
-  resources :profiles, only: [:show, :edit, :update]
+  resource :profile, only: [:show, :edit, :update]
 
   namespace :admin do
     get '/', to: "admin#index"

@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
   def update
     authorize! :edit, current_user
     if current_user.update_attributes(profile_params)
-      redirect_to profile_path(current_user), notice: "Profile updated!"
+      redirect_to profile_path, notice: "Profile updated!"
     else
       redirect_to :back, alert: "Sorry, your profile could not be updated."
     end
