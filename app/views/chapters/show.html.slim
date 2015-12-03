@@ -39,5 +39,5 @@
       - if user_signed_in?
         = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
       - else
-        = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path, class: "btn btn-primary btn-lg"
+        = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
