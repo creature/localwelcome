@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :role do
-    user nil
-chapter nil
-role 1
+  factory :admin_role, class: Role do
+    user
+    chapter nil
+    role Role.roles["admin"]
   end
-
 end

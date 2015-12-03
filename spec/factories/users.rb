@@ -11,5 +11,9 @@ FactoryGirl.define do
       telephone nil
       bio nil
     end
+
+    factory :admin do
+      after(:create) { |user| FactoryGirl.create(:admin_role, user: user) }
+    end
   end
 end
