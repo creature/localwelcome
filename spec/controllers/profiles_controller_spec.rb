@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, type: :controller do
+describe ProfilesController do
+  before do
+    sign_in FactoryGirl.create(:user)
+  end
 
   describe "GET #show" do
     it "returns http success" do
@@ -15,12 +18,4 @@ RSpec.describe ProfilesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end
