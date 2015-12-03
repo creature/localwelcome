@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :invitations
   has_many :events, through: :invitations
 
-  validates :email, presence: true
+  validates :email, presence: true, format: { without: /\.{2,}/ }
 
   # Is this user subscribed to a given chapter?
   def subscribed_to?(chapter)
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
     roles.admin.exists?
   end
 
+  # A percentage score describing how complete a user's profile is.
   def profile_completion_score
     attrs = [:name, :bio, :telephone]
     (attrs.reject { |attr| self.send(attr).blank? }.count.to_f / attrs.count) * 100
