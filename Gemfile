@@ -12,7 +12,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim-rails' # Templating library
-gem 'rspec-rails' # Testing
 gem 'factory_girl_rails' # Mock objects
 gem 'cancancan' # Allow for different kinds of users
 gem 'devise' # Authentication framework
@@ -21,6 +20,8 @@ gem 'bourbon' # Useful CSS functions
 gem 'google-webfonts-rails' # Helpers for webfonts
 
 group :development, :test do
+  gem 'rspec-rails' # Testing
+  gem 'capybara' # Drive a web browser from our test framework
   gem 'byebug'
   gem 'faker' # Generate filler content
   gem 'pry-remote' # Connect to a debugger session remotely

@@ -4,5 +4,10 @@ FactoryGirl.define do
     title { Faker::Lorem.sentence }
     starts_at 3.days.from_now
     ends_at 3.days.from_now + 3.hours
+    published true
+
+    factory :unpublished_event do
+      published false
+    end
   end
 end
