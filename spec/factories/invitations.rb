@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :invitation do
-    user nil
-event nil
-invited false
-attending false
-status 1
+    user
+    event
+    invited false
+    attending false
+    status nil
   end
-
 end

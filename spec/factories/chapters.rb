@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :chapter do
-    name "MyString"
-description "MyText"
+    name { Faker::Lorem.word }
+    description { Faker::Lorem.paragraph }
   end
 
 end
