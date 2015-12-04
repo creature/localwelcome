@@ -1,0 +1,18 @@
+<% if @user.name.blank? %>
+Hi,
+<% else %>
+Hi #{@name},
+<% end %>
+
+You requested an invite to <%= @event.title %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
+<% unless @event.email_info.blank? %>
+
+  <%= @event.email_info %>
+<% end %>
+
+If you can make it, click the link below:
+(Link goes here)
+
+Or, if you can't make it, let us know via this link:
+(Other link goes here)
+
