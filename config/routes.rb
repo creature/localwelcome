@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: "admin#index"
     post 'invitations/invite/:id', to: "invitations#invite", as: :invite
-    resources :chapters do
-      resources :events
+    resources :chapters, only: [:show] do
+      resources :events, only: [:show, :create, :edit, :update]
     end
   end
 end

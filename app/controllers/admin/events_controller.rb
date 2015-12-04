@@ -1,4 +1,4 @@
-class Admin::EventsController < ApplicationController
+class Admin::EventsController < Admin::AdminController
   before_action :set_chapter
   before_action :set_event, except: [:create]
 

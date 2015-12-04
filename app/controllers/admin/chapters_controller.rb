@@ -1,4 +1,4 @@
-class Admin::ChaptersController < ApplicationController
+class Admin::ChaptersController < Admin::AdminController
   before_action :set_chapter, except: :new
 
   def show
