@@ -9,10 +9,10 @@
         = f.text_area :description, class: "form-control"
       .form-group
         = f.label :starts_at
-        = f.datetime_field :starts_at, class: "form-control"
+        = f.datetime_select :starts_at, class: "form-control"
       .form-group
         = f.label :ends_at
-        = f.datetime_field :ends_at, class: "form-control"
+        = f.datetime_select :ends_at, class: "form-control"
       .form-group
         - if event.persisted?
           = f.submit "Save changes", class: "btn btn-primary"
