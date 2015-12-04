@@ -68,8 +68,26 @@ feature "The admin panel" do
       expect(event.starts_at).to eq new_start_time
     end
 
-    it "Allows an admin to see potential attendees"
-    it "Allows an admin to send an attendee an invite"
+    it "Allows an admin to see potential attendees" do
+      invitations = FactoryGirl.create_list(:invitation, 3, event: event)
+      other_invitations = FactoryGirl.create_list(:invitation, 3)
+
+      visit admin_chapter_event_path(event.chapter, event)
+      invitations.each { |invite| expect(page).to have_content invite.user.email }
+      other_invitations.each { |invite| expect(page).not_to have_content invite.user.email }
+    end
+
+    it "Allows an admin to send an attendee an invite" do
+      invitation = FactoryGirl.create(:invitation, event: event)
+      emails = ActionMailer::Base.deliveries
+
+      visit admin_chapter_event_path(event.chapter, event)
+      expect { click_button "Send invitation" }.to change { emails.count }.by 1
+      expect(emails.last.to.last).to eq invitation.user.email
+
+      invitation.reload
+      expect(invitation.invited?).to be true
+    end
   end
 end
 
