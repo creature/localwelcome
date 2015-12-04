@@ -7,4 +7,9 @@ class Invitation < ActiveRecord::Base
 
   validates :user, presence: true, uniqueness: { scope: :event }
   validates :event, presence: true
+
+  # Has this user requested an invitation, but not received one yet?
+  def requested?
+    !invited?
+  end
 end
