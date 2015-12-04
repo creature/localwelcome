@@ -1,7 +1,7 @@
 <% if @user.name.blank? %>
 Hi,
 <% else %>
-Hi #{@name},
+Hi <%= @user.name %>,
 <% end %>
 
 You requested an invite to <%= @event.title %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
