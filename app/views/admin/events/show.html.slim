@@ -24,19 +24,23 @@
 
   .row
     .col-md-12
-      p
-        - if @event.description.blank?
-          p.system.message No description yet
-        - else
-          p
-            = @event.description
+      - if @event.description.blank?
+        p.system.message No description yet
+      - else
+        p = @event.description
+
+      - if @event.email_info.blank?
+        p.system.message No extra information will be included in the emails we send to attendees.
+      - else
+        p = @event.email_info
+
 
       p
-        |Starts at
-        =< long_friendly_datetime @event.starts_at
+        ' Starts at
+        = long_friendly_datetime @event.starts_at
       p
-        | Ends at
-        =< long_friendly_datetime @event.ends_at
+        ' Ends at
+        = long_friendly_datetime @event.ends_at
 
   .row
     .col-md-12
