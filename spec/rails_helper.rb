@@ -22,7 +22,20 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
+  # Fake out user auth in controller tests
   config.include Devise::TestHelpers, type: :controller
 
+  # Fake out user auth in feature tests
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
 
+  config.after :each do
+    Warden.test_reset!
+  end
+end
+
+def login(user)
+  login_as(user, scope: :user)
 end
