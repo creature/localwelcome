@@ -8,11 +8,17 @@
         = f.label :description
         = f.text_area :description, class: "form-control"
       .form-group
-        = f.label :starts_at
-        = f.datetime_select :starts_at, class: "form-control"
+        => f.label :starts_at, "Start date"
+        = f.date_select :starts_at, order: [:day, :month, :year]
+        br
+        => f.label :starts_at, "Start time"
+        = f.time_select :starts_at, ignore_date: true, minute_step: 15
       .form-group
-        = f.label :ends_at
-        = f.datetime_select :ends_at, class: "form-control"
+        => f.label :ends_at, "End date"
+        = f.date_select :ends_at, order: [:day, :month, :year]
+        br
+        => f.label :ends_at, "End time"
+        = f.time_select :ends_at, ignore_date: true, minute_step: 15
       .form-group
         - if event.persisted?
           = f.submit "Save changes", class: "btn btn-primary"
