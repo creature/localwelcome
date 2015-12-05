@@ -11,8 +11,8 @@ You requested an invite to <%= @event.title %>, an event ran by Local Welcome <%
 <% end %>
 
 If you can make it, click the link below:
-(Link goes here)
+<%= accept_invitation_url(@token) %>
 
 Or, if you can't make it, let us know via this link:
-(Other link goes here)
+<%= decline_invitation_url(@token) %>
 

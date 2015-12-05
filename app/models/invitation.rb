@@ -12,4 +12,26 @@ class Invitation < ActiveRecord::Base
   def requested?
     !invited?
   end
+
+  def accepted?
+    invited? && attending?
+  end
+
+  def declined?
+    invited? && !attending?
+  end
+
+  # Accept this invitation, if possible.
+  def accept
+    if invited
+      update_attributes(attending: true)
+    end
+  end
+
+  # Decline this invitation, if possible.
+  def decline
+    if invited
+      update_attributes(attending: false)
+    end
+  end
 end
