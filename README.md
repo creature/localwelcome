@@ -1,5 +1,7 @@
 # Local Welcome
 
+[![Build Status](https://travis-ci.org/creature/localwelcome.svg)](https://travis-ci.org/creature/localwelcome)
+
 Local Welcome is a project to help new refugees meet people in their community. The big goal is to help people get back into their industry - for instance, introducing a Syrian dentist to a British dentist. Meetups are held around the country on the first Sunday of each month. 
 
 At the moment, all the meetups have been organised "by hand" using a combination of Eventbrite, Google Docs, and human co-ordinators. This project is a prototype to see if some custom software would help save time, allow other people to run local chapters independently, and give them their own permanent web presence. **It is a prototype**, so I don't know if it will ever hit production. 
