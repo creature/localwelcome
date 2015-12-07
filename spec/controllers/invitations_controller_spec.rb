@@ -7,6 +7,7 @@ describe InvitationsController do
 
   context "Accepting invites" do
     it "Lets a user accept an invitation that's been sent" do
+      expect(sent_invite.sent?).to be true
       get :accept, token: sent_invite.id
 
       sent_invite.reload

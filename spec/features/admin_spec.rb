@@ -86,7 +86,7 @@ feature "The admin panel" do
       expect(emails.last.to.last).to eq invitation.user.email
 
       invitation.reload
-      expect(invitation.invited?).to be true
+      expect(invitation.sent?).to be true
     end
   end
 end

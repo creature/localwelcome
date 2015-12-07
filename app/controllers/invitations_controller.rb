@@ -25,14 +25,14 @@ class InvitationsController < ApplicationController
   # Gives a user a one-click accept within an invite email
   def accept
     @invite = Invitation.find(params[:token])
-    @invite.accept
+    @invite.accept_invite!
     redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: "Your place is confirmed. See you there!"
   end
 
   # Gives a user a one-click decline within an invite email
   def decline
     @invite = Invitation.find(params[:token])
-    @invite.decline
+    @invite.decline_invite!
     redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: "Thanks for letting us know that you can't make it."
   end
 

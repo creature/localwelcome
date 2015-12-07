@@ -3,8 +3,7 @@ class Admin::InvitationsController < Admin::AdminController
   def invite
    @invitation = Invitation.find(params[:id])
 
-   if @invitation.requested?
-     @invitation.update_attributes(invited: true)
+   if @invitation.send_invite!
      UserMailer.invite(@invitation).deliver_now
      flash[:notice] = "Invitation sent!"
    else

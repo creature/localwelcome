@@ -2,17 +2,21 @@ FactoryGirl.define do
   factory :invitation do
     user
     event
-    invited nil
-    attending nil
-    status nil
-
-    factory :sent_invitation do
-      invited true
-    end
 
     factory :accepted_invitation do
-      invited true
-      attending true
+      before(:build) { |invite| invite.aasm_state = :accepted }
+      after(:create) do |invite|
+        invite.aasm_state = :accepted
+        invite.save
+      end
+    end
+
+    factory :sent_invitation do
+      before(:build) { |invite| invite.aasm_state = :sent }
+      after(:create) do |invite|
+        invite.aasm_state = :sent
+        invite.save
+      end
     end
   end
 end

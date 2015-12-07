@@ -55,22 +55,19 @@
           - @event.invitations.each do |invite|
             tr
               td = invite.user.try(:email)
-              - if !invite.invited?
-                td
-                  | Invite requested
+              - if invite.requested?
+                td Invite requested
                 td
                   = form_tag admin_invite_path(invite), method: :post do
                     = submit_tag "Send invitation", class: "btn btn-success"
-              - else
-                  - if invite.attending.nil?
-                    td
-                      | Invite sent, no response yet
-                  - elsif !invite.attending
-                    td
-                      | Not attending
-                  - else
-                    td
-                      | Attending
-                    td
-                      button.btn.btn-success Mark as attended
-                      button.btn.btn-warning Mark as no-show
+                - if invite.sent?
+                  td Invite sent, no response yet
+                  td &nbsp;
+                - if invite.declined?
+                  td Not attending
+                  td &nbsp;
+                - if invite.accepted?
+                  td Attending
+                  td
+                    button.btn.btn-success Mark as attended
+                    button.btn.btn-warning Mark as no-show
