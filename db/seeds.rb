@@ -16,27 +16,11 @@ Chapter.create(name: 'Manchester', description: Faker::Lorem.paragraph)
 end
 
 5.times do
-  user = User.new(
-    name:     Faker::Name.first_name,
-    email:    Faker::Internet.email,
-    password: Faker::Lorem.characters(10),
-  )
-  user.save!
+  User.create(name: Faker::Name.first_name, email: Faker::Internet.safe_email, password: Faker::Lorem.characters(10))
 end
 
-admin = User.new(
-  name:     "localwelcome-admin",
-  email:    "admin@localwelcome.com",
-  password: "localwelcome",
-)
-admin.save!
-
-admin_role = Role.new(
-  user: admin,
-  chapter: nil,
-  role: "admin"
-)
-admin_role.save!
+admin = User.create(name: "admin", email: "admin@example.com", password: "password")
+Role.create(user: admin, chapter: nil, role: "admin")
 
 puts "Chapters count: #{Chapter.count}"
 puts "Events count: #{Event.count}"

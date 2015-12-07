@@ -19,6 +19,8 @@ bundle exec rake db:setup
 bundle exec rails server
 ```
 
+You can login as an admin with the username "admin@example.com" and the password "password".
+
 ## Running tests
 
 I'm using RSpec as a test framework. You can run the test suite with the following command: 
