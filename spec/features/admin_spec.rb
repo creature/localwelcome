@@ -4,6 +4,7 @@ feature "The admin panel" do
   let(:admin) { FactoryGirl.create(:admin) }
   let(:chapter) { FactoryGirl.create(:chapter) }
   let(:event) { FactoryGirl.create(:event) }
+  let(:accepted_invite) { FactoryGirl.create(:accepted_invitation, event: event) }
 
   let(:event_title) { Faker::Lorem.words(4).join(" ") }
   let(:event_description) { Faker::Lorem.paragraph }
@@ -87,6 +88,26 @@ feature "The admin panel" do
 
       invitation.reload
       expect(invitation).to be_sent
+    end
+
+    it "Allows an admin to mark a user as attended" do
+      expect(accepted_invite).to be_accepted
+
+      visit admin_chapter_event_path(event.chapter, event)
+      click_button "Mark as attended"
+
+      accepted_invite.reload
+      expect(accepted_invite).to be_attended
+    end
+
+    it "Allows an admin to mark a user as a no-show" do
+      expect(accepted_invite).to be_accepted
+
+      visit admin_chapter_event_path(event.chapter, event)
+      click_button "Mark as no-show"
+
+      accepted_invite.reload
+      expect(accepted_invite).to be_no_show
     end
   end
 end
