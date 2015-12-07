@@ -1,26 +1,29 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Create some chapters
+london = Chapter.find_or_create_by(name: 'London', description: Faker::Lorem.paragraph)
+Chapter.find_or_create_by(name: 'Birmingham', description: Faker::Lorem.paragraph)
+Chapter.find_or_create_by(name: 'Manchester', description: Faker::Lorem.paragraph)
 
-london = Chapter.create(name: 'London', description: Faker::Lorem.paragraph)
-Chapter.create(name: 'Birmingham', description: Faker::Lorem.paragraph)
-Chapter.create(name: 'Manchester', description: Faker::Lorem.paragraph)
-
+# Make sure that London has some events
 5.times do |i|
   i -= 2
-  Event.create(chapter: london, title: Faker::Lorem.sentence, starts_at: i.months.from_now, ends_at: i.months.from_now + 2.hours)
+  Event.find_or_create_by(chapter: london, title: Faker::Lorem.sentence, starts_at: i.months.from_now, ends_at: i.months.from_now + 2.hours)
 end
 
+# Create some users
 5.times do
-  User.create(name: Faker::Name.first_name, email: Faker::Internet.safe_email, password: Faker::Lorem.characters(10))
+  email = Faker::Internet.safe_email
+  unless User.where(email: email).exists?
+    u = User.new(name: Faker::Name.first_name, email: email, password: Faker::Lorem.characters(10))
+    u.save
+  end
 end
 
-admin = User.create(name: "admin", email: "admin@example.com", password: "password")
-Role.create(user: admin, chapter: nil, role: "admin")
+# Ensure that an admin user exists
+unless admin = User.find_by(email: "admin@example.com")
+  admin = User.new(name: "admin", email: "admin@example.com", password: "password")
+  admin.save
+end
+Role.find_or_create_by(user: admin, chapter: nil, role: "admin")
 
 puts "Chapters count: #{Chapter.count}"
 puts "Events count: #{Event.count}"
