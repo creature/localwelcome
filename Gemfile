@@ -16,6 +16,7 @@ gem 'devise' # Authentication framework
 gem 'twitter-bootstrap-rails' # CSS framework
 gem 'bourbon' # Useful CSS functions
 gem 'google-webfonts-rails' # Helpers for webfonts
+gem 'aasm' # Acts as state machine, used by invitations
 
 group :development, :test do
   gem 'rspec-rails' # Testing
