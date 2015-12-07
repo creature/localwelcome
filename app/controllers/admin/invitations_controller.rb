@@ -11,4 +11,22 @@ class Admin::InvitationsController < Admin::AdminController
    end
    redirect_to :back
   end
+
+  def mark_as_attended
+    @invitation = Invitation.find(params[:id])
+    if @invitation.attended!
+      redirect_to :back, notice: "Marked #{@invitation.user.email} as attended."
+    else
+      redirect_to :back, alert: "Couldn't mark #{@invitation.user.email} as attended."
+    end
+  end
+
+  def mark_as_no_show
+    @invitation = Invitation.find(params[:id])
+    if @invitation.no_show!
+      redirect_to :back, notice: "Marked #{@invitation.user.email} as a no-show."
+    else
+      redirect_to :back, alert: "Couldn't mark #{@invitation.user.email} as a no-show."
+    end
+  end
 end

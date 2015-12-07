@@ -69,5 +69,13 @@
               - if invite.accepted?
                 td Attending
                 td
-                  button.btn.btn-success> Mark as attended
-                  button.btn.btn-warning Mark as no-show
+                  = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
+                    = submit_tag "Mark as attended", class: "btn btn-success"
+                  = form_tag admin_mark_as_no_show_path(invite), method: :post, class: "form-inline" do
+                    = submit_tag "Mark as no-show", class: "btn btn-warning"
+              - if invite.attended?
+                td Attended
+                td &nbsp;
+              - if invite.no_show?
+                td No-show
+                td &nbsp;
