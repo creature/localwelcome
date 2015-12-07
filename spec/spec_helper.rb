@@ -1,3 +1,9 @@
+require 'simplecov'
+require 'simplecov-console'
+SimpleCov.start 'rails' do
+  SimpleCov.formatter = SimpleCov::Formatter::Console
+end
+
 Dir["./spec/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|

@@ -33,3 +33,7 @@ group :development do
   gem 'spring' # Keep app running in background.
 end
 
+group :test do
+  gem 'simplecov', require: false # Code coverage metrics
+  gem 'simplecov-console', require: false # Output code coverage report on the CLI
+end
