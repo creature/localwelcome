@@ -18,9 +18,16 @@
 
   - unless @event.in_the_past?
     - if @invite
-      | You've requested an invitation to this event.
-      = form_tag invitation_path(@invite), method: :delete do
-        = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+      - if @invite.sent?
+        | You've requested an invitation to this event.
+        = form_tag invitation_path(@invite), method: :delete do
+          = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+      - elsif @invite.accepted?
+        | You're coming to this event! Check your email for more details.
+        = form_tag invitation_path(@invite), method: :delete do
+          = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+      - elsif @invite.declined? || @invite.cancelled?
+        | You're not attending this event.
     - else
       = form_tag invitations_path, method: :post do
         = hidden_field :invitation, :event_id, value: @event.id
