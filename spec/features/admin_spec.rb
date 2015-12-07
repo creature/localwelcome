@@ -39,7 +39,7 @@ feature "The admin panel" do
       visit admin_chapter_event_path(event.chapter, event)
       click_button "Publish"
       event.reload
-      expect(event.published?).to be true
+      expect(event).to be_published
     end
 
     it "Allows an admin to unpublish a published event" do
@@ -86,7 +86,7 @@ feature "The admin panel" do
       expect(emails.last.to.last).to eq invitation.user.email
 
       invitation.reload
-      expect(invitation.sent?).to be true
+      expect(invitation).to be_sent
     end
   end
 end

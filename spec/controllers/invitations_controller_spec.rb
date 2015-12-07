@@ -11,14 +11,14 @@ describe InvitationsController do
       get :accept, token: sent_invite.id
 
       sent_invite.reload
-      expect(sent_invite.accepted?).to be true
+      expect(sent_invite).to be_accepted
     end
 
     it "Doesn't allow an invitation to be accepted that hasn't been sent" do
       get :accept, token: invite.id
 
       invite.reload
-      expect(invite.accepted?).to be false
+      expect(invite).not_to be_accepted
     end
   end
 
@@ -27,22 +27,22 @@ describe InvitationsController do
       get :decline, token: sent_invite.id
 
       sent_invite.reload
-      expect(sent_invite.declined?).to be true
+      expect(sent_invite).to be_declined
     end
 
     it "Doesn't allow a user to decline an unsent invitation" do
       get :decline, token: invite.id
 
       invite.reload
-      expect(invite.declined?).to be false
+      expect(invite).not_to be_declined
     end
 
     it "Allows a user to decline a previously-accepted invitation" do
       get :decline, token: accepted_invite.id
 
       accepted_invite.reload
-      expect(accepted_invite.accepted?).to be false
-      expect(accepted_invite.declined?).to be true
+      expect(accepted_invite).not_to be_accepted
+      expect(accepted_invite).to be_declined
     end
   end
 end
