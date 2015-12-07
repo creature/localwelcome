@@ -1,19 +1,20 @@
+- content_for :chapter_name
+  | Local Welcome #{@event.chapter.name}
+- content_for :page_title
+  | Local Welcome #{@event.chapter.name} &ndash; #{@event.title}
+
 .container
-  h1
-    |Local Welcome
-    =< link_to @event.chapter.name, chapter_path(@event.chapter)
-    |:
-    =< @event.title
+  p.breadcrumbs = link_to "&laquo; Back to Local Welcome #{@event.chapter.name} chapter page".html_safe, chapter_path(@event.chapter)
+
+  h1 = @event.title
+  h2.timing = long_friendly_date @event.starts_at
   h2.timing
-    = long_friendly_date @event.starts_at
-  h2.timing
-    =<> friendly_time @event.starts_at
-    | to
-    =< friendly_time @event.ends_at
+    => friendly_time @event.starts_at
+    ' to
+    = friendly_time @event.ends_at
 
   - unless @event.description.blank?
-    p.description
-      = @event.description
+    p.description = @event.description
 
   - unless @event.in_the_past?
     - if @invite

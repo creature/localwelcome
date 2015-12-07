@@ -1,8 +1,7 @@
 doctype html
 html
   head
-    title
-      = t("site.title")
+    title = content_for(:page_title) || t("site.title")
     = google_webfonts_init({ google: 'Dosis' })
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -10,16 +9,16 @@ html
   body
     nav
       h1
-        = link_to t("site.title"), root_path
+        = link_to content_for(:chapter_name) || t("site.title"), root_path
       p.links.pull-right
         - if user_signed_in?
-          | Signed in as
-          =<> link_to current_user.email, profile_path
-          | |
+          ' Signed in as
+          => link_to current_user.email, profile_path
+          ' |
           - if current_user.admin?
-            =<> link_to "Admin dashboard", admin_path
-            | |
-          =< link_to "Sign out", destroy_user_session_path, method: :delete
+            => link_to "Admin dashboard", admin_path
+            ' |
+          = link_to "Sign out", destroy_user_session_path, method: :delete
         - else
           = link_to "Sign in", new_user_session_path
 
@@ -27,10 +26,8 @@ html
       .container
         .col-md-8.col-md-offset-2
           - if flash.key? :notice
-            p.alert.alert-info
-              = flash[:notice]
+            p.alert.alert-info = flash[:notice]
           - if flash.key? :alert
-            p.alert.alert-danger
-              = flash[:alert]
+            p.alert.alert-danger = flash[:alert]
 
     = yield
