@@ -32,4 +32,23 @@ class Invitation < ActiveRecord::Base
     event(:cancelled_rudely) { transitions from: :accepted, to: :cancelled_rudely }
     event(:cancelled_by_admin) { transitions from: [:sent, :accepted], to: :cancelled }
   end
+
+  # Gets a token that can be used to update this invite.
+  def token
+    Invitation.verifier.generate [user.email, id, created_at]
+  end
+
+  # Gets an invite via a token.
+  def self.find_by_token(token)
+    email, id, created_at = Invitation.verifier.verify(token)
+    Invitation.find(id)
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
+  end
+
+  protected
+
+  def self.verifier
+    @@verifier ||= ActiveSupport::MessageVerifier.new(Rails.application.secrets.secret_key_base)
+  end
 end
