@@ -1,0 +1,19 @@
+- if @user.name.blank?
+  p Hi,
+- else
+  p Hi #{@user.name},
+
+p You requested an invite to #{@event.title}, an event ran by Local Welcome #{@event.chapter.name}. We'd love for you to come!
+
+- unless @event.email_info.blank?
+  p = @event.email_info
+
+p
+  ' If you can make it,
+  = link_to "click here to reserve your spot at this event", accept_invitation_url(@token)
+  |.
+
+p
+  ' Or, if you can't make this event after all,
+  = link_to "click here to let us know", decline_invitation_url(@token)
+  |.
