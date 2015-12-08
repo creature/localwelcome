@@ -1,39 +1,27 @@
 .container
   .row.col-md-12
-    h1
-      = @chapter.name
+    h1 = @chapter.name
 
   .row
     .col-md-12
-      h2
-        |Events (
-        = @chapter.events.count
-        |)
+      h2 Events (#{@chapter.events.count})
       .row
         .col-md-6
-          h3
-            |Published events (
-            = @chapter.events.published.count
-            |)
+          h3 Published events (#{@chapter.events.published.count})
 
           - if @chapter.events.published.any?
             ul
               - @chapter.events.published.each do |event|
-                li
-                  = link_to "#{short_friendly_date event.starts_at}: #{event.title}", admin_chapter_event_path(@chapter, event)
+                li = link_to "#{short_friendly_date event.starts_at}: #{event.title}", admin_chapter_event_path(@chapter, event)
           - else
             p.system.info No published events yet.
         .col-md-6
-          h3
-            |Not-yet-published events (
-            = @chapter.events.unpublished.count
-            |)
+          h3 Not-yet-published events (#{@chapter.events.unpublished.count})
 
           - if @chapter.events.unpublished.any?
             ul
               - @chapter.events.unpublished.each do |event|
-                li
-                  = link_to "#{short_friendly_date event.starts_at}: #{event.title}", admin_chapter_event_path(@chapter, event)
+                li = link_to "#{short_friendly_date event.starts_at}: #{event.title}", admin_chapter_event_path(@chapter, event)
           - else
             p.system.info No not-yet-published events yet.
 
