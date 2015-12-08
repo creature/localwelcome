@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '4.2.5'
-gem 'sqlite3' # Lightweight DB used in development
+gem 'pg' # Postgres gem, used in production
+gem 'rails_12factor' # Makes some Heroku-friendly tweaks.
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -19,6 +20,7 @@ gem 'google-webfonts-rails' # Helpers for webfonts
 gem 'aasm' # Acts as state machine, used by invitations
 
 group :development, :test do
+  gem 'sqlite3' # Lightweight DB used in development
   gem 'rspec-rails' # Testing
   gem 'capybara' # Drive a web browser from our test framework
   gem 'byebug'
