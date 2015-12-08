@@ -5,7 +5,7 @@
   .row.col-md-12
     h1
       ' Your profile
-    p Filling this out helps us make sure we have people with the right skills at the meet-ups, and lets us know more about how you can help.
+    p Filling this out helps us make sure we have people with the right skills at the meet-ups, and lets us know more about how you can help. We'll never display these details publicly &ndash; they just help us organise the events.
 
     dl.dl-horizontal
       dt Name
@@ -18,12 +18,41 @@
       dt Email address
       dd = current_user.email
 
+      dt Telephone number
+      dd
+        - if current_user.telephone.blank?
+          span.system.message None set
+        - else
+          = current_user.telephone
+
+      dt Postcode
+      dd
+        - if current_user.postcode.blank?
+          span.system.message None set
+        - else
+          = current_user.postcode
+
       dt About you
       dd
         - if current_user.bio.blank?
           span.system.message You haven't told us about yourself yet. :(
         - else
           = current_user.bio
+
+      dt Language skills
+      dd
+        - if current_user.language_skills.blank?
+          span.system.message None set
+        - else
+          = current_user.language_skills
+
+      dt Life skills
+      dd
+        - if current_user.life_skills.blank?
+          span.system.message None set
+        - else
+          = current_user.life_skills
+
     = link_to "Edit your profile...", edit_profile_path
 
   .row.col-md-12

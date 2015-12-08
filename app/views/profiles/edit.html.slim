@@ -1,6 +1,7 @@
 .container
   .row.col-md-12
     h1 Edit your profile
+    p We never display these details publicly &ndash; they just help us run the events and match people up.
 
     = form_for current_user, url: profile_path, method: :patch do |f|
       .form-group
@@ -10,7 +11,17 @@
         = f.label :telephone, "Telephone number"
         = f.telephone_field :telephone, class: "form-control"
       .form-group
+        = f.label :postcode
+        = f.text_field :postcode, class: "form-control"
+
+      .form-group
         = f.label :bio, "Tell us a little about yourself"
         = f.text_area :bio, class: "form-control", placeholder: "I'm a local dentist who'd love to help newly-arrived refugees get back into the community. I'm not fluent but I speak a little Arabic, and I can also help with some of the admin too."
+      .form-group
+        = f.label :language_skills
+        = f.text_area :language_skills, class: "form-control", placeholder: "I speak English fluently, as well as a little French and basic Arabic."
+      .form-group
+        = f.label :life_skills
+        = f.text_area :life_skills, class: "form-control", placeholder: "I'm a trained engineer and first-aider. I've also worked as a careers counsellor in the past, so can offer advice on job-hunting too."
       .form-group
         = f.submit "Save", class: "btn btn-primary"
