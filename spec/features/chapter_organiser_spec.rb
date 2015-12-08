@@ -83,4 +83,7 @@ feature "Chapter organisers" do
     expect(current_path).not_to eq admin_chapter_path(other_chapter)
     expect(page).to have_selector ".alert-danger"
   end
+
+  scenario "Chapter organisers can create events for their chapter"
+  scenario "Chapter organisers can edit events for their chapter"
 end

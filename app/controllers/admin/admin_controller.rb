@@ -7,6 +7,7 @@ class Admin::AdminController < ApplicationController
       @chapters = Chapter.all.includes(:users)
       @events = Event.all
       @users = User.all
+      @organisers = Role.chapter_organisers.map(&:user)
     elsif current_user.organiser?
       @chapters = current_user.organised_chapters
     end

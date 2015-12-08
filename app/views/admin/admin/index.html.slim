@@ -1,5 +1,5 @@
 .container
-  .row
+  .row.col-md-12
     - if current_user.admin?
       h1 Some numbers
       p
@@ -9,7 +9,24 @@
         ' ,
         = pluralize(@users.count, "user")
 
-  .row
+  - if current_user.admin?
+    .row.col-md-12
+      h2 Chapter organisers
+      - if @organisers.any?
+        ul
+        - @organisers.each do |organiser|
+          li
+            - if organiser.name.blank?
+              span.system.message> No name
+            - else
+              => organiser.name
+            ' (#{organiser.email}) &mdash;
+            ' runs #{organiser.organised_chapters.map(&:name).to_sentence} &mdash;
+            | last signed in on #{long_friendly_date organiser.current_sign_in_at}
+      - else
+        p.system.message No chapter organisers yet.
+
+  .row.col-md-12
     h2 Chapters you organise
     ul
       - @chapters.each do |chapter|

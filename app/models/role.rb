@@ -8,4 +8,8 @@ class Role < ActiveRecord::Base
   validates :user, presence: true
   validates :role, presence: true
   validates :chapter, presence: true, if: :chapter_organiser?
+
+  def self.chapter_organisers
+    Role.chapter_organiser
+  end
 end
