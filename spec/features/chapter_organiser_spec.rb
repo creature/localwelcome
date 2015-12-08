@@ -33,7 +33,16 @@ feature "Chapter organisers" do
     expect(current_path).to eq admin_chapter_event_path(event.chapter, event)
   end
 
-  scenario "Chapter organisers can view members for their chapter"
+  scenario "Chapter organisers can view members for their chapter" do
+    chapter_users = FactoryGirl.create_list(:user, 3)
+    chapter_users.each { |cu| FactoryGirl.create(:subscription, user: cu, chapter: chapter) }
+
+    visit admin_chapter_path(chapter)
+    chapter_users.each do |cu|
+      expect(page).to have_content cu.name
+      expect(page).to have_content cu.email
+    end
+  end
 
   scenario "Chapter organisers cannot view other chapters" do
     other_chapter = FactoryGirl.create(:chapter)
@@ -57,5 +66,21 @@ feature "Chapter organisers" do
     expect(page).to have_selector ".alert-danger"
   end
 
-  scenario "Chapter organisers cannot view members for other chapters"
+  scenario "Chapter organisers cannot view members for other chapters" do
+    other_chapter = FactoryGirl.create(:chapter)
+    other_chapter_users = FactoryGirl.create_list(:user, 3)
+    other_chapter_users.each { |cu| FactoryGirl.create(:subscription, user: cu, chapter: other_chapter) }
+
+    # Other chapter users shouldn't show up on this chapter's management page
+    visit admin_chapter_path(chapter)
+    other_chapter_users.each do |cu|
+      expect(page).not_to have_content cu.name
+      expect(page).not_to have_content cu.email
+    end
+
+    # Chapter organisers shouldn't be able to access the users page for other chapters.
+    visit admin_chapter_path(other_chapter)
+    expect(current_path).not_to eq admin_chapter_path(other_chapter)
+    expect(page).to have_selector ".alert-danger"
+  end
 end
