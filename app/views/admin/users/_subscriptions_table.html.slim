@@ -1,0 +1,25 @@
+- if subscriptions.any?
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Email address
+        th Biography
+        th Signed up on
+    tbody
+    - subscriptions.each do |subscription|
+      tr
+        - if subscription.user.name.blank?
+          td
+            | [Not set]
+        - else
+          td = subscription.user.name
+        td = subscription.user.email
+        - if subscription.user.bio.blank?
+          td
+            | [Not set]
+        - else
+          td = truncate subscription.user.bio, length: 80
+        td = long_friendly_datetime subscription.created_at
+- else
+  p.system.message No subscribers yet.

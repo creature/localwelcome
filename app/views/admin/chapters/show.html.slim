@@ -4,32 +4,10 @@
 
   .row.col-md-12
     h2 Users (#{@chapter.users.count})
-    - if @chapter.users.any?
-      table.table.table-striped
-        thead
-          tr
-            th Name
-            th Email address
-            th Biography
-            th Signed up on
-        tbody
-        - @chapter.subscriptions.newest.first(10).each do |subscription|
-          tr
-            - if subscription.user.name.blank?
-              td
-                | [Not set]
-            - else
-              td = subscription.user.name
-            td = subscription.user.email
-            - if subscription.user.bio.blank?
-              td
-                | [Not set]
-            - else
-              td = truncate subscription.user.bio, length: 80
-            td = long_friendly_datetime subscription.created_at
 
-      - if @chapter.users.count > 10
-        p = link_to "See more &raquo;".html_safe, admin_chapter_users_path(@chapter)
+    = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @chapter.subscriptions.newest.first(10) }
+    - if @chapter.users.count > 10
+      p = link_to "See more &raquo;".html_safe, admin_chapter_users_path(@chapter)
 
   .row.col-md-12
       h2 Events (#{@chapter.events.count})

@@ -1,0 +1,10 @@
+.container
+  .row.col-md-12
+    h1
+      ' Users for Local Welcome
+      => link_to @chapter.name, admin_chapter_path(@chapter)
+      | (#{@subscriptions.count})
+
+    = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @subscriptions }
+
+
