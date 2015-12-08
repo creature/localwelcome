@@ -3,5 +3,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :chapter
 
+  scope :newest, -> { order(created_at: :desc) }
+
   validates :user_id, uniqueness: { scope: :chapter_id }
 end
