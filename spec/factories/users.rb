@@ -7,11 +7,17 @@ FactoryGirl.define do
     password { Faker::Lorem.characters(10) }
     telephone { Faker::PhoneNumber.phone_number }
     bio { Faker::Lorem.paragraph }
+    postcode { Faker::Address.postcode }
+    life_skills { Faker::Lorem.paragraph }
+    language_skills { Faker::Lorem.paragraph }
 
     factory :empty_user do
       name nil
       telephone nil
       bio nil
+      postcode nil
+      life_skills nil
+      language_skills nil
     end
 
     factory :admin do
