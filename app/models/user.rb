@@ -21,6 +21,16 @@ class User < ActiveRecord::Base
     roles.admin.exists?
   end
 
+  # Does this user organise _any_ chapter?
+  def organiser?
+    roles.chapter_organiser.exists?
+  end
+
+  # Gets the chapters organised by this user.
+  def organised_chapters
+    Chapter.where(id: roles.chapter_organiser.pluck(:chapter_id)) # TODO: There's a better way to do this.
+  end
+
   # A percentage score describing how complete a user's profile is.
   def profile_completion_score
     attrs = [:name, :bio, :telephone]

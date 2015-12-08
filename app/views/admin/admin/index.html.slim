@@ -1,15 +1,16 @@
 .container
   .row
-    h1 Some numbers
-    p
-      = pluralize(@chapters.count, "chapter")
-      |,
-      =< pluralize(@events.count, "event")
-      |,
-      =< pluralize(@users.count, "user")
+    - if current_user.admin?
+      h1 Some numbers
+      p
+        = pluralize(@chapters.count, "chapter")
+        ' ,
+        = pluralize(@events.count, "event")
+        ' ,
+        = pluralize(@users.count, "user")
 
   .row
-    h2 Chapters
+    h2 Chapters you organise
     ul
       - @chapters.each do |chapter|
         li

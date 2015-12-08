@@ -1,6 +1,7 @@
 class Admin::EventsController < Admin::AdminController
+  load_and_authorize_resource
   before_action :set_chapter
-  before_action :set_event, except: [:create]
+  before_action :check_permissions
 
   def show
   end
@@ -31,8 +32,10 @@ class Admin::EventsController < Admin::AdminController
     @chapter = Chapter.find(params[:chapter_id])
   end
 
-  def set_event
-    @event = Event.find(params[:id])
+  def check_permissions
+    unless can? :manage, @event
+      redirect_to admin_path, alert: "You're not allowed to access that."
+    end
   end
 
   def event_params

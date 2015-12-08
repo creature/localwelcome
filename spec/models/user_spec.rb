@@ -42,4 +42,27 @@ describe User do
       expect(new_user).not_to be_valid
     end
   end
+
+  describe "Organised chapters" do
+    it "Gets chapters organised by this user" do
+      chapter = FactoryGirl.create(:chapter)
+      organiser = FactoryGirl.create(:chapter_organiser, chapter: chapter)
+      chapters = organiser.organised_chapters
+
+      expect(chapters.length).to eq 1
+      expect(chapters.first).to be_a Chapter
+      expect(chapters.first.id).to eq chapter.id
+    end
+
+    it "Doesn't retrieve chapters not organised by this user" do
+      other_chapters = FactoryGirl.create_list(:chapter, 3)
+      organiser = FactoryGirl.create(:chapter_organiser)
+      chapters = organiser.organised_chapters
+
+      expect(chapters.length).to eq 1
+      other_chapters.each do |oc|
+        expect(chapters.first.id).not_to eq oc.id
+      end
+    end
+  end
 end
