@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "The admin panel" do
   let(:admin) { FactoryGirl.create(:admin) }
   let(:chapter) { FactoryGirl.create(:chapter) }
+  let(:chapter_user) { FactoryGirl.create(:chapter_user, chapter: chapter) }
   let(:event) { FactoryGirl.create(:event) }
   let(:accepted_invite) { FactoryGirl.create(:accepted_invitation, event: event) }
 
@@ -108,6 +109,33 @@ feature "The admin panel" do
 
       accepted_invite.reload
       expect(accepted_invite).to be_no_show
+    end
+  end
+
+  context "Users" do
+    it "Allows an admin to view a user profile" do
+      visit admin_chapter_user_path(chapter, chapter_user)
+
+      expect(page).to have_content chapter_user.name
+      expect(page).to have_content chapter_user.email
+      expect(page).to have_content chapter_user.bio
+    end
+
+    it "Allows an admin to view all users associated with a chapter" do
+      chapter_users = FactoryGirl.create_list(:chapter_user, 3, chapter: chapter)
+      other_chapter = FactoryGirl.create(:chapter)
+      other_chapter_users = FactoryGirl.create_list(:chapter_user, 3, chapter: other_chapter)
+
+      visit admin_chapter_users_path(chapter)
+      chapter_users.each do |cu|
+        expect(page).to have_content cu.name
+        expect(page).to have_content cu.email
+      end
+
+      other_chapter_users.each do |ocu|
+        expect(page).not_to have_content ocu.name
+        expect(page).not_to have_content ocu.email
+      end
     end
   end
 end

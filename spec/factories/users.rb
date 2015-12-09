@@ -33,5 +33,13 @@ FactoryGirl.define do
         end
       end
     end
+
+    factory :chapter_user do
+      after(:create) do |user, evaluator|
+        if evaluator.chapter
+          FactoryGirl.create(:subscription, user: user, chapter: evaluator.chapter)
+        end
+      end
+    end
   end
 end
