@@ -12,13 +12,13 @@
         = f.text_area :email_info, class: "form-control", placeholder: "This text will be included in emails we send to attendees, but not visible on the website."
       .form-group
         => f.label :starts_at, "Start date"
-        = f.date_select :starts_at, order: [:day, :month, :year]
+        = f.date_select :starts_at, order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year + 1
         br
         => f.label :starts_at, "Start time"
         = f.time_select :starts_at, ignore_date: true, minute_step: 15
       .form-group
         => f.label :ends_at, "End date"
-        = f.date_select :ends_at, order: [:day, :month, :year]
+        = f.date_select :ends_at, order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year + 1
         br
         => f.label :ends_at, "End time"
         = f.time_select :ends_at, ignore_date: true, minute_step: 15
