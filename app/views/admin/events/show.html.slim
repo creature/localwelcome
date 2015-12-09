@@ -52,30 +52,19 @@
             th Status
             th &nbsp;
         tbody
-          - @event.invitations.each do |invite|
+          - @event.invitations.map(&:decorate).each do |invite|
             tr
               td = invite.user.try(:email)
+              td = invite.friendly_status
               - if invite.requested?
-                td Invite requested
                 td
                   = form_tag admin_invite_path(invite), method: :post do
                     = submit_tag "Send invitation", class: "btn btn-success"
-              - if invite.sent?
-                td Invite sent, no response yet
-                td &nbsp;
-              - if invite.declined?
-                td Not attending
-                td &nbsp;
-              - if invite.accepted?
-                td Attending
+              - elsif invite.accepted?
                 td
                   = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
                     = submit_tag "Mark as attended", class: "btn btn-success"
                   = form_tag admin_mark_as_no_show_path(invite), method: :post, class: "form-inline" do
                     = submit_tag "Mark as no-show", class: "btn btn-warning"
-              - if invite.attended?
-                td Attended
-                td &nbsp;
-              - if invite.no_show?
-                td No-show
+              - else
                 td &nbsp;
