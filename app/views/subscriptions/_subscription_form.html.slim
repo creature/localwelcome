@@ -1,8 +1,8 @@
 - if current_user.subscribed_to? chapter
-  = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete do
+  = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete, class: "subscribed" do
     = submit_tag "Subscribed to Local Welcome #{chapter.name}", class: "btn btn-success btn-lg"
 - else
-  = form_for Subscription.new(chapter: chapter) do |f|
+  = form_for Subscription.new(chapter: chapter), class: "new subscription" do |f|
     = f.hidden_field :chapter_id
     = f.submit "Get emails from Local Welcome #{chapter.name}", class: "btn btn-default btn-lg"
 
