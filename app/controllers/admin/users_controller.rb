@@ -6,6 +6,10 @@ class Admin::UsersController < Admin::AdminController
     @subscriptions = @chapter.subscriptions.newest
   end
 
+  def show
+    @user = @chapter.users.find(params[:id]).decorate
+  end
+
   protected
 
   def set_chapter

@@ -9,49 +9,25 @@
 
     dl.dl-horizontal
       dt Name
-      dd
-        - if current_user.name.blank?
-          span.system.message None set
-        - else
-          = current_user.name
+      dd = @user.optional_name
 
       dt Email address
-      dd = current_user.email
+      dd = @user.email
 
       dt Telephone number
-      dd
-        - if current_user.telephone.blank?
-          span.system.message None set
-        - else
-          = current_user.telephone
+      dd = @user.telephone
 
       dt Postcode
-      dd
-        - if current_user.postcode.blank?
-          span.system.message None set
-        - else
-          = current_user.postcode
+      dd = @user.postcode
 
       dt About you
-      dd
-        - if current_user.bio.blank?
-          span.system.message You haven't told us about yourself yet. :(
-        - else
-          = current_user.bio
+      dd = @user.bio
 
       dt Language skills
-      dd
-        - if current_user.language_skills.blank?
-          span.system.message None set
-        - else
-          = current_user.language_skills
+      dd = @user.language_skills
 
       dt Life skills
-      dd
-        - if current_user.life_skills.blank?
-          span.system.message None set
-        - else
-          = current_user.life_skills
+      dd = @user.life_skills
 
     = link_to "Edit your profile...", edit_profile_path
 

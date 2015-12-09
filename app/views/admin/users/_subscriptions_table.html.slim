@@ -8,12 +8,10 @@
         th Signed up on
     tbody
     - subscriptions.each do |subscription|
+      - user = subscription.user.decorate
       tr
-        - if subscription.user.name.blank?
-          td
-            | [Not set]
-        - else
-          td = subscription.user.name
+        td
+          = link_to user.optional_name, admin_chapter_user_path(subscription.chapter, subscription.user)
         td = subscription.user.email
         - if subscription.user.bio.blank?
           td

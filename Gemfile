@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'pg' # Postgres gem, used in production
-gem 'rails_12factor' # Makes some Heroku-friendly tweaks.
+gem 'rails_12factor', group: :production # Makes some Heroku-friendly tweaks.
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -18,6 +18,7 @@ gem 'twitter-bootstrap-rails' # CSS framework
 gem 'bourbon' # Useful CSS functions
 gem 'google-webfonts-rails' # Helpers for webfonts
 gem 'aasm' # Acts as state machine, used by invitations
+gem 'draper' # Decorator objects, to make view logic a little less repetitive
 
 group :development, :test do
   gem 'sqlite3' # Lightweight DB used in development
