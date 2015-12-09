@@ -1,0 +1,49 @@
+.container
+  .row.col-md-12
+    p
+      = link_to "&laquo; Back to Local Welcome #{@chapter.name}".html_safe, admin_chapter_path(@chapter)
+    h1 #{@user.name}'s profile
+
+  .row
+    .col-md-6
+      dl
+        dt Name
+        dd = @user.optional_name
+
+        dt Email
+        dd = @user.email
+
+        dt Telephone
+        dd = @user.telephone
+
+        dt Postcode
+        dd = @user.postcode
+    .col-md-6
+      dl
+        dt About this user
+        dd = @user.bio
+
+        dt Language skills
+        dd = @user.language_skills
+
+        dt Life skills
+        dd = @user.life_skills
+
+  .row
+    .col-md-6
+      h2 #{@user.name}'s chapters
+      - if @user.subscriptions.any?
+        ul
+          - @user.subscriptions.each do |sub|
+            li Local Welcome #{sub.chapter.name} (joined on #{long_friendly_date sub.created_at})
+      - else
+        p.system.message This user hasn't joined any chapters yet.
+
+    .col-md-6
+      h2 #{@user.name}'s events
+      - if @user.invitations.any?
+        ul
+          - @user.invitations.map(&:decorate).each do |invite|
+            li #{invite.event.title} (#{invite.friendly_status})
+      - else
+        p.system.message This user hasn't signed up for any events yet.

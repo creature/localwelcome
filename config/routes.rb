@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     post 'invitations/:id/mark_as_attended', to: "invitations#mark_as_attended", as: :mark_as_attended
     post 'invitations/:id/mark_as_no_show', to: "invitations#mark_as_no_show", as: :mark_as_no_show
     resources :chapters, only: [:show] do
-      resources :users, only: [:index]
+      resources :users, only: [:index, :show]
       resources :events, only: [:show, :create, :edit, :update]
     end
   end
