@@ -37,6 +37,7 @@
       ul
         - current_user.events.each do |ev|
           li = link_to ev.title, chapter_event_path(ev.chapter, ev)
+      p We'll email you announcements of new events from #{link_to "the chapters you're subscribed to", subscriptions_path}. You can also #{link_to "browse the site", root_path} to find them.
     - else
       ' You haven't signed up for any events yet.
       - if current_user.subscriptions.any?
@@ -53,6 +54,7 @@
       ul
         - current_user.subscriptions.each do |sub|
           li = link_to sub.chapter.name, chapter_path(sub.chapter)
+      p You can join and leave mailing lists #{link_to "from the subscriptions page", subscriptions_path}.
     - else
       p You haven't joined any chapters yet, so you won't hear about any of our events.
       = link_to "Join a local chapter", subscriptions_path, class: "btn btn-primary btn-lg"
