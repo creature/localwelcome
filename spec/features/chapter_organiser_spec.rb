@@ -52,7 +52,7 @@ feature "Chapter organisers" do
 
     visit admin_chapter_path(other_chapter)
     expect(current_path).not_to eq admin_chapter_path(other_chapter)
-    expect(page).to have_selector ".alert-danger"
+    expect(page).to have_error_notice
   end
 
   scenario "Chapter organisers cannot view events for other chapters" do
@@ -63,7 +63,7 @@ feature "Chapter organisers" do
 
     visit admin_chapter_event_path(other_event.chapter, other_event)
     expect(current_path).not_to eq admin_chapter_event_path(other_event.chapter, other_event)
-    expect(page).to have_selector ".alert-danger"
+    expect(page).to have_error_notice
   end
 
   scenario "Chapter organisers cannot view members for other chapters" do
@@ -81,7 +81,7 @@ feature "Chapter organisers" do
     # Chapter organisers shouldn't be able to access the users page for other chapters.
     visit admin_chapter_path(other_chapter)
     expect(current_path).not_to eq admin_chapter_path(other_chapter)
-    expect(page).to have_selector ".alert-danger"
+    expect(page).to have_error_notice
   end
 
   scenario "Chapter organisers can create events for their chapter"

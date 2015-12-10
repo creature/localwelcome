@@ -76,7 +76,7 @@ feature "Event capacity limits" do
     fill_in :event_capacity, with: 6
     click_button "Save"
 
-    expect(page).to have_selector ".alert-info"
+    expect(page).to have_success_notice
     event.reload
     expect(event.capacity).to eq 6
   end

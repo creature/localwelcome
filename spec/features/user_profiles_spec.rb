@@ -31,7 +31,7 @@ feature "User profiles" do
     click_button "Save"
 
     # Page should show new profile values
-    expect(page).to have_selector ".alert-info"
+    expect(page).to have_success_notice
     expect(page).to have_content bio
     expect(page).to have_content telephone
 
@@ -54,7 +54,7 @@ feature "User profiles" do
 
     # Page and user should have been updated.
     empty_user.reload
-    expect(page).to have_selector ".alert-info"
+    expect(page).to have_success_notice
     [:name, :telephone, :bio, :postcode, :life_skills, :language_skills].each do |attr|
       expect(page).to have_content self.send(attr)
       expect(empty_user.send(attr)).to eq self.send(attr)

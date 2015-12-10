@@ -61,8 +61,8 @@ feature "The admin panel" do
       click_button "Save changes"
 
       # Flash message should be a success, not an error
-      expect(page).not_to have_selector ".alert-danger"
-      expect(page).to have_selector ".alert-info"
+      expect(page).not_to have_error_notice
+      expect(page).to have_success_notice
 
       # Event should have been updated
       event.reload
