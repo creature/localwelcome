@@ -23,7 +23,7 @@ class Invitation < ActiveRecord::Base
     state :cancelled_rudely # The user dropped out at late notice
 
     event(:send_invite) { transitions from: :requested, to: :sent }
-    event(:accept_invite) { transitions from: :sent, to: :accepted }
+    event(:accept_invite) { transitions from: :sent, to: :accepted, unless: :full_event? }
     event(:decline_invite) { transitions from: [:sent, :accepted], to: :declined }
     event(:unknown) { transitions from: :accepted, to: :unknown }
     event(:attended) { transitions from: :accepted, to: :attended }
@@ -47,6 +47,11 @@ class Invitation < ActiveRecord::Base
   end
 
   protected
+
+  # Is this an invitation to a full event?
+  def full_event?
+    event.full?
+  end
 
   def self.verifier
     @@verifier ||= ActiveSupport::MessageVerifier.new(Rails.application.secrets.secret_key_base)

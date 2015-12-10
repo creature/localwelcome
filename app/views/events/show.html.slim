@@ -29,6 +29,13 @@
       - elsif @invite.declined? || @invite.cancelled?
         | You're not attending this event.
     - else
-      = form_tag invitations_path, method: :post do
-        = hidden_field :invitation, :event_id, value: @event.id
-        = submit_tag "Request an invite", class: "btn btn-lg btn-primary"
+      - if @event.full?
+        h2 This event is full!
+        p Sorry, we've not got any space left at this event.
+        - unless current_user.try(:subscribed_to?, @event.chapter)
+          p If you join #{link_to "Local Welcome #{@event.chapter.name}", chapter_path(@event.chapter)} you'll get an email whenever we announce a new event.
+
+      - else
+        = form_tag invitations_path, method: :post do
+          = hidden_field :invitation, :event_id, value: @event.id
+          = submit_tag "Request an invite", class: "btn btn-lg btn-primary"

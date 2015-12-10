@@ -9,6 +9,8 @@
         span.info-label.bg-success Published
       - else
         span.info-label.bg-warning Not yet published
+      - if @event.full?
+        span.info-label.bg-warning< Event full
 
   .row.buttons
     .col-md-12
@@ -24,27 +26,33 @@
 
   .row
     .col-md-12
-      - if @event.description.blank?
-        p.system.message No description yet
-      - else
-        p = @event.description
+      dl
+        dt Starts at
+        dd = long_friendly_datetime @event.starts_at
 
-      - if @event.email_info.blank?
-        p.system.message No extra information will be included in the emails we send to attendees.
-      - else
-        p = @event.email_info
+        dt Ends at
+        dd = long_friendly_datetime @event.ends_at
 
+        dt Capacity
+        dd = @event.capacity
 
-      p
-        ' Starts at
-        = long_friendly_datetime @event.starts_at
-      p
-        ' Ends at
-        = long_friendly_datetime @event.ends_at
+        dt Public description (visible everywhere)
+        dd
+          - if @event.description.blank?
+            p.system.message No description yet
+          - else
+            p = @event.description
+
+        dt Email-only information (only sent to attendees)
+        dd
+          - if @event.email_info.blank?
+            p.system.message No extra information will be included in the emails we send to attendees.
+          - else
+            p = @event.email_info
 
   .row
     .col-md-12
-      h2 Attendees
+      h2 Attendees (#{@event.attendees.count} of #{@event.capacity} slots taken; #{@event.remaining_place_count} slots left)
       table.table.table-striped
         thead
           tr

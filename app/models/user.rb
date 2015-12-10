@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
     subscriptions.where(chapter: chapter).exists?
   end
 
+  # Is this user attending the given event?
+  def attending?(event)
+    invitations.accepted.where(event: event).exists?
+  end
+
   # Is this user an admin?
   def admin?
     roles.admin.exists?
