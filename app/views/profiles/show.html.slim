@@ -36,7 +36,11 @@
     - if current_user.events.any?
       ul
         - current_user.events.each do |ev|
-          li = link_to ev.title, chapter_event_path(ev.chapter, ev)
+          li
+            = link_to ev.title, chapter_event_path(ev.chapter, ev)
+            - if current_user.attending? ev
+              span.bg-success.text-success<
+                | (You're attending this!)
       p We'll email you announcements of new events from #{link_to "the chapters you're subscribed to", subscriptions_path}. You can also #{link_to "browse the site", root_path} to find them.
     - else
       ' You haven't signed up for any events yet.

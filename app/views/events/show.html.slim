@@ -16,6 +16,9 @@
   - unless @event.description.blank?
     p.description = @event.description
 
+  - if @invite.try(:accepted?)
+    p = @event.email_info
+
   - unless @event.in_the_past?
     - if @invite
       - if @invite.sent?
@@ -23,7 +26,11 @@
         = form_tag invitation_path(@invite), method: :delete do
           = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
       - elsif @invite.accepted?
-        | You're coming to this event! Check your email for more details.
+        ' You're coming to this event! Check your email for more details.
+        - if @event.full?
+          p
+            strong> Please note:
+            | This event is full up. If you can no longer make it, please let us know so we can give your slot to someone else.
         = form_tag invitation_path(@invite), method: :delete do
           = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
       - elsif @invite.declined? || @invite.cancelled?
