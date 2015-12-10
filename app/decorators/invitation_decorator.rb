@@ -10,4 +10,8 @@ class InvitationDecorator < Draper::Decorator
     return "Attended" if object.attended?
     return "No-show" if object.no_show?
   end
+
+  def user
+    object.user.decorate
+  end
 end

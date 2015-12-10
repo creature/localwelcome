@@ -57,16 +57,16 @@
   .row
     .col-md-12
       h2 Attendees (#{@event.attendees.count} of #{@event.capacity} slots taken; #{@event.remaining_place_count} slots left)
-      table.table.table-striped
+      table.table.table-striped.attendees
         thead
           tr
-            th Email address
+            th Attendee
             th Status
             th &nbsp;
         tbody
           - @event.invitations.map(&:decorate).each do |invite|
             tr
-              td = invite.user.try(:email)
+              td = link_to invite.user.name, admin_chapter_user_path(@event.chapter, invite.user), data: { toggle: "popover", content: html_escape_once(invite.user.popover_preview) }, title: invite.user.name, class: "popoverable"
               td = invite.friendly_status
               - if invite.requested?
                 td

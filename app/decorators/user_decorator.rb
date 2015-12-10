@@ -1,6 +1,10 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
+  def popover_preview
+    h.render partial: "admin/users/popover_preview", object: self
+  end
+
   def name
     if object.name.blank?
       object.email
