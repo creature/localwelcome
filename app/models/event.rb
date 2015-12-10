@@ -19,6 +19,18 @@ class Event < ActiveRecord::Base
     ends_at < Time.zone.now
   end
 
+  def full?
+    invitations.accepted.count >= capacity
+  end
+
+  def attendees
+    invitations.accepted.map(&:user)
+  end
+
+  def remaining_place_count
+    n = capacity - attendees.count
+    n >= 0 ? n : 0
+  end
 
   protected
 

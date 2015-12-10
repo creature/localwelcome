@@ -10,5 +10,11 @@ FactoryGirl.define do
     factory :unpublished_event do
       published false
     end
+
+    factory :full_event do
+      after(:create) do |event|
+        event.capacity.times { FactoryGirl.create(:accepted_invitation, event: event) }
+      end
+    end
   end
 end
