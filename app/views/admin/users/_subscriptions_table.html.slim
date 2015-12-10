@@ -10,8 +10,7 @@
     - subscriptions.each do |subscription|
       - user = subscription.user.decorate
       tr
-        td
-          = link_to user.optional_name, admin_chapter_user_path(subscription.chapter, subscription.user)
+        td = user.admin_link_with_popover(subscription.chapter)
         td = subscription.user.email
         - if subscription.user.bio.blank?
           td

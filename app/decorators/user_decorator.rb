@@ -5,6 +5,10 @@ class UserDecorator < Draper::Decorator
     h.render partial: "admin/users/popover_preview", object: self
   end
 
+  def admin_link_with_popover(chapter)
+    h.link_to name, h.admin_chapter_user_path(chapter, object), data: { toggle: "popover", content: h.html_escape_once(popover_preview) }, title: name, class: "popoverable"
+  end
+
   def name
     if object.name.blank?
       object.email

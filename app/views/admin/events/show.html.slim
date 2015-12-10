@@ -66,7 +66,7 @@
         tbody
           - @event.invitations.map(&:decorate).each do |invite|
             tr
-              td = link_to invite.user.name, admin_chapter_user_path(@event.chapter, invite.user), data: { toggle: "popover", content: html_escape_once(invite.user.popover_preview) }, title: invite.user.name, class: "popoverable"
+              td = invite.user.admin_link_with_popover(@event.chapter)
               td = invite.friendly_status
               - if invite.requested?
                 td
