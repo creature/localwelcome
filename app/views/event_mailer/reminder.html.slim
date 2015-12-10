@@ -1,0 +1,25 @@
+= render partial: "shared/email_greeting", locals: { user: @user }
+
+p
+  ' You're signed up to attend
+  = link_to "Local Welcome #{@event.chapter.name}", chapter_path(@event.chapter)
+  ' 's event "#{@event.title}". The event's on #{long_friendly_date @event.starts_at}
+  | (that's in #{distance_of_time_in_words_to_now @event.starts_at}!), so we wanted to remind you that it was coming up.
+
+- unless @event.email_info.blank?
+  p = @event.email_info
+
+p
+  ' All the details for this event
+  => link_to "Are available on our website", chapter_event_url(@event.chapter, @event)
+  | (make sure you're logged in if you want to see the details above too).
+
+p
+  ' And if you no longer make it to this event,
+  = link_to "please let us know by clicking here so we can give your place to someone else", decline_invitation_url(@invite.token)
+  |.
+
+p
+  | Best wishes,
+  br
+  | The Local Welcome #{@event.chapter.name} Organisers

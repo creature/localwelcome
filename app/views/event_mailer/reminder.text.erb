@@ -1,0 +1,18 @@
+<%= render partial: "shared/email_greeting", locals: { user: @user } %>
+
+You're signed up to attend Local Welcome <%= @event.chapter.name %>'s event "<%= @event.title %>".
+The event's on <%= long_friendly_date @event.starts_at %> (that's in <%= distance_of_time_in_words_to_now @event.starts_at %>!), so we wanted to remind you that it was coming up.
+<% unless @event.email_info.blank? %>
+
+<%= @event.email_info %>
+<% end %>
+
+You can see all the details on our website (make sure you're logged in if you want the details above too):
+<%= chapter_event_url(@event.chapter, @event) %>
+
+And if you can no longer make it, please let us know by clicking the link below:
+<%= decline_invitation_url(@invite.token) %>
+
+
+Best wishes,
+The Local Welcome <%= @event.chapter.name %> Organisers
