@@ -1,7 +1,4 @@
-- if @user.name.blank?
-  p Hi,
-- else
-  p Hi #{@user.name},
+= render partial: "shared/email_greeting", locals: { user: @user }
 
 p You requested an invite to #{@event.title}, an event ran by Local Welcome #{@event.chapter.name}. We'd love for you to come!
 
