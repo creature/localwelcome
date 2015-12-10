@@ -46,5 +46,10 @@ describe Ability do
       other_event = FactoryGirl.create(:event)
       expect(ability).not_to be_able_to :manage, other_event
     end
+
+    it "Should be able to create new events" do
+      new_event = FactoryGirl.build(:event, chapter: chapter)
+      expect(ability).to be_able_to :create, new_event
+    end
   end
 end

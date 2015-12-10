@@ -4,6 +4,10 @@ feature "Chapter organisers" do
   let(:chapter) { FactoryGirl.create(:chapter) }
   let(:other_chapter) { FactoryGirl.create(:chapter) }
   let(:organiser) { FactoryGirl.create(:chapter_organiser, chapter: chapter) }
+  let(:title) { Faker::Lorem.sentence }
+  let(:description) { Faker::Lorem.paragraph }
+  let(:start_time) { 12.days.from_now.beginning_of_hour }
+  let(:end_time) { start_time + 3.hours }
   before { login(organiser) }
 
   scenario "Chapter organisers can access the dashboard" do
@@ -26,7 +30,6 @@ feature "Chapter organisers" do
 
   scenario "Chapter organisers can view events for their chapter" do
     event = FactoryGirl.create(:event, chapter: chapter)
-
     visit admin_path
     expect(page).to have_content event.title
     click_link event.title
@@ -84,6 +87,26 @@ feature "Chapter organisers" do
     expect(page).to have_error_notice
   end
 
-  scenario "Chapter organisers can create events for their chapter"
-  scenario "Chapter organisers can edit events for their chapter"
+  scenario "Chapter organisers can create events for their chapter" do
+    visit admin_chapter_path(chapter)
+    fill_in_event_form(title, description, start_time, end_time)
+    expect { click_button "Create new event" }.to change { chapter.events.count }.by 1
+    new_event = chapter.events.last
+
+    expect(new_event.title).to eq title
+    expect(new_event.starts_at).to eq start_time
+  end
+
+  scenario "Chapter organisers can edit events for their chapter" do
+    event = FactoryGirl.create(:event, chapter: chapter)
+    visit edit_admin_chapter_event_path(event.chapter, event)
+    fill_in_event_form(title, description, start_time, end_time)
+    click_button "Save"
+
+    expect(page).to have_success_notice
+    expect(current_path).to eq admin_chapter_event_path(event.chapter, event)
+    event.reload
+    expect(event.title).to eq title
+    expect(event.starts_at).to eq start_time
+  end
 end

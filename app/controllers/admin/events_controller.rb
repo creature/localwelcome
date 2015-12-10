@@ -1,13 +1,13 @@
 class Admin::EventsController < Admin::AdminController
-  load_and_authorize_resource
   before_action :set_chapter
+  load_and_authorize_resource
   before_action :check_permissions
 
   def show
   end
 
   def create
-    @event = Event.new(event_params.merge(chapter: @chapter))
+    @event = Event.new(event_params)
     if @event.save
       redirect_to admin_chapter_event_path(@chapter, @event), notice: "Event created!"
     else
@@ -39,6 +39,6 @@ class Admin::EventsController < Admin::AdminController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :email_info, :starts_at, :ends_at, :published, :capacity)
+    params.require(:event).permit(:title, :description, :email_info, :starts_at, :ends_at, :published, :capacity).merge({chapter_id: @chapter.id})
   end
 end

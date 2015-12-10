@@ -139,11 +139,3 @@ feature "The admin panel" do
     end
   end
 end
-
-def fill_in_event_form(title, description, starts_at, ends_at)
-  fill_in :event_title, with: title
-  fill_in :event_description, with: description
-  datetime_select(:event_starts_at, starts_at)
-  datetime_select(:event_ends_at, ends_at)
-end
-
