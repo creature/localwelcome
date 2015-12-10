@@ -1,6 +1,7 @@
 class Admin::EventsController < Admin::AdminController
   before_action :set_chapter
-  load_and_authorize_resource
+  before_action :set_event
+  load_and_authorize_resource :event
   before_action :check_permissions
 
   def show
@@ -26,10 +27,23 @@ class Admin::EventsController < Admin::AdminController
     end
   end
 
+  # Send emails to this chapter's members about the given event.
+  def announcement
+    @chapter.users.each do |u|
+      EventMailer.announcement(u, @event).deliver
+    end
+    redirect_to :back, notice: "Emails sent."
+  end
+
   protected
 
   def set_chapter
     @chapter = Chapter.find(params[:chapter_id])
+  end
+
+  # Some non-RESTful actions end up with an :event_id param instead.
+  def set_event
+    @event = Event.find(params[:event_id]) if params.has_key? :event_id
   end
 
   def check_permissions

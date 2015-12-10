@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     post 'invitations/:id/mark_as_no_show', to: "invitations#mark_as_no_show", as: :mark_as_no_show
     resources :chapters, only: [:show] do
       resources :users, only: [:index, :show]
-      resources :events, only: [:show, :create, :edit, :update]
+      resources :events, only: [:show, :create, :edit, :update] do
+        post 'announcement', to: "events#announcement", as: :announcement
+      end
     end
   end
 end

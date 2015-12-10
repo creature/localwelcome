@@ -1,0 +1,11 @@
+= render partial: "shared/email_greeting", locals: { user: @user }
+
+p We wanted to let you know that Local Welcome #{@event.chapter.name} has a new event coming up. On #{long_friendly_date @event.starts_at } we're hosting a meet-up between refugees and local folk. We want to help people make friends, share skills, and improve community ties.
+
+p If you'd like to attend, you can find out more details and request an invite from our web site:
+p = link_to "Local Welcome #{@event.chapter.name} - #{@event.title}", chapter_event_url(@event.chapter, @event)
+
+p
+  | Best wishes,
+  br
+  | The Local Welcome #{@event.chapter.name} Organisers

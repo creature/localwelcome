@@ -18,6 +18,7 @@
         = form_for [:admin, @event.chapter, @event], html: { class: "form-inline" } do |f|
           = f.hidden_field :published, value: false
           = f.submit "Unpublish", class: "btn btn-warning"
+        => link_to "Send announcement emails", admin_chapter_event_announcement_path(@event.chapter, @event), method: :post, class: "btn btn-default"
       - else
         = form_for [:admin, @event.chapter, @event], html: { class: "form-inline" } do |f|
           = f.hidden_field :published, value: true
