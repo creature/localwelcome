@@ -12,6 +12,16 @@ feature "Signing Up to Local Welcome" do
     expect { click_button "Sign up" }.to change { User.count }.by 1
   end
 
+  scenario "After sign up, a user is prompted to fill out their profile" do
+    visit new_user_registration_path
+    fill_in_registration_form
+    click_button "Sign up"
+
+    expect(page).to have_success_notice
+    expect(page).not_to have_error_notice
+    expect(current_path).to eq edit_profile_path
+  end
+
   scenario "Signing up doesn't create a subscription automatically" do
     visit new_user_registration_path
     fill_in_registration_form
