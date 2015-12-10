@@ -45,4 +45,11 @@ describe InvitationsController do
       expect(accepted_invite).to be_declined
     end
   end
+
+  it "Deletes an invite" do
+    sign_in invite.user
+    request.env["HTTP_REFERER"] = chapter_event_path(invite.event.chapter, invite.event)
+    delete :destroy, id: invite.id
+    expect { Invitation.find(invite.id) }.to raise_error ActiveRecord::RecordNotFound
+  end
 end
