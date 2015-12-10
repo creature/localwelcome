@@ -5,6 +5,7 @@ FactoryGirl.define do
     starts_at 3.days.from_now
     ends_at 3.days.from_now + 3.hours
     published true
+    capacity 10
 
     factory :unpublished_event do
       published false

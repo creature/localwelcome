@@ -24,5 +24,16 @@ describe Event do
       event.ends_at = event.starts_at
       expect(event).not_to be_valid
     end
+
+    it "Must have a capacity greater than 0" do
+      event.capacity = 5
+      expect(event).to be_valid
+      event.capacity = 1
+      expect(event).to be_valid
+      event.capacity = 0
+      expect(event).not_to be_valid
+      event.capacity = -1
+      expect(event).not_to be_valid
+    end
   end
 end

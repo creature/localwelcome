@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   validates :title, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+  validates :capacity, numericality: { only_integer: true, greater_than: 0 }
   validate :starts_before_it_ends
 
   scope :chronological, -> { order({starts_at: :asc}) }
