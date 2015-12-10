@@ -17,6 +17,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Redirect the user to the subscriptions path after signup.
   def after_sign_up_path_for(resource)
-    subscriptions_path
+    edit_profile_path
   end
 end
