@@ -11,6 +11,8 @@
         span.info-label.bg-warning Not yet published
       - if @event.full?
         span.info-label.bg-warning< Event full
+      - if @event.announced?
+        span.info-label.bg-success< Announcement emails sent
 
   .row.buttons
     .col-md-12
@@ -18,7 +20,8 @@
         = form_for [:admin, @event.chapter, @event], html: { class: "form-inline" } do |f|
           = f.hidden_field :published, value: false
           = f.submit "Unpublish", class: "btn btn-warning"
-        => link_to "Send announcement emails", admin_chapter_event_announcement_path(@event.chapter, @event), method: :post, class: "btn btn-default"
+        - unless @event.announced?
+          => link_to "Send announcement emails", admin_chapter_event_announcement_path(@event.chapter, @event), method: :post, class: "btn btn-default"
       - else
         = form_for [:admin, @event.chapter, @event], html: { class: "form-inline" } do |f|
           = f.hidden_field :published, value: true

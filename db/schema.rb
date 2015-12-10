@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210012059) do
+ActiveRecord::Schema.define(version: 20151210211722) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151210012059) do
     t.boolean  "published"
     t.text     "email_info"
     t.integer  "capacity",    default: 10
+    t.boolean  "announced"
   end
 
   add_index "events", ["chapter_id"], name: "index_events_on_chapter_id"

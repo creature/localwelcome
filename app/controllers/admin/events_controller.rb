@@ -29,10 +29,15 @@ class Admin::EventsController < Admin::AdminController
 
   # Send emails to this chapter's members about the given event.
   def announcement
-    @chapter.users.each do |u|
-      EventMailer.announcement(u, @event).deliver
+    if @event.announced?
+      redirect_to :back, alert: "Announcement emails have already been sent."
+    else
+      @chapter.users.each do |u|
+        EventMailer.announcement(u, @event).deliver
+      end
+      @event.update_attributes(announced: true)
+      redirect_to :back, notice: "Emails sent."
     end
-    redirect_to :back, notice: "Emails sent."
   end
 
   protected
