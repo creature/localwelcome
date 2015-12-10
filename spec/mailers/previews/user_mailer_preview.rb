@@ -1,6 +1,5 @@
 class UserMailerPreview < ActionMailer::Preview
   def invite
-    invitation = FactoryGirl.create(:invitation)
-    UserMailer.invite(invitation)
+    UserMailer.invite(Invitation.first)
   end
 end
