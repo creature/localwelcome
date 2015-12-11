@@ -138,4 +138,35 @@ feature "The admin panel" do
       end
     end
   end
+
+  context "Chapters" do
+    let(:name) { Faker::Lorem.sentence }
+    let(:description) { Faker::Lorem.paragraph }
+
+    it "Allows an admin to create a new chapter" do
+      visit admin_path
+      click_link "Create new chapter"
+      fill_in :chapter_name, with: name
+      fill_in :chapter_description, with: description
+
+      expect { click_button "Save" }.to change { Chapter.count }.by 1
+      expect(Chapter.last.name).to eq name
+      expect(Chapter.last.description).to eq description
+    end
+
+    it "Allows an admin to edit an existing chapter" do
+      chapter = FactoryGirl.create(:chapter)
+      expect(chapter.name).not_to eq name
+      expect(chapter.description).not_to eq description
+
+      visit edit_admin_chapter_path(chapter)
+      fill_in :chapter_name, with: name
+      fill_in :chapter_description, with: description
+      click_button "Save"
+
+      chapter.reload
+      expect(chapter.name).to eq name
+      expect(chapter.description).to eq description
+    end
+  end
 end
