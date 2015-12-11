@@ -38,7 +38,13 @@
       - if @user.subscriptions.any?
         ul
           - @user.subscriptions.each do |sub|
-            li Local Welcome #{sub.chapter.name} (joined on #{long_friendly_date sub.created_at})
+            li
+              ' Local Welcome #{sub.chapter.name} (joined on #{long_friendly_date sub.created_at})
+              - unless @user.admin?
+                - if @user.organiser_of? sub.chapter
+                  = link_to "Remove as organiser", admin_chapter_user_destroy_organiser_path(sub.chapter, @user), method: :post, class: "btn btn-danger"
+                - else
+                  = link_to "Make organiser", admin_chapter_user_create_organiser_path(sub.chapter, @user), method: :post, class: "btn btn-default"
       - else
         p.system.message This user hasn't joined any chapters yet.
 

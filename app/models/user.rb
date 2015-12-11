@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
     roles.chapter_organiser.exists?
   end
 
+  # Does this user organise a particular chapter?
+  def organiser_of?(chapter)
+    roles.chapter_organiser.where(chapter: chapter).exists?
+  end
+
   # Gets the chapters organised by this user.
   def organised_chapters
     Chapter.where(id: roles.chapter_organiser.pluck(:chapter_id)) # TODO: There's a better way to do this.

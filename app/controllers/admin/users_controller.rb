@@ -10,6 +10,25 @@ class Admin::UsersController < Admin::AdminController
     @user = @chapter.users.find(params[:id]).decorate
   end
 
+  def create_organiser
+    user = @chapter.users.find(params[:user_id])
+    if user.roles.create(role: :chapter_organiser, chapter: @chapter)
+      redirect_to :back, notice: "Successfully added organiser."
+    else
+      redirect_to :back, alert: "Couldn't add as organiser."
+    end
+  end
+
+  def destroy_organiser
+    user = @chapter.users.find(params[:user_id])
+    role = user.roles.chapter_organisers.find_by(chapter: @chapter)
+    if role.destroy
+      redirect_to :back, notice: "Removed organiser from this chapter."
+    else
+      redirect_to :back, alert: "Couldn't remove user as organiser."
+    end
+  end
+
   protected
 
   def set_chapter
