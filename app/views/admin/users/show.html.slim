@@ -37,19 +37,19 @@
   .row
     .col-md-6
       h2 #{@user.name}'s chapters
-      - if @user.subscriptions.any?
+      - if @user.all_chapters.any?
         ul
-          - @user.subscriptions.each do |sub|
+          - @user.all_chapters.each do |chapter|
             li
-              ' Local Welcome #{sub.chapter.name} (joined on #{long_friendly_date sub.created_at})
-              - if @user.organiser_of? sub.chapter
+              ' Local Welcome #{chapter.name}
+              - if @user.organiser_of? chapter
                 span.bg-success.text-success>
                   | (Organiser)
               - unless @user.admin?
-                - if @user.organiser_of? sub.chapter
-                  = link_to "Remove as organiser", admin_chapter_user_destroy_organiser_path(sub.chapter, @user), method: :post, class: "btn btn-danger"
+                - if @user.organiser_of? chapter
+                  = link_to "Remove as organiser", admin_chapter_user_destroy_organiser_path(chapter, @user), method: :post, class: "btn btn-danger"
                 - else
-                  = link_to "Make organiser", admin_chapter_user_create_organiser_path(sub.chapter, @user), method: :post, class: "btn btn-default"
+                  = link_to "Make organiser", admin_chapter_user_create_organiser_path(chapter, @user), method: :post, class: "btn btn-default"
       - else
         p.system.message This user hasn't joined any chapters yet.
 

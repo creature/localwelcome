@@ -4,6 +4,7 @@ feature "Chapter organisers" do
   let(:chapter) { FactoryGirl.create(:chapter) }
   let(:other_chapter) { FactoryGirl.create(:chapter) }
   let(:organiser) { FactoryGirl.create(:chapter_organiser, chapter: chapter) }
+  let(:admin) { FactoryGirl.create(:admin) }
   let(:name) { Faker::Lorem.sentence }
   let(:description) { Faker::Lorem.paragraph }
   let(:start_time) { 12.days.from_now.beginning_of_hour }
@@ -108,5 +109,31 @@ feature "Chapter organisers" do
     event.reload
     expect(event.name).to eq name
     expect(event.starts_at).to eq start_time
+  end
+
+  context "Admins managing chapter organisers" do
+    before do
+      logout(:user)
+      login(admin)
+    end
+
+    scenario "An admin can add a new chapter organiser" do
+      target_user = FactoryGirl.create(:chapter_user, chapter: chapter)
+      expect(target_user).not_to be_organiser
+
+      visit admin_chapter_user_path(chapter, target_user)
+      click_link "Make organiser"
+
+      expect(target_user).to be_organiser
+      expect(target_user.organiser_of? chapter).to be true
+    end
+
+    scenario "An admin can revoke a chapter organiser permission" do
+      expect(organiser).to be_organiser
+      visit admin_chapter_user_path(chapter, organiser)
+      click_link "Remove as organiser"
+
+      expect(organiser).not_to be_organiser
+    end
   end
 end
