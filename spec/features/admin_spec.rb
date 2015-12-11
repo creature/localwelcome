@@ -75,8 +75,8 @@ feature "The admin panel" do
       other_invitations = FactoryGirl.create_list(:invitation, 3)
 
       visit admin_chapter_event_path(event.chapter, event)
-      invitations.each { |invite| expect(page).to have_content invite.user.email }
-      other_invitations.each { |invite| expect(page).not_to have_content invite.user.email }
+      invitations.each { |invite| expect(page).to have_content invite.user.name }
+      other_invitations.each { |invite| expect(page).not_to have_content invite.user.name }
     end
 
     it "Allows an admin to send an attendee an invite" do
