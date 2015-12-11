@@ -13,6 +13,7 @@ class Ability
 
       if user.organiser?
         can :manage, Chapter, id: user.organised_chapters.ids
+        cannot :create, Chapter
         can :manage, Event, chapter_id: user.organised_chapters.ids
       end
     end
