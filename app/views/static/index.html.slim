@@ -17,7 +17,7 @@
           - else
             h3
               |Next event:
-              =<> chapter.next_event.title
+              =<> chapter.next_event.name
               |(in
               =< distance_of_time_in_words(chapter.next_event.starts_at, Time.now)
               |)

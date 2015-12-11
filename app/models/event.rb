@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :users, through: :invitations
 
   validates :chapter, presence: true
-  validates :title, presence: true
+  validates :name, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   validates :capacity, numericality: { only_integer: true, greater_than: 0 }

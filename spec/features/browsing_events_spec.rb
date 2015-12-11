@@ -7,7 +7,7 @@ feature "Browsing events" do
   scenario "An anonymous user can view a published event" do
     visit chapter_event_path(event.chapter, event)
 
-    expect(page).to have_content event.title
+    expect(page).to have_content event.name
     expect(page).to have_content event.description
   end
 

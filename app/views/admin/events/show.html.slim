@@ -4,7 +4,7 @@
       h1
         => link_to @event.chapter.name, admin_chapter_path(@event.chapter)
         | &raquo;
-        =<> @event.title
+        =<> @event.name
       - if @event.published?
         span.info-label.bg-success Published
       - else

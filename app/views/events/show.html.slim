@@ -1,12 +1,12 @@
 - content_for :chapter_name
   | Local Welcome #{@event.chapter.name}
 - content_for :page_title
-  | Local Welcome #{@event.chapter.name} &ndash; #{@event.title}
+  | Local Welcome #{@event.chapter.name} &ndash; #{@event.name}
 
 .container
   p.breadcrumbs = link_to "&laquo; Back to Local Welcome #{@event.chapter.name} chapter page".html_safe, chapter_path(@event.chapter)
 
-  h1 = @event.title
+  h1 = @event.name
   h2.timing = long_friendly_date @event.starts_at
   h2.timing
     => friendly_time @event.starts_at

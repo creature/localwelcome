@@ -1,6 +1,6 @@
 <%= render partial: "shared/email_greeting", locals: { user: @user } %>
 
-You requested an invite to <%= @event.title %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
+You requested an invite to <%= @event.name %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
 <% unless @event.email_info.blank? %>
 
   <%= @event.email_info %>

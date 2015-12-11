@@ -3,7 +3,7 @@
 p
   ' You're signed up to attend
   = link_to "Local Welcome #{@event.chapter.name}", chapter_path(@event.chapter)
-  ' 's event "#{@event.title}". The event's on #{long_friendly_date @event.starts_at}
+  ' 's event "#{@event.name}". The event's on #{long_friendly_date @event.starts_at}
   | (that's in #{distance_of_time_in_words_to_now @event.starts_at}!), so we wanted to remind you that it was coming up.
 
 - unless @event.email_info.blank?

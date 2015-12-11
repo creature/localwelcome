@@ -6,7 +6,7 @@ Chapter.find_or_create_by(name: 'Manchester', description: Faker::Lorem.paragrap
 # Make sure that London has some events
 5.times do |i|
   i -= 2
-  Event.find_or_create_by(chapter: london, title: Faker::Lorem.sentence, starts_at: i.months.from_now, ends_at: i.months.from_now + 2.hours)
+  Event.find_or_create_by(chapter: london, name: Faker::Lorem.sentence, starts_at: i.months.from_now, ends_at: i.months.from_now + 2.hours)
 end
 
 # Create some users

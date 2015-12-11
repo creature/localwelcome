@@ -4,6 +4,6 @@ class UserMailer < ApplicationMailer
     @event = invitation.event
     @token = invitation.token
 
-    mail to: @user.email, subject: "An invitation to #{@event.title}"
+    mail to: @user.email, subject: "An invitation to #{@event.name}"
   end
 end

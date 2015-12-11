@@ -44,6 +44,6 @@
       - if @user.invitations.any?
         ul
           - @user.invitations.map(&:decorate).each do |invite|
-            li #{invite.event.title} (#{invite.friendly_status})
+            li #{invite.event.name} (#{invite.friendly_status})
       - else
         p.system.message This user hasn't signed up for any events yet.

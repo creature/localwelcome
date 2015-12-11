@@ -19,7 +19,7 @@
           = link_to chapter_event_path(@chapter, event) do
             = short_friendly_date event.starts_at
             |:
-            =< event.title
+            =< event.name
     - else
       p.system.message No upcoming events
 
@@ -31,7 +31,7 @@
           = link_to chapter_event_path(@chapter, event) do
             = short_friendly_date event.starts_at
             |:
-            =< event.title
+            =< event.name
     - else
       p.system.message No past events
 

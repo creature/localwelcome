@@ -2,6 +2,6 @@
   .row.col-md-12
     h1
       | Editing
-      =< @event.title
+      =< @event.name
 
   = render partial: "form", locals: { chapter: @chapter, event: @event }

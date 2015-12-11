@@ -2,8 +2,8 @@
   .col-md-8
     = form_for [:admin, chapter, event] do |f|
       .form-group
-        = f.label :title
-        = f.text_field :title, class: "form-control"
+        = f.label :name
+        = f.text_field :name, class: "form-control"
       .form-group
         = f.label :description
         = f.text_area :description, class: "form-control"

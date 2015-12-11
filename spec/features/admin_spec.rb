@@ -7,7 +7,7 @@ feature "The admin panel" do
   let(:event) { FactoryGirl.create(:event) }
   let(:accepted_invite) { FactoryGirl.create(:accepted_invitation, event: event) }
 
-  let(:event_title) { Faker::Lorem.words(4).join(" ") }
+  let(:event_name) { Faker::Lorem.words(4).join(" ") }
   let(:event_description) { Faker::Lorem.paragraph }
   let(:event_starts_at) { 1.week.from_now.beginning_of_hour }
   let(:event_ends_at) { (1.week.from_now + 2.hours).beginning_of_hour }
@@ -17,10 +17,10 @@ feature "The admin panel" do
   context "Events" do
     it "Allows an admin to create an event" do
       visit admin_chapter_path(chapter)
-      fill_in_event_form(event_title, event_description, event_starts_at, event_ends_at)
+      fill_in_event_form(event_name, event_description, event_starts_at, event_ends_at)
 
       expect { click_button "Create new event" }.to change { Event.count }.by 1
-      expect(page).to have_content event_title
+      expect(page).to have_content event_name
       expect(page).to have_content event_description
 
       new_event = Event.last
@@ -30,7 +30,7 @@ feature "The admin panel" do
 
     it "Creates unpublished events by default" do
       visit admin_chapter_path(chapter)
-      fill_in_event_form(event_title, event_description, event_starts_at, event_ends_at)
+      fill_in_event_form(event_name, event_description, event_starts_at, event_ends_at)
       click_button "Create new event"
 
       expect(Event.last.published?).to be false
@@ -52,11 +52,11 @@ feature "The admin panel" do
     end
 
     it "Allows an admin to edit an event" do
-      new_title = Faker::Lorem.sentence
+      new_name = Faker::Lorem.sentence
       new_start_time = (event.starts_at - 1.hour).beginning_of_hour
 
       visit edit_admin_chapter_event_path(event.chapter, event)
-      fill_in :event_title, with: new_title
+      fill_in :event_name, with: new_name
       datetime_select :event_starts_at, new_start_time
       click_button "Save changes"
 
@@ -66,7 +66,7 @@ feature "The admin panel" do
 
       # Event should have been updated
       event.reload
-      expect(event.title).to eq new_title
+      expect(event.name).to eq new_name
       expect(event.starts_at).to eq new_start_time
     end
 

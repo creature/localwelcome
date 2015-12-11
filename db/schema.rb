@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210211722) do
+ActiveRecord::Schema.define(version: 20151211165952) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20151210211722) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "chapter_id"
-    t.string   "title"
+    t.string   "name"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.text     "description"
