@@ -3,7 +3,9 @@
 
 .container
   .row.col-md-12
-    h1 = @chapter.name
+    h1
+      = @chapter.name
+    = link_to "Edit", edit_admin_chapter_path(@chapter), class: "btn btn-default" if @current_user.admin?
 
   .row.col-md-12
     h2 Users (#{@chapter.users.count})

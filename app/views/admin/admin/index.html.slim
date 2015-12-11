@@ -35,9 +35,10 @@
       - @chapters.each do |chapter|
         li
           = link_to chapter.name, admin_chapter_path(chapter)
-          |,
-          =< pluralize(chapter.users.count, "user")
+          ' ,
+          = pluralize(chapter.users.count, "user")
           ul
             - chapter.upcoming_events.first(3).each do |upcoming_event|
-              li
-                = link_to "#{short_friendly_date upcoming_event.starts_at} - #{upcoming_event.name}", admin_chapter_event_path(chapter, upcoming_event)
+              li = link_to "#{short_friendly_date upcoming_event.starts_at} - #{upcoming_event.name}", admin_chapter_event_path(chapter, upcoming_event)
+    - if @current_user.admin?
+      p = link_to "Create new chapter", new_admin_chapter_path, class: "btn btn-default"

@@ -1,0 +1,13 @@
+= form_for [:admin, chapter] do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, placeholder: "Ambridge", class: "form-control"
+  .form-group
+    = f.label :description
+    = f.text_area :description, placeholder: "Local Welcome Ambridge meets on the first Sunday of each month in a local coffee shop. We aim to bring folk together from all walks of life.", class: "form-control"
+  .form-group
+    => f.submit "Save", class: "btn btn-primary"
+    - if chapter.persisted?
+      = link_to "Cancel", admin_chapter_path(chapter), class: "btn btn-default"
+    - else
+      = link_to "Cancel", admin_path, class: "btn btn-default"
