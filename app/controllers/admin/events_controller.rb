@@ -33,7 +33,7 @@ class Admin::EventsController < Admin::AdminController
       redirect_to :back, alert: "Announcement emails have already been sent."
     else
       @chapter.users.each do |u|
-        EventMailer.announcement(u, @event).deliver
+        EventMailer.announcement(u, @event).deliver_now
       end
       @event.update_attributes(announced: true)
       redirect_to :back, notice: "Emails sent."
