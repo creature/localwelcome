@@ -6,6 +6,8 @@
     p
       = link_to "&laquo; Back to Local Welcome #{@chapter.name}".html_safe, admin_chapter_path(@chapter)
     h1 #{@user.name}'s profile
+    - if @user.admin?
+      span.info-label.bg-success.text-success Admin
 
   .row
     .col-md-6
@@ -40,6 +42,9 @@
           - @user.subscriptions.each do |sub|
             li
               ' Local Welcome #{sub.chapter.name} (joined on #{long_friendly_date sub.created_at})
+              - if @user.organiser_of? sub.chapter
+                span.bg-success.text-success>
+                  | (Organiser)
               - unless @user.admin?
                 - if @user.organiser_of? sub.chapter
                   = link_to "Remove as organiser", admin_chapter_user_destroy_organiser_path(sub.chapter, @user), method: :post, class: "btn btn-danger"

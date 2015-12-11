@@ -1,3 +1,8 @@
+- if popover_preview.admin?
+  span.info-label.text-success.bg-success> Admin
+- if popover_preview.organiser?
+  span.info-label.text-success.bg-success Chapter organiser
+
 dl
   dt Bio
   dd = popover_preview.bio
