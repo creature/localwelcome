@@ -1,10 +1,14 @@
 - content_for :page_title
-  | Local Welcome admin panel - #{@chapter.name}, details for #{@user.name}
+  - if @chapter
+    | Local Welcome admin panel - #{@chapter.name}, details for #{@user.name}
+  - else
+    | Local Welcome admin panel - details for #{@user.name}
 
 .container
   .row.col-md-12
-    p
-      = link_to "&laquo; Back to Local Welcome #{@chapter.name}".html_safe, admin_chapter_path(@chapter)
+    - if @chapter
+      p
+        = link_to "&laquo; Back to Local Welcome #{@chapter.name}".html_safe, admin_chapter_path(@chapter)
     h1 #{@user.name}'s profile
     - if @user.admin?
       span.info-label.bg-success.text-success Admin

@@ -11,7 +11,11 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def show
-    @user = @chapter.find_user(params[:id]).decorate
+    if @chapter
+      @user = @chapter.find_user(params[:id]).decorate
+    else
+      @user = User.find(params[:id]).decorate
+    end
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_chapter_path(@chapter), alert: "That user is not a member of this chapter."
   end
