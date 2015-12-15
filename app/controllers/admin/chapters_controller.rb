@@ -3,6 +3,7 @@ class Admin::ChaptersController < Admin::AdminController
   before_filter :check_permissions
 
   def show
+    @newest_subscriptions = @chapter.subscriptions.newest.limit(10).includes(:user)
   end
 
   def new

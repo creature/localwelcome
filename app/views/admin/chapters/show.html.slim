@@ -10,7 +10,7 @@
   .row.col-md-12
     h2 Users (#{@chapter.users.count})
 
-    = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @chapter.subscriptions.newest.first(10) }
+    = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @newest_subscriptions }
     - if @chapter.users.count > 10
       p = link_to "See more &raquo;".html_safe, admin_chapter_users_path(@chapter)
 

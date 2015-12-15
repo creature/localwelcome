@@ -66,7 +66,7 @@
             th Status
             th &nbsp;
         tbody
-          - @event.invitations.map(&:decorate).each do |invite|
+          - @invitations.map(&:decorate).each do |invite|
             tr
               td = invite.user.admin_link_with_popover(@event.chapter)
               td = invite.friendly_status
