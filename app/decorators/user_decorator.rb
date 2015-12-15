@@ -5,8 +5,13 @@ class UserDecorator < Draper::Decorator
     h.render partial: "admin/users/popover_preview", object: self
   end
 
-  def admin_link_with_popover(chapter)
-    h.link_to name, h.admin_chapter_user_path(chapter, object), data: { toggle: "popover", content: h.html_escape_once(popover_preview) }, title: name, class: "popoverable"
+  def admin_link_with_popover(chapter=nil)
+    common_opts = { data: { toggle: "popover", content: h.html_escape_once(popover_preview) }, title: name, class: "popoverable" }
+    if chapter
+      h.link_to name, h.admin_chapter_user_path(chapter, object), data: common_opts
+    else
+      h.link_to name, "#", common_opts
+    end
   end
 
   def name

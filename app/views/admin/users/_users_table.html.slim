@@ -1,0 +1,22 @@
+- if users.any?
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Email address
+        th Biography
+        th Signed up on
+    tbody
+    - users.each do |user|
+      - user = user.decorate
+      tr
+        td = user.admin_link_with_popover
+        td = user.email
+        - if user.bio.blank?
+          td
+            | [Not set]
+        - else
+          td = truncate user.bio, length: 80
+        td = long_friendly_datetime user.created_at
+- else
+  p.system.message No users yet.

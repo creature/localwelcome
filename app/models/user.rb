@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, format: { without: /\.{2,}/ }
 
+  scope :newest_first, -> { order(created_at: :desc) }
+
   # Is this user subscribed to a given chapter?
   def subscribed_to?(chapter)
     subscriptions.where(chapter: chapter).exists?
