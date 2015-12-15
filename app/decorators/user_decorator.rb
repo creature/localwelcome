@@ -10,7 +10,7 @@ class UserDecorator < Draper::Decorator
     if chapter
       h.link_to name, h.admin_chapter_user_path(chapter, object), data: common_opts
     else
-      h.link_to name, "#", common_opts
+      h.link_to name, h.admin_user_path(object), common_opts
     end
   end
 

@@ -17,7 +17,7 @@
       h2 Users (#{@users.count})
       = render partial: "admin/users/users_table", locals: { users: @users.first(10) }
       - if @users.count > 10
-        = link_to "See more &raquo;".html_safe, "#"
+        = link_to "See more &raquo;".html_safe, admin_users_path
 
     .row.col-md-12
       h2 Chapter organisers
