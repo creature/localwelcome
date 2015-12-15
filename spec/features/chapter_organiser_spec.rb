@@ -117,6 +117,32 @@ feature "Chapter organisers" do
     end
   end
 
+  context "Keeping user details secure" do
+    let!(:users) { FactoryGirl.create_list(:user, 3) }
+
+    scenario "Chapter organisers shouldn't be able to access the global user list" do
+      visit admin_users_path
+
+      expect(current_path).not_to eq admin_users_path
+      expect(page).to have_error_notice
+      users.each do |u|
+        expect(page).not_to have_content u.name
+        expect(page).not_to have_content u.email
+      end
+    end
+
+    scenario "Chapter organisers shouldn't be able to access the global user show page" do
+      users.each do |u|
+        visit admin_user_path(u)
+
+        expect(current_path).not_to eq admin_user_path(u)
+        expect(page).to have_error_notice
+        expect(page).not_to have_content u.name
+        expect(page).not_to have_content u.email
+      end
+    end
+  end
+
   context "Admins managing chapter organisers" do
     before do
       logout(:user)
