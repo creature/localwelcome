@@ -1,10 +1,14 @@
 .container
   .row.col-md-12
-    h1
-      ' Users for Local Welcome
-      => link_to @chapter.name, admin_chapter_path(@chapter)
-      | (#{@subscriptions.count})
+    - if @chapter # Viewing users for a specific chapter
+      h1
+        ' Users for Local Welcome
+        => link_to @chapter.name, admin_chapter_path(@chapter)
+        | (#{@subscriptions.count})
 
-    = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @subscriptions }
+      = render partial: "admin/users/subscriptions_table", locals: { subscriptions: @subscriptions }
+    - else # Viewing all users
+      h1 Users (#{@users.count})
+      = render partial: "admin/users/users_table", locals: { users: @users }
 
 

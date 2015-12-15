@@ -3,7 +3,11 @@ class Admin::UsersController < Admin::AdminController
   before_filter :check_permissions
 
   def index
-    @subscriptions = @chapter.subscriptions.newest
+    if @chapter
+      @subscriptions = @chapter.subscriptions.newest
+    else
+      @users = User.all.newest_first
+    end
   end
 
   def show
@@ -35,7 +39,7 @@ class Admin::UsersController < Admin::AdminController
   protected
 
   def set_chapter
-    @chapter = Chapter.find(params[:chapter_id])
+    @chapter = Chapter.find(params[:chapter_id]) if params.has_key? :chapter_id
   end
 
   def check_permissions
