@@ -15,6 +15,18 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # Bullet looks for N+1 queries. It can be disabled in config/environments/test.rb
+  if Bullet.enable?
+    config.before(:each) do
+      Bullet.start_request
+    end
+
+    config.after(:each) do
+      Bullet.perform_out_of_channel_notifications if Bullet.notification?
+      Bullet.end_request
+    end
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

@@ -27,6 +27,7 @@ group :development, :test do
   gem 'byebug'
   gem 'faker' # Generate filler content
   gem 'pry-remote' # Connect to a debugger session remotely
+  gem 'bullet' # Look for and catch N+1 queries
 end
 
 group :development do
