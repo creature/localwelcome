@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   # Gets all chapters associated with this user - the ones they're subscribed to, and the ones they organise.
   def all_chapters
-    chapters + organised_chapters
+    (organised_chapters + chapters).uniq
   end
 
   # Does this user organise a particular chapter?
