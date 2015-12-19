@@ -1,24 +1,20 @@
 .overview
   .container
     .col-md-8.col-md-offset-2
-      p
-        |Local Welcome helps people who are new to an area make friends & get a head start in their community. It brings together new immigrants & local volunteers over coffee in a relaxed, low-stakes, friendly environment.
+      p Local Welcome connects volunteers and refugees to help them learn English and return to work. We aim to match people with similar skills and qualifications. Groups meet monthly in safe public spaces, and we encourage pairs to also meet monthly for coffee.
 
 .container
   .row.chapters
-    h1 Find a welcome near you
+    h1 Find a group near you
     - @chapters.each do |chapter|
       .col-md-4
         .chapter-block
           h2
             = link_to chapter.name, chapter_path(chapter)
           - if chapter.next_event.nil?
-            = link_to "Learn more about this welcome", chapter_path(chapter), class: "btn btn-large btn-default"
+            = link_to "Learn more about this group", chapter_path(chapter), class: "btn btn-large btn-default"
           - else
             h3
-              |Next event:
-              =<> chapter.next_event.name
-              |(in
-              =< distance_of_time_in_words(chapter.next_event.starts_at, Time.now)
-              |)
+              ' Next event: #{chapter.next_event.name}
+              | (in #{distance_of_time_in_words(chapter.next_event.starts_at, Time.now)})
             = link_to "Register to attend", chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"
