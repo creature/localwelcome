@@ -5,6 +5,7 @@ class Admin::EventsController < Admin::AdminController
   before_action :check_permissions
 
   def show
+    @event = @event.decorate
     @invitations = @event.invitations.includes(:user)
   end
 

@@ -31,7 +31,8 @@
       = link_to "Edit", edit_admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
 
   .row
-    .col-md-12
+    .col-md-6
+      h2[title="Visible to everyone"] Public information
       dl
         dt Starts at
         dd = long_friendly_datetime @event.starts_at
@@ -39,22 +40,23 @@
         dt Ends at
         dd = long_friendly_datetime @event.ends_at
 
-        dt Capacity
-        dd = @event.capacity
+        dt Event description
+        dd = @event.description
 
-        dt Public description (visible everywhere)
-        dd
-          - if @event.description.blank?
-            p.system.message No description yet
-          - else
-            p = @event.description
+    .col-md-6
+      h2[title="Sent in attendee emails, and visible to logged-in attendees"] Attendee-only information
+      dl
+        dt Email-only information
+        dd = @event.email_info
 
-        dt Email-only information (only sent to attendees)
-        dd
-          - if @event.email_info.blank?
-            p.system.message No extra information will be included in the emails we send to attendees.
-          - else
-            p = @event.email_info
+        dt Venue name
+        dd = @event.venue_name
+
+        dt Venue postcode
+        dd = @event.venue_postcode
+
+        dt Venue info
+        dd = @event.venue_info
 
   .row
     .col-md-12
