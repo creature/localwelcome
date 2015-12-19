@@ -5,3 +5,10 @@
 .attendees {
   margin-bottom: 6rem;
 }
+
+.top-ruled {
+  border-top: 1px solid darken($flat-silver, 20%);
+  margin-top: 4rem;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}

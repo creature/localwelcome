@@ -59,6 +59,6 @@ class Admin::EventsController < Admin::AdminController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, :email_info, :starts_at, :ends_at, :published, :capacity).merge({chapter_id: @chapter.id})
+    params.require(:event).permit(:name, :description, :email_info, :starts_at, :ends_at, :published, :capacity, :venue_name, :venue_postcode, :venue_info).merge({chapter_id: @chapter.id})
   end
 end

@@ -1,15 +1,13 @@
 .row
   .col-md-8
     = form_for [:admin, chapter, event] do |f|
+      h2 Public info
       .form-group
         = f.label :name
         = f.text_field :name, class: "form-control"
       .form-group
         = f.label :description
         = f.text_area :description, class: "form-control"
-      .form-group
-        = f.label :email_info, "Email-only info"
-        = f.text_area :email_info, class: "form-control", placeholder: "This text will be included in emails we send to attendees, but not visible on the website."
       .form-group
         => f.label :starts_at, "Start date"
         = f.date_select :starts_at, order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year + 1
@@ -22,6 +20,22 @@
         br
         => f.label :ends_at, "End time"
         = f.time_select :ends_at, ignore_date: true, minute_step: 15
+
+      h2.top-ruled Attendee-only info
+      .form-group
+        = f.label :email_info, "Email-only info"
+        = f.text_area :email_info, class: "form-control", placeholder: "This text will be included in emails we send to attendees, but not visible on the website (except to people who are attending)."
+      .form-group
+        = f.label :venue_name
+        = f.text_field :venue_name, class: "form-control", placeholder: "Starbucks (Victoria)"
+      .form-group
+        = f.label :venue_postcode
+        = f.text_field :venue_postcode, class: "form-control", placeholder: "SW1E 6RD"
+      .form-group
+        = f.label :venue_info
+        = f.text_area :venue_info, class: "form-control", placeholder: "We'll be meeting upstairs, in a group of tables with a sign reading 'Local Welcome'."
+
+      h2.top-ruled Admin-only info
       .form-group
         => f.label :capacity
         = f.number_field :capacity, min: 0
