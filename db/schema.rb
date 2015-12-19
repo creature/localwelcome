@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211165952) do
+ActiveRecord::Schema.define(version: 20151219041951) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name"
@@ -26,12 +26,15 @@ ActiveRecord::Schema.define(version: 20151211165952) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.text     "description"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "published"
     t.text     "email_info"
-    t.integer  "capacity",    default: 10
+    t.integer  "capacity",       default: 10
     t.boolean  "announced"
+    t.string   "venue_name"
+    t.string   "venue_postcode"
+    t.text     "venue_info"
   end
 
   add_index "events", ["chapter_id"], name: "index_events_on_chapter_id"
