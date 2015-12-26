@@ -21,6 +21,26 @@ class EventDecorator < Draper::Decorator
     field_helper(:venue_info)
   end
 
+  def friendly_venue_name
+    if !object.venue_name.blank? && !object.venue_postcode.blank?
+      "#{venue_name}, #{venue_postcode}"
+    elsif !object.venue_name.blank?
+      venue_name
+    elsif !object.venue_postcode.blank?
+      "(Not announced yet), #{venue_postcode}"
+    else
+      "Not announced yet"
+    end
+  end
+
+  def google_map_url
+    if !object.venue_name.blank? && !object.venue_postcode.blank?
+      "https://maps.google.com/?q=#{venue_name}, #{venue_postcode}"
+    elsif !object.venue_name.blank? || !object.venue_postcode.blank?
+      "https://maps.google.com/?q=#{object.venue_name}#{object.venue_postcode}"
+    end
+  end
+
   protected
 
   def field_helper(field)

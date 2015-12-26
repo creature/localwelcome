@@ -32,6 +32,10 @@ class Event < ActiveRecord::Base
     n >= 0 ? n : 0
   end
 
+  def has_email_info?
+    !email_info.blank?
+  end
+
   protected
 
   def starts_before_it_ends
