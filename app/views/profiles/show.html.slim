@@ -33,9 +33,9 @@
 
   .row.col-md-12
     h1 Your events
-    - if current_user.events.any?
+    - if @events.any?
       ul
-        - current_user.events.each do |ev|
+        - @events.each do |ev|
           li
             = link_to ev.name, chapter_event_path(ev.chapter, ev)
             - if current_user.attending? ev

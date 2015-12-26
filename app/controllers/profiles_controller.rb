@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   def show
     @user = current_user.decorate
+    @events = current_user.events.includes(:chapter)
   end
 
   def edit
