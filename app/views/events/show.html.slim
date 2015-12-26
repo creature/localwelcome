@@ -12,7 +12,7 @@
   - if current_user.try(:admin?) || current_user.try(:organiser_of?, @event.chapter)
     .row.col-md-12
       .buttons
-        = link_to "Edit", edit_admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
+        = link_to "Manage this event", admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
 
   .row.col-md-12
     h2.timing = long_friendly_date @event.starts_at
