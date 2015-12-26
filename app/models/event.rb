@@ -33,7 +33,11 @@ class Event < ActiveRecord::Base
   end
 
   def has_email_info?
-    !email_info.blank?
+    email_info.present?
+  end
+
+  def has_venue_info?
+    venue_name.present? || venue_postcode.present? || venue_info.present?
   end
 
   protected

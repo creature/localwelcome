@@ -28,12 +28,7 @@
       h2 Attendee information
       - if @event.has_email_info?
         p = @event.email_info
-      - unless @event.venue_name.blank? && @event.venue_postcode.blank? && @event.venue_info.blank?
-        p
-          ' We're meeting at #{@event.friendly_venue_name}
-          - unless @event.google_map_url.blank?
-            | (#{link_to "view map", @event.google_map_url})
-          |.
+      = render partial: "venue_info", locals: { event: @event }
     - unless @event.in_the_past?
       - if @invite
         - if @invite.sent?

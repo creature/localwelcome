@@ -35,10 +35,11 @@ class EventDecorator < Draper::Decorator
 
   def google_map_url
     if !object.venue_name.blank? && !object.venue_postcode.blank?
-      "https://maps.google.com/?q=#{venue_name}, #{venue_postcode}"
+      query_param = "#{venue_name}, #{venue_postcode}"
     elsif !object.venue_name.blank? || !object.venue_postcode.blank?
-      "https://maps.google.com/?q=#{object.venue_name}#{object.venue_postcode}"
+      query_param = "#{object.venue_name}#{object.venue_postcode}"
     end
+    "https://maps.google.com/?q=" + h.u(query_param)
   end
 
   protected

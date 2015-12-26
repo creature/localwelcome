@@ -1,0 +1,6 @@
+- if event.has_venue_info?
+  p
+    ' We're meeting at #{event.friendly_venue_name}
+    - unless event.google_map_url.blank?
+      | (#{link_to "view map", event.google_map_url})
+    |. #{event.venue_info}

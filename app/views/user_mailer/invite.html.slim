@@ -2,8 +2,9 @@
 
 p You requested an invite to #{@event.name}, an event ran by Local Welcome #{@event.chapter.name}. We'd love for you to come!
 
-- unless @event.email_info.blank?
+- if @event.has_email_info?
   p = @event.email_info
+= render partial: "events/venue_info", locals: { event: @event }
 
 p
   ' If you can make it,

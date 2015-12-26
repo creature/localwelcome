@@ -1,11 +1,12 @@
 <%= render partial: "shared/email_greeting", locals: { user: @user } %>
 
 You requested an invite to <%= @event.name %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
-<% unless @event.email_info.blank? %>
+<% if @event.has_email_info? %>
 
-  <%= @event.email_info %>
+<%= @event.email_info %>
 <% end %>
 
+<%= render partial: "events/venue_info", locals: { event: @event } %>
 If you can make it, click the link below:
 <%= accept_invitation_url(@token) %>
 
