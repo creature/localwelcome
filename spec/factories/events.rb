@@ -7,6 +7,10 @@ FactoryGirl.define do
     published true
     announced false
     capacity 10
+    email_info { Faker::Lorem.paragraph }
+    venue_name { Faker::Company.name }
+    venue_postcode { Faker::Address.postcode }
+    venue_info { Faker::Lorem.sentence }
 
     factory :unpublished_event do
       published false

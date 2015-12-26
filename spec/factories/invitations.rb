@@ -11,6 +11,14 @@ FactoryGirl.define do
       end
     end
 
+    factory :declined_invitation do
+      before(:build) { |invite| invite.aasm_state = :declined }
+      after(:create) do |invite|
+        invite.aasm_state = :declined
+        invite.save
+      end
+    end
+
     factory :sent_invitation do
       before(:build) { |invite| invite.aasm_state = :sent }
       after(:create) do |invite|
