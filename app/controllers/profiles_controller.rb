@@ -20,6 +20,6 @@ class ProfilesController < ApplicationController
   protected
 
   def profile_params
-    params.require(:user).permit(:name, :email, :telephone, :bio, :life_skills, :language_skills, :postcode)
+    params.require(:user).permit(:name, :email, :telephone, :bio, :life_skills, :language_skills, :postcode).merge(more_info_required: false)
   end
 end
