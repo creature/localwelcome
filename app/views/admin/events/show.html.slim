@@ -73,18 +73,23 @@
             tr
               td = invite.user.admin_link_with_popover(@event.chapter)
               td = invite.friendly_status
-              - if invite.requested?
-                td
-                  - if @event.full?
-                    span.btn.btn-success.disabled Send invitation
-                  - else
-                    = form_tag admin_invite_path(invite), method: :post do
-                      = submit_tag "Send invitation", class: "btn btn-success"
-              - elsif invite.accepted?
-                td
-                  = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
-                    = submit_tag "Mark as attended", class: "btn btn-success"
-                  = form_tag admin_mark_as_no_show_path(invite), method: :post, class: "form-inline" do
-                    = submit_tag "Mark as no-show", class: "btn btn-warning"
-              - else
+              - if invite.user.more_info_required? # No options until they fill out more info
                 td &nbsp;
+              - else # Tools to manage the state of this invite
+                - if invite.requested?
+                  td
+                    - if @event.full?
+                      span.btn.btn-success.disabled Send invitation
+                    - else
+                      = form_tag admin_invite_path(invite), method: :post, class: "form-inline" do
+                        = submit_tag "Send invitation", class: "btn btn-success"
+                    =< form_tag admin_more_info_required_path(invite), method: :post, class: "form-inline" do
+                      = submit_tag "More profile info required", class: "btn btn-default"
+                - elsif invite.accepted?
+                  td
+                    = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
+                      = submit_tag "Mark as attended", class: "btn btn-success"
+                    = form_tag admin_mark_as_no_show_path(invite), method: :post, class: "form-inline" do
+                      = submit_tag "Mark as no-show", class: "btn btn-warning"
+                - else
+                  td &nbsp;

@@ -15,6 +15,7 @@ class Ability
         can :manage, Chapter, id: user.organised_chapters.ids
         cannot :create, Chapter
         can :manage, Event, chapter_id: user.organised_chapters.ids
+        can :manage, Invitation, event: { chapter_id: user.organised_chapters.ids }
       end
     end
   end

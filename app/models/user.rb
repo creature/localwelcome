@@ -53,4 +53,12 @@ class User < ActiveRecord::Base
     attrs = [:name, :bio, :telephone]
     (attrs.reject { |attr| self.send(attr).blank? }.count.to_f / attrs.count) * 100
   end
+
+  def name_or_email
+    if name.present?
+      name
+    else
+      email
+    end
+  end
 end
