@@ -23,13 +23,16 @@ html
           => link_to "Sign up", new_user_registration_path
           ' |
           => link_to "Sign in", new_user_session_path
+  - if current_user.try(:more_info_required?)
+    .more-info-required-banner.bg-warning.text-warning
+      p We need more information about you before we can invite you to our meetups! Please #{link_to "add more details to your profile", edit_profile_path}.
 
-    - if flash.key?(:notice) || flash.key?(:alert)
-      .container
-        .col-md-8.col-md-offset-2
-          - if flash.key? :notice
-            p.alert.alert-info = flash[:notice]
-          - if flash.key? :alert
-            p.alert.alert-danger = flash[:alert]
+  - if flash.key?(:notice) || flash.key?(:alert)
+    .container
+      .col-md-8.col-md-offset-2
+        - if flash.key? :notice
+          p.alert.alert-info = flash[:notice]
+        - if flash.key? :alert
+          p.alert.alert-danger = flash[:alert]
 
-    = yield
+  = yield
