@@ -30,4 +30,9 @@ class UserMailerPreview < ActionMailer::Preview
     invite.event.venue_info = "Upstairs, on a table with a 'Local Welcome' sign."
     UserMailer.invite(invite)
   end
+
+  def more_info_required
+    invite = Invitation.first
+    UserMailer.more_info_required(invite)
+  end
 end

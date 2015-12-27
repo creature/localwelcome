@@ -1,0 +1,16 @@
+= render partial: "shared/email_greeting", locals: { user: @user }
+
+p You requested an invite to #{@event.name}, but we don't have enough details about you to approve it.
+
+p We try to match our refugees with volunteers who have skills that they need, or common professions. Similarly, we try to match our volunteers with people who they can help the most. To do that, we need to know some details about their work, their skills, and their interests.
+
+p
+  ' To help us do that,
+  strong> please #{link_to "fill in your profile with as much info as you can", edit_profile_url}.
+  | We use this info in the matching process to help us issue invitations.
+
+p
+  br
+  | Many thanks,
+  br
+  | The Local Welcome #{@event.chapter.name} organisers
