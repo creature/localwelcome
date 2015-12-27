@@ -10,6 +10,7 @@ FactoryGirl.define do
     postcode { Faker::Address.postcode }
     life_skills { Faker::Lorem.paragraph }
     language_skills { Faker::Lorem.paragraph }
+    more_info_required false
 
     factory :empty_user do
       name nil

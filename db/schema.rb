@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219041951) do
+ActiveRecord::Schema.define(version: 20151227214253) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name"
@@ -76,13 +76,13 @@ ActiveRecord::Schema.define(version: 20151219041951) do
     t.string   "email"
     t.string   "telephone"
     t.text     "bio"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20151219041951) do
     t.text     "life_skills"
     t.text     "language_skills"
     t.string   "postcode"
+    t.boolean  "more_info_required",     default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
