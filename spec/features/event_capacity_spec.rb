@@ -80,4 +80,13 @@ feature "Event capacity limits" do
     event.reload
     expect(event.capacity).to eq 6
   end
+
+  scenario "An admin can't issue invitations to a full event" do
+    FactoryGirl.create_list(:invitation, 3, event: full_event)
+    logout(:user)
+    login(admin)
+
+    visit admin_chapter_event_path(full_event.chapter, full_event)
+    expect(page).not_to have_button "Send invitation"
+  end
 end

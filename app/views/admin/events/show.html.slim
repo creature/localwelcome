@@ -75,8 +75,11 @@
               td = invite.friendly_status
               - if invite.requested?
                 td
-                  = form_tag admin_invite_path(invite), method: :post do
-                    = submit_tag "Send invitation", class: "btn btn-success"
+                  - if @event.full?
+                    span.btn.btn-success.disabled Send invitation
+                  - else
+                    = form_tag admin_invite_path(invite), method: :post do
+                      = submit_tag "Send invitation", class: "btn btn-success"
               - elsif invite.accepted?
                 td
                   = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
