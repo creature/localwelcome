@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!, except: [:accept, :decline]
+  before_action :check_for_more_info_required
 
   def create
     @invite = Invitation.new(invitation_params.merge(user: current_user))
@@ -43,5 +44,9 @@ class InvitationsController < ApplicationController
 
   def invitation_params
     params.require(:invitation).permit(:event_id)
+  end
+
+  def check_for_more_info_required
+    redirect_to edit_profile_path if current_user.try(:more_info_required?)
   end
 end
