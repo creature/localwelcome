@@ -52,6 +52,14 @@ feature "Attending events" do
     expect(page).to have_content event.venue_info
   end
 
+  scenario "A user who's labelled as 'more info required' can't request an invite" do
+    user.update_attributes(more_info_required: true)
+    visit chapter_event_path(event.chapter, event)
+
+    expect { click_button "Request an invite" }.not_to change { Invitation.count }
+    expect(current_path).to eq edit_profile_path
+  end
+
   def expect_page_not_to_have_attendee_only_info(event)
     expect(page).not_to have_content event.email_info
     expect(page).not_to have_content event.venue_name

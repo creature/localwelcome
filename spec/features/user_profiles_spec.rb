@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "User profiles" do
   let(:user) { FactoryGirl.create(:user) }
   let(:empty_user) { FactoryGirl.create(:empty_user) }
+  let(:more_info_required_user) { FactoryGirl.create(:user, more_info_required: true) }
   let(:name) { Faker::Name.name }
   let(:telephone) { Faker::PhoneNumber.phone_number }
   let(:bio) { Faker::Lorem.paragraph }
@@ -59,5 +60,18 @@ feature "User profiles" do
       expect(page).to have_content self.send(attr)
       expect(empty_user.send(attr)).to eq self.send(attr)
     end
+  end
+
+  scenario "A user flagged as 'more info required' gets that flag removed when they update their profile" do
+    expect(more_info_required_user).to be_more_info_required
+
+    login more_info_required_user
+    visit edit_profile_path
+    fill_in :user_bio, with: Faker::Lorem.paragraph
+    click_button "Save"
+    more_info_required_user.reload
+
+    expect(page).to have_success_notice
+    expect(more_info_required_user).not_to be_more_info_required
   end
 end
