@@ -19,7 +19,6 @@ Rails.application.configure do
 
   # Production email settings: send via Sendgrid, generate URLs with our hostname
   config.action_mailer.default_url_options = { host: 'www.local-welcome.org' }
-  config.action_mailer.default_options = { from: "noreply@local-welcome.org" }
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: '587',
