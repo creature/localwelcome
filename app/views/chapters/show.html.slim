@@ -5,44 +5,49 @@
 
 .container
   .row
-    h1
-      = @chapter.name
-    - unless @chapter.description.blank?
-      p
-        = @chapter.description
-
-  .row
-    h2 Upcoming events
-    - if @chapter.upcoming_events.published.any?
-      - @chapter.upcoming_events.published.each do |event|
+    .col-md-12
+      h1
+        = @chapter.name
+      - unless @chapter.description.blank?
         p
-          = link_to chapter_event_path(@chapter, event) do
-            = short_friendly_date event.starts_at
-            |:
-            =< event.name
-    - else
-      p.system.message No upcoming events
+          = @chapter.description
 
   .row
-    h2 Past events
-    - if @chapter.past_events.published.any?
-      - @chapter.past_events.published.each do |event|
-        p
-          = link_to chapter_event_path(@chapter, event) do
-            = short_friendly_date event.starts_at
-            |:
-            =< event.name
-    - else
-      p.system.message No past events
-
-  .row
-    h2
-      |Get involved with Local Welcome
-      =< @chapter.name
-    p Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
-    p
-      - if user_signed_in?
-        = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+    .col-md-6
+      h2 Upcoming events
+      - if @chapter.upcoming_events.published.any?
+        - @chapter.upcoming_events.published.each_with_index do |event, i|
+          p
+            => link_to chapter_event_path(@chapter, event) do
+              = short_friendly_date event.starts_at
+              ':
+              = event.name
+            - if 0 == i
+              span.info-label.bg-warning Our next event
       - else
-        = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
+        p.system.message No upcoming events
+
+    .col-md-6
+      h2 Past events
+      - if @chapter.past_events.published.any?
+        - @chapter.past_events.published.each do |event|
+          p
+            = link_to chapter_event_path(@chapter, event) do
+              = short_friendly_date event.starts_at
+              |:
+              =< event.name
+      - else
+        p.system.message No past events
+
+  .row
+    .col-md-12
+      h2
+        |Get involved with Local Welcome
+        =< @chapter.name
+      p Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
+      p
+        - if user_signed_in?
+          = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+        - else
+          = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 

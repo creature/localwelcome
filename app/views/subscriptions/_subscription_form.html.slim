@@ -2,7 +2,8 @@
   - if current_user.subscribed_to? chapter
     p.pull-left.lead
       i.fa.fa-check>
-      ' Subscribed to Local Welcome #{chapter.name}
+      ' Subscribed to
+      => link_to "Local Welcome #{chapter.name}", chapter_path(chapter)
     = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete, class: "subscribed form-inline" do
       = submit_tag "Unsubscribe", class: "btn btn-danger"
   - else
