@@ -8,7 +8,7 @@ class UserDecorator < Draper::Decorator
   def admin_link_with_popover(chapter=nil)
     common_opts = { data: { toggle: "popover", content: h.html_escape_once(popover_preview) }, title: name, class: "popoverable" }
     if chapter
-      h.link_to name, h.admin_chapter_user_path(chapter, object), data: common_opts
+      h.link_to name, h.admin_chapter_user_path(chapter, object), common_opts
     else
       h.link_to name, h.admin_user_path(object), common_opts
     end
