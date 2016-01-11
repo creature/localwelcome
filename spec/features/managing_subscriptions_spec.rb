@@ -38,7 +38,7 @@ feature "Managing subscriptions to chapters" do
 
     visit subscriptions_path
     expect {
-      click_button "Subscribed to Local Welcome #{chosen_chapter.name}"
+      click_button "Unsubscribe"
     }.to change { Subscription.count }.by(-1)
     expect(user.subscribed_to? chosen_chapter).to be false
   end
@@ -49,7 +49,7 @@ feature "Managing subscriptions to chapters" do
 
 
     visit subscriptions_path
-    expect(page).to have_button "Subscribed to Local Welcome #{chosen_chapter.name}"
-    expect(page.find(".subscribed")).to have_selector ".btn-success"
+    expect(page).to have_content "Subscribed to Local Welcome #{chosen_chapter.name}"
+    expect(page).to have_button "Unsubscribe"
   end
 end
