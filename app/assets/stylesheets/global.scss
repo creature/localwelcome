@@ -3,13 +3,13 @@ body {
   background-color: $flat-silver;
 }
 
-nav {
+nav, footer {
   color: $flat-silver;
   padding-bottom: 1rem;
   margin-bottom: $nav-margin;
   background-color: $flat-lynch;
 
-  p {
+  p, li {
     color: darken($flat-silver, 20%);
   }
 
@@ -32,6 +32,22 @@ nav {
   p.links {
     padding: 1rem;
     display: inline-block;
+  }
+}
+
+footer {
+  font-size: 90%;
+  padding-top: 1rem;
+  margin-bottom: 0;
+  margin-top: 8rem;
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      margin-left: 0;
+    }
   }
 }
 
