@@ -2,6 +2,9 @@
   | Local Welcome #{@chapter.name}
 - content_for :page_title
   | Local Welcome #{@chapter.name} &ndash; upcoming events and details of our meet-up.
+- unless @chapter.description.blank?
+  - content_for :page_description
+    = @chapter.description
 
 .container
   .row
