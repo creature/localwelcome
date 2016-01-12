@@ -1,3 +1,25 @@
+/* Stick footer to bottom of page */
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  min-height: 100%;
+}
+
+.ebttf {
+  padding-bottom: $footer-height;
+  overflow: auto;
+}
+
+footer {
+  height: $footer-height;
+  position: relative;
+  margin-top: $footer-height * -1;
+}
+
+
+
 body {
   color: $flat-ebony-clay;
   background-color: $flat-silver;
@@ -35,11 +57,11 @@ nav, footer {
   }
 }
 
+/* Visual styles for footer; see also the stickyness at top of the file */
 footer {
   font-size: 90%;
   padding-top: 1rem;
   margin-bottom: 0;
-  margin-top: 8rem;
 
   ul {
     list-style-type: none;

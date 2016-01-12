@@ -7,46 +7,49 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    nav
-      h1
-        = link_to content_for(:chapter_name) || t("site.title"), root_path
-      p.links.pull-right
-        - if user_signed_in?
-          ' Signed in as
-          => link_to current_user.email, profile_path
-          ' |
-          - if current_user.admin? || current_user.organiser?
-            => link_to "Admin dashboard", admin_path
-            ' |
-          = link_to "Sign out", destroy_user_session_path, method: :delete
-        - else
-          => link_to "Sign up", new_user_registration_path
-          ' |
-          => link_to "Sign in", new_user_session_path
-    - if current_user.try(:more_info_required?)
-      .more-info-required-banner.bg-warning.text-warning
-        p We need more information about you before we can invite you to our meetups! Please #{link_to "add more details to your profile", edit_profile_path}.
+    .wrap
+      / Everything but the footer
+      .ebttf
+        nav
+          h1
+            = link_to content_for(:chapter_name) || t("site.title"), root_path
+          p.links.pull-right
+            - if user_signed_in?
+              ' Signed in as
+              => link_to current_user.email, profile_path
+              ' |
+              - if current_user.admin? || current_user.organiser?
+                => link_to "Admin dashboard", admin_path
+                ' |
+              = link_to "Sign out", destroy_user_session_path, method: :delete
+            - else
+              => link_to "Sign up", new_user_registration_path
+              ' |
+              => link_to "Sign in", new_user_session_path
+        - if current_user.try(:more_info_required?)
+          .more-info-required-banner.bg-warning.text-warning
+            p We need more information about you before we can invite you to our meetups! Please #{link_to "add more details to your profile", edit_profile_path}.
 
-    - if flash.key?(:notice) || flash.key?(:alert)
-      .container
-        .col-md-8.col-md-offset-2
-          - if flash.key? :notice
-            p.alert.alert-info = flash[:notice]
-          - if flash.key? :alert
-            p.alert.alert-danger = flash[:alert]
+        - if flash.key?(:notice) || flash.key?(:alert)
+          .container
+            .col-md-8.col-md-offset-2
+              - if flash.key? :notice
+                p.alert.alert-info = flash[:notice]
+              - if flash.key? :alert
+                p.alert.alert-danger = flash[:alert]
 
-    = yield
+        = yield
 
     footer
       .container
         .row
-          .col-md-4
+          .col-md-6
             ul
-              li Email us on #{link_to "localwelcome@example.org", "mailto: localwelcome@example.org"}
-              li Follow Local Welcome on Twitter
-              li Like Local Welcome on Facebook
+              li Questions? Email us on #{link_to "localwelcometeam@gmail.com", "mailto:localwelcometeam@gmail.com "}
+              li Follow Local Welcome on #{link_to "Twitter", "https://twitter.com/localwelcome"}
+              /* li Like Local Welcome on #{link_to "Facebook", "#"} */
 
-          .col-md-4.col-md-offset-4.text-right
+          .col-md-6.text-right
             p Local Welcome was established in 2015.
             p Our website is #{link_to "open source", "https://github.com/creature/localwelcome"}.
 
