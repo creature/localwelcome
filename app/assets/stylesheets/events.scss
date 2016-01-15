@@ -3,3 +3,11 @@ h2.timing {
   margin-bottom: 1rem;
   margin-top: 0;
 }
+
+.who-do-you-want-to-meet {
+  display: none;
+}
+
+.no-js .who-do-you-want-to-meet {
+  display: block;
+}

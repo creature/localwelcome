@@ -6,6 +6,23 @@
   - content_for :page_description
     = @event.description
 
+/ Hidden basic container for a modal popover (used for requesting an invite).
+.modal.fade#invite-modal tabindex="-1" role="dialog" aria-abelledby="invite-modal-label"
+  .modal-dialog role="document"
+    .modal-content
+      = form_tag invitations_path, method: :post do
+        .modal-header
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
+          h4.modal-title#invite-modal-label Request an invite
+        .modal-body
+          p We need some information to help us match people up.
+          = hidden_field :invitation, :event_id, value: @event.id
+          .form-group
+            = label_tag :invitation_who_do_you_want_to_meet, "Who would you like to meet at this event?"
+            = text_area :invitation, :who_do_you_want_to_meet, value: nil, placeholder: @placeholders.sample, class: "form-control"
+        .modal-footer
+          = submit_tag "Request an invite", class: "btn btn-primary"
 
 .container
   .row.col-md-12
@@ -81,9 +98,9 @@
             p If you join #{link_to "Local Welcome #{@event.chapter.name}", chapter_path(@event.chapter)} you'll get an email whenever we announce a new event.
 
         - else
-          = form_tag invitations_path, method: :post do
+          = form_tag invitations_path, method: :post, class: "new-invite" do
             = hidden_field :invitation, :event_id, value: @event.id
-            .form-group
+            .form-group.who-do-you-want-to-meet
               = label_tag :invitation_who_do_you_want_to_meet, "Who would you like to meet at this event?"
               = text_area :invitation, :who_do_you_want_to_meet, value: nil, placeholder: @placeholders.sample, class: "form-control"
             = submit_tag "Request an invite", class: "btn btn-lg btn-primary"

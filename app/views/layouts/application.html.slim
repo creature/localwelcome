@@ -16,7 +16,9 @@ html
     meta property="og:description" content="#{content_for(:page_description) || "Local Welcome hosts monthly groups in public spaces to help refugees learn english, volunteer in the community, and return to work."}"
     meta property="og:locale" content="en_GB"
     meta property="og:site_name" content="Local Welcome"
-  body
+  body.no-js
+    script type="text/javascript"
+      | document.getElementsByTagName('body')[0].classList.remove("no-js")
     .wrap
       / Everything but the footer
       .ebttf
