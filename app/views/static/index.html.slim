@@ -1,32 +1,29 @@
 .overview
   .container
     .col-md-8.col-md-offset-2
-      p Local Welcome hosts monthly groups in public spaces to help refugees learn english, volunteer in the community, and return to work.
+      p = t('site.hero_text')
 
 .container
   .row.chapters
-    h1 Find a group near you
+    h1 = t('groups.group_header')
     - @chapters.each do |chapter|
       .col-md-4
         .chapter-block
-          h2
-            = link_to chapter.name, chapter_path(chapter)
+          h2 = link_to chapter.name, chapter_path(chapter)
           - if chapter.next_event.nil?
-            = link_to "Learn more about this group", chapter_path(chapter), class: "btn btn-large btn-default"
+            = link_to t('groups.learn_more'), chapter_path(chapter), class: "btn btn-large btn-default"
           - else
-            h3
-              ' Next event: #{chapter.next_event.name}
-              | (in #{distance_of_time_in_words(chapter.next_event.starts_at, Time.now)})
-            = link_to "Register to attend", chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"
+            h3 = t('groups.next_event', event_name: chapter.next_event.name, time_in_future: distance_of_time_in_words(chapter.next_event.starts_at, Time.now))
+            = link_to t('groups.register'), chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"
 
   .row.sponsors
     .col.md-6.col-md-offset-4
-      h2 Thanks to our supporters
+      h2 = t('sponsors.title')
   .row.sponsor-details
     .col-md-2.col-md-offset-2
       = link_to "http://indigotrust.org.uk/"
         = image_tag "indigo-logo.jpg"
     .col-md-6
-      p Local Welcome has received financial support from The Indigo Trust, without which this project would not be possible. The Indigo Trust is a UK based grant making foundation that funds technology-driven projects to bring about social change. You can find out more about their work #{link_to "on their website", "http://indigotrust.org.uk/"}.
+      p = t('sponsors.blurb').html_safe
 
 

@@ -13,12 +13,13 @@ html
     meta property="og:image:width" content="916"
     meta property="og:url" content="#{request.original_url}"
     meta property="og:type" content="website"
-    meta property="og:description" content="#{content_for(:page_description) || "Local Welcome hosts monthly groups in public spaces to help refugees learn english, volunteer in the community, and return to work."}"
+    meta property="og:description" content="#{content_for(:page_description) || t('site.hero_text')}"
     meta property="og:locale" content="en_GB"
-    meta property="og:site_name" content="Local Welcome"
+    meta property="og:site_name" content="#{t('site.title')}"
   body.no-js
     script type="text/javascript"
       | document.getElementsByTagName('body')[0].classList.remove("no-js")
+
     .wrap
       / Everything but the footer
       .ebttf
@@ -27,20 +28,19 @@ html
             = link_to content_for(:chapter_name) || t("site.title"), root_path
           p.links.pull-right
             - if user_signed_in?
-              ' Signed in as
-              => link_to current_user.email, profile_path
+              => t('site.signed_in_as', email: current_user.email, link: profile_path).html_safe
               ' |
               - if current_user.admin? || current_user.organiser?
-                => link_to "Admin dashboard", admin_path
+                => link_to t('site.admin_dashboard'), admin_path
                 ' |
-              = link_to "Sign out", destroy_user_session_path, method: :delete
+              = link_to t('site.sign_out'), destroy_user_session_path, method: :delete
             - else
-              => link_to "Sign up", new_user_registration_path
+              => link_to t('site.sign_up'), new_user_registration_path
               ' |
-              => link_to "Sign in", new_user_session_path
+              => link_to t('site.sign_in'), new_user_session_path
         - if current_user.try(:more_info_required?)
           .more-info-required-banner.bg-warning.text-warning
-            p We need more information about you before we can invite you to our meetups! Please #{link_to "add more details to your profile", edit_profile_path}.
+            p = t('profile.more_info_required', link: edit_profile_path).html_safe
 
         - if flash.key?(:notice) || flash.key?(:alert)
           .container
@@ -57,11 +57,11 @@ html
         .row
           .col-md-6
             ul
-              li Questions? Email us on #{link_to "localwelcometeam@gmail.com", "mailto:localwelcometeam@gmail.com "}
-              li Follow Local Welcome on #{link_to "Twitter", "https://twitter.com/localwelcome"}
-              li Like Local Welcome on #{link_to "Facebook", "https://www.facebook.com/LocalWelcome/"}
+              li = t('site.footer.email').html_safe
+              li = t('site.footer.twitter').html_safe
+              li = t('site.footer.facebook').html_safe
 
           .col-md-6.text-right
-            p Local Welcome was established in 2015.
-            p Our website is #{link_to "open source", "https://github.com/creature/localwelcome"}.
+            p = t('site.footer.established')
+            p = t('site.footer.open_source').html_safe
 

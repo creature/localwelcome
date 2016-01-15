@@ -1,24 +1,29 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   site:
-    title: "Local Welcome"
+    title: Local Welcome
+    hero_text: Local Welcome hosts monthly groups in public spaces to help refugees learn english, volunteer in the community, and return to work.
+    signed_in_as: Signed in as <a href="%{link}">%{email}</a>
+    admin_dashboard: Admin dashboard
+    sign_out: Sign out
+    sign_in: Sign in
+    sign_up: Sign up
+    footer:
+      email: Questions? Email us on <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
+      twitter: Follow Local Welcome on <a href="https://twitter.com/localwelcome">Twitter</a>
+      facebook: Like Local Welcome on <a href="https://www.facebook.com/LocalWelcome/">Facebook</a>
+      established: Local Welcome was established in 2015.
+      open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
+
+  groups:
+    group_header: Find a group near you
+    learn_more: "Learn more about this group"
+    next_event: "Next event: %{event_name} (in %{time_in_future})"
+    register:  "Register to attend"
+
+  sponsors:
+    title: Thanks to our supporters
+    blurb: Local Welcome has received financial support from The Indigo Trust, without which this project would not be possible. The Indigo Trust is a UK based grant making foundation that funds technology-driven projects to bring about social change. You can find out more about their work <a href="http://indigotrust.org.uk/">on their website</a>.
+
+
+  profile:
+    more_info_required: We need more information about you before we can invite you to our meetups! Please <a href="%{link}">add more details to your profile</a>.
