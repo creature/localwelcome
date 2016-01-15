@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
     if @invite.save
       redirect_to :back, notice: "Invitation requested!"
     else
-      redirect_to :back, alert: "Sorry, something went wrong."
+      redirect_to :back, alert: "Sorry, something went wrong: #{@invite.errors.full_messages.join(", ")}"
     end
   end
 
@@ -43,7 +43,7 @@ class InvitationsController < ApplicationController
   protected
 
   def invitation_params
-    params.require(:invitation).permit(:event_id)
+    params.require(:invitation).permit(:event_id, :who_do_you_want_to_meet)
   end
 
   def check_for_more_info_required

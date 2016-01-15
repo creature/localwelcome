@@ -7,6 +7,7 @@ class Invitation < ActiveRecord::Base
 
   validates :user, presence: true, uniqueness: { scope: :event }
   validates :event, presence: true
+  validates :who_do_you_want_to_meet, presence: true
 
   enum aasm_state: [:requested, :sent, :accepted, :declined, :cancelled, :unknown, :attended, :no_show, :cancelled_politely, :cancelled_rudely]
 

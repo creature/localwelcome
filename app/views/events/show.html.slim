@@ -83,4 +83,7 @@
         - else
           = form_tag invitations_path, method: :post do
             = hidden_field :invitation, :event_id, value: @event.id
+            .form-group
+              = label_tag :invitation_who_do_you_want_to_meet, "Who would you like to meet at this event?"
+              = text_area :invitation, :who_do_you_want_to_meet, value: nil, placeholder: @placeholders.sample, class: "form-control"
             = submit_tag "Request an invite", class: "btn btn-lg btn-primary"
