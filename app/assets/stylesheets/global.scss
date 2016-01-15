@@ -12,13 +12,28 @@ html, body {
   overflow: auto;
 }
 
+@media (max-width: $mobile-breakpoint) {
+  .ebttf {
+    padding-bottom: $footer-height * 2;
+  }
+}
+
 footer {
   height: $footer-height;
   position: relative;
   margin-top: $footer-height * -1;
 }
 
+@media (max-width: $mobile-breakpoint) {
+  footer {
+    height: $footer-height * 2;
+    margin-top: $footer-height * -2;
 
+    p, li {
+      text-align: center;
+    }
+  }
+}
 
 body {
   color: $flat-ebony-clay;
@@ -54,6 +69,22 @@ nav, footer {
   p.links {
     padding: 1rem;
     display: inline-block;
+    float: right;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    h1 {
+      font-size: 300%;
+      text-align: center;
+      display: block;
+    }
+
+    p.links {
+      display: block;
+      float: none;
+      text-align: center;
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -85,6 +116,12 @@ footer {
 
 h1, h2, h3 {
   font-family: 'Dosis', 'Helvetica Neue', sans-serif;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  h1, h2, h3 {
+    text-align: center;
+  }
 }
 
 .system.message {
