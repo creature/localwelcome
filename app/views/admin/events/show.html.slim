@@ -66,12 +66,14 @@
         thead
           tr
             th Attendee
+            th Who they want to meet
             th Status
             th &nbsp;
         tbody
           - @invitations.map(&:decorate).each do |invite|
             tr
               td = invite.user.admin_link_with_popover(@event.chapter)
+              td.who_do_you_want_to_meet = invite.who_do_you_want_to_meet
               td = invite.friendly_status
               - if invite.user.more_info_required? # No options until they fill out more info
                 td &nbsp;
