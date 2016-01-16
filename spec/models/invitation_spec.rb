@@ -3,6 +3,16 @@ require 'rails_helper'
 describe Invitation do
   let (:invite) { FactoryGirl.create(:invitation) }
 
+  describe "Validations" do
+    it "Requires info about who a user wants to meet to be considered valid" do
+      expect(invite).to be_valid
+      expect(invite.who_do_you_want_to_meet).not_to be_blank
+
+      invite.who_do_you_want_to_meet = ""
+      expect(invite).not_to be_valid
+    end
+  end
+
   it "Allows an event to have more than one invitation" do
     second_invite = FactoryGirl.build(:invitation, event: invite.event)
     expect(second_invite).to be_valid
