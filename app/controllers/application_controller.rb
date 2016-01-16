@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
       redirect_to edit_profile_path
     end
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, alert: "You're not allowed to do that."
+  end
 end

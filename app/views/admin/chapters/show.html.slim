@@ -5,7 +5,7 @@
   .row.col-md-12
     h1 = @chapter.name
 
-    => link_to "Edit", edit_admin_chapter_path(@chapter), class: "btn btn-default" if @current_user.admin?
+    => link_to "Edit", edit_admin_chapter_path(@chapter), class: "btn btn-default"
     = link_to "View on site", chapter_path(@chapter), class: "btn btn-default"
 
     dl.chapter-description
