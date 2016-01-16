@@ -11,9 +11,14 @@
     .col-md-12
       h1
         = @chapter.name
+
+  / TODO: Make this check use Cancan instead.
+  - if current_user.try(:admin?) || current_user.try(:organiser_of?, @chapter)
+    .row.col-md-12
+      .buttons
+        = link_to "Manage this chapter", admin_chapter_path(@chapter), class: "btn btn-default"
       - unless @chapter.description.blank?
-        p
-          = @chapter.description
+        p.chapter-description = @chapter.description
 
   .row
     .col-md-6
