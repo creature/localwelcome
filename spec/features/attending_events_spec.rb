@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "Attending events" do
   let (:user) { FactoryGirl.create(:user) }
   let (:event) { FactoryGirl.create(:event) }
+  let (:description) { Faker::Lorem.sentence }
 
   before { login_as user }
 
@@ -11,18 +12,22 @@ feature "Attending events" do
     visit chapter_event_path(event.chapter, event)
 
     expect(page).to have_link "Sign in"
-    click_link_or_button "Request an invite"
+    within(".new-invite") { click_link_or_button "Request an invite" }
     expect(current_path).to eq new_user_session_path
   end
 
   scenario "A registered user can request an invite for an event" do
     visit chapter_event_path(event.chapter, event)
 
-    expect { click_link_or_button "Request an invite" }.to change { Invitation.count }.by 1
+    within(".new-invite") do
+      fill_in :invitation_who_do_you_want_to_meet, with: description
+      expect { click_link_or_button "Request an invite" }.to change { Invitation.count }.by 1
+    end
     invite = Invitation.last
 
     expect(invite.user).to eq user
     expect(invite.event).to eq event
+    expect(invite.who_do_you_want_to_meet).to eq description
   end
 
   scenario "A user who has no invite doesn't see attendee-only info" do
@@ -56,7 +61,9 @@ feature "Attending events" do
     user.update_attributes(more_info_required: true)
     visit chapter_event_path(event.chapter, event)
 
-    expect { click_button "Request an invite" }.not_to change { Invitation.count }
+    within(".new-invite") do
+      expect { click_button "Request an invite" }.not_to change { Invitation.count }
+    end
     expect(current_path).to eq edit_profile_path
   end
 

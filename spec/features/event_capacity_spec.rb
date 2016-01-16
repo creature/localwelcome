@@ -6,6 +6,7 @@ feature "Event capacity limits" do
   let(:users) { FactoryGirl.create_list(:user, 5) }
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
+  let(:description) { Faker::Lorem.sentence }
 
   before { login user }
 
@@ -15,13 +16,20 @@ feature "Event capacity limits" do
       login(u)
       visit chapter_event_path(event.chapter, event)
 
-      expect { click_button "Request an invite" }.to change { Invitation.count }.by 1
+      within(".new-invite") do
+      fill_in :invitation_who_do_you_want_to_meet, with: description
+        expect { click_button "Request an invite" }.to change { Invitation.count }.by 1
+      end
     end
   end
 
   scenario "A user can request an invite to an event with free capacity" do
     visit chapter_event_path(event.chapter, event)
-    expect { click_button "Request an invite" }.to change { Invitation.count }.by 1
+
+    within(".new-invite") do
+      fill_in :invitation_who_do_you_want_to_meet, with: description
+      expect { click_button "Request an invite" }.to change { Invitation.count }.by 1
+    end
   end
 
   scenario "A user can accept an invite to an event with free capacity" do

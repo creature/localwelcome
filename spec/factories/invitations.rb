@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :invitation do
     user
     event
+    who_do_you_want_to_meet { Faker::Lorem.sentence }
 
     factory :accepted_invitation do
       before(:build) { |invite| invite.aasm_state = :accepted }

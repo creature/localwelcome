@@ -6,8 +6,8 @@
   - content_for :page_description
     = @event.description
 
-/ Hidden basic container for a modal popover (used for requesting an invite).
-.modal.fade#invite-modal tabindex="-1" role="dialog" aria-abelledby="invite-modal-label"
+/ Hidden basic container for a modal popover (used for requesting an invite). The inline style is for Capybara's benefit.
+.modal.fade#invite-modal tabindex="-1" role="dialog" aria-labelledby="invite-modal-label" style="display: none;"
   .modal-dialog role="document"
     .modal-content
       = form_tag invitations_path, method: :post do
