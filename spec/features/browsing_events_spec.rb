@@ -31,35 +31,23 @@ feature "Browsing events" do
   context "The 'manage this event' button" do
     scenario "An anonymous user doesn't see a manage button" do
       visit chapter_event_path(event.chapter, event)
-
       expect(page).not_to have_link "Manage this event"
     end
 
     scenario "A logged-in user doesn't see a manage button" do
-      manage_helper(user, event, false)
+      check_for_manage_event_button(user, event, false)
     end
 
     scenario "A chapter organiser for a different chapter doesn't see a manage button" do
-      manage_helper(other_organiser, event, false)
+      check_for_manage_event_button(other_organiser, event, false)
     end
 
     scenario "A chapter organiser for this chapter sees a manage button" do
-      manage_helper(organiser, event, true)
+      check_for_manage_event_button(organiser, event, true)
     end
 
     scenario "An admin sees a chapter button" do
-      manage_helper(admin, event, true)
-    end
-  end
-
-  def manage_helper(u, event, should_see_link)
-    login_as(u)
-    visit chapter_event_path(event.chapter, event)
-
-    if should_see_link
-      expect(page).to have_link "Manage this event"
-    else
-      expect(page).not_to have_link "Manage this event"
+      check_for_manage_event_button(admin, event, true)
     end
   end
 end
