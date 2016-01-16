@@ -10,7 +10,11 @@
 
     dl.chapter-description
       dt Description
-      dd = @chapter.description
+      dd
+        - if @chapter.description.blank?
+          span.system.message No description yet
+        - else
+          = @chapter.description
 
   .row.col-md-12
     h2 Users (#{@chapter.users.count})
