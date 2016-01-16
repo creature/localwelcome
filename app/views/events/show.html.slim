@@ -42,8 +42,7 @@
       ' to
       = friendly_time @event.ends_at
 
-    - unless @event.description.blank?
-      p.description = @event.description
+    p.description = @event.friendly_description
 
     - if @invite.try(:accepted?) || @invite.try(:sent?) # Only show private details to people who are marked as attending
       h2 Attendee information

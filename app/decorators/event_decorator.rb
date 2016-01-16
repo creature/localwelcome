@@ -1,7 +1,7 @@
 class EventDecorator < Draper::Decorator
   delegate_all
 
-  def description
+  def friendly_description
     field_helper(:description)
   end
 

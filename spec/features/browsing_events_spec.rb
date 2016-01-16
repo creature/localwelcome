@@ -21,6 +21,13 @@ feature "Browsing events" do
     expect(current_path).to eq root_path
   end
 
+  scenario "We don't generate broken meta tags" do
+    visit chapter_event_path(event.chapter, event)
+
+    expect(page).not_to have_content 'property="og:description"'
+    expect(page).to have_selector('meta[property="og:description"]', visible: false)
+  end
+
   context "The 'manage this event' button" do
     scenario "An anonymous user doesn't see a manage button" do
       visit chapter_event_path(event.chapter, event)
