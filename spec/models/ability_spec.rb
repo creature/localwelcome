@@ -42,6 +42,7 @@ describe Ability do
     it "Should be able to manage their chapters" do
       expect(ability).to be_able_to :read, chapter
       expect(ability).to be_able_to :update, chapter
+      expect(ability).to be_able_to :manage, chapter
     end
 
     it "Should be able to manage their events" do

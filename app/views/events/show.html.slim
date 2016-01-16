@@ -31,6 +31,8 @@
     h1 = @event.name
 
   - if current_user.try(:admin?) || current_user.try(:organiser_of?, @event.chapter)
+    /* TODO: Figure out why the unit tests fail for this. */
+    /* - if can?(:manage, @event) */
     .row.col-md-12
       .buttons
         = link_to "Manage this event", admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
