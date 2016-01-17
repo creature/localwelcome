@@ -7,6 +7,7 @@ FactoryGirl.define do
     published true
     announced false
     capacity 10
+    description { Faker::Lorem.paragraph }
     email_info { Faker::Lorem.paragraph }
     venue_name { Faker::Company.name }
     venue_postcode { Faker::Address.postcode }

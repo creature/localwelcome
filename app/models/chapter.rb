@@ -33,4 +33,8 @@ class Chapter < ActiveRecord::Base
   def next_event
     published_upcoming_events.first
   end
+
+  def has_unpublished_upcoming_events?
+    upcoming_events.unpublished.any?
+  end
 end
