@@ -18,7 +18,7 @@ end
 # A helper that checks if a given button is or isn't displayed for a given page.
 def check_for_manage_button(u, path, name, should_see_link)
   logout(:user)
-  login_as(u)
+  login(u)
   visit path
 
   if should_see_link
