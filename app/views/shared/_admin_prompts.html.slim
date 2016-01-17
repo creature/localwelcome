@@ -8,52 +8,34 @@
   - has_unannounced_events = has_next_events.reject { |c| c.next_event.announced? }
 
   - if blank_descriptions.any?
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{blank_descriptions.first.name} is missing a description &ndash;
-          = link_to "add one &raquo;".html_safe, edit_admin_chapter_path(blank_descriptions.first)
-        p Your chapter's description is shown to all visitors, and is the best way to tell them about your local group. It's what's going to get them interested in coming along, and learn more about how you operate. It should include details about how often you meet, what kind of volunteers you're looking for, and who they can contact for more information.
+    = render_admin_prompt("Local Welcome #{blank_descriptions.first.name} is missing a description",
+                          "add one", edit_admin_chapter_path(blank_descriptions.first),
+                          "Your chapter's description is shown to all visitors, and is the best way to tell them about your local group. It's what's going to get them interested in coming along, and learn more about how you operate. It should include details about how often you meet, what kind of volunteers you're looking for, and who they can contact for more information.")
 
   - elsif has_unpublished_events.any?
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{has_unpublished_events.first.name} has an unpublished upcoming event &ndash;
-          = link_to "publish it now &raquo;".html_safe, edit_admin_chapter_path(has_unpublished_events.first)
-        p Users can't see your events on the site until they're published, so to the wider world it looks like there's nothing coming up for your group.
+    = render_admin_prompt("Local Welcome #{has_unpublished_events.first.name} has an unpublished upcoming event",
+                          "publish it now", edit_admin_chapter_path(has_unpublished_events.first),
+                          "Users can't see your events on the site until they're published, so to the wider world it looks like there's nothing coming up for your group.")
 
   - elsif no_next_events.any?
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{no_next_events.first.name} has no upcoming events &ndash;
-          = link_to "add one &raquo;".html_safe, edit_admin_chapter_path(no_next_events.first)
-        p Making sure that you always have an event listed on the site makes your group feel more active, and makes people more likely to get involved. Even if it's a long way off or you don't know all the details yet, it's a good idea to have something listed on the site.
+    = render_admin_prompt("Local Welcome #{no_next_events.first.name} has no upcoming events",
+                          "add one", edit_admin_chapter_path(no_next_events.first),
+                          "Making sure that you always have an event listed on the site makes your group feel more active, and makes people more likely to get involved. Even if it's a long way off or you don't know all the details yet, it's a good idea to have something listed on the site.")
 
   - elsif missing_event_descriptions.any?
     - next_event = missing_event_descriptions.first.next_event
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{missing_event_descriptions.first.name}'s next event has no description &ndash;
-          = link_to "add one &raquo;".html_safe, edit_admin_chapter_event_path(next_event.chapter, next_event)
-        p The event description tells volunteers more about what they can expect, and is a chance for you to give some details about what kind of volunteers you're looking for at your event (eg. people in certain careers, with certain skills, etc).
+    = render_admin_prompt("Local Welcome #{missing_event_descriptions.first.name}'s next event has no description",
+                          "add one", edit_admin_chapter_event_path(next_event.chapter, next_event),
+                          "The event description tells volunteers more about what they can expect, and is a chance for you to give some details about what kind of volunteers you're looking for at your event (eg. people in certain careers, with certain skills, etc).")
 
   - elsif missing_attendee_info.any?
     - next_event = missing_attendee_info.first.next_event
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{missing_attendee_info.first.name}'s next event has no attendee info &ndash;
-          = link_to "add details &raquo;".html_safe, edit_admin_chapter_event_path(next_event.chapter, next_event)
-        p Attendee info is emailed to people who you invite to the events. It gives them details about where the event will be held. You can also give them specific instructions, too (like "Please don't bring extra people along" or "We'd love more nurses, if you know of any").
+    = render_admin_prompt("Local Welcome #{missing_attendee_info.first.name}'s next event has no attendee info",
+                          "add details", edit_admin_chapter_event_path(next_event.chapter, next_event),
+                          "Attendee info is emailed to people who you invite to the events. It gives them details about where the event will be held. You can also give them specific instructions, too (like 'Please don't bring extra people along' or 'We'd love more nurses, if you know of any').")
 
   - elsif has_unannounced_events.any?
     - next_event = has_unannounced_events.first.next_event
-    .banner.bg-warning.text-warning
-      .container
-        h1
-          ' Local Welcome #{has_unannounced_events.first.name}'s next event hasn't been announced yet &ndash;
-          = link_to "announce it now &raquo;".html_safe, admin_chapter_event_path(next_event.chapter, next_event)
-        p Announcing an event sends emails to everyone who's signed up for your chapter, inviting them to sign up. When you've added all the details to your event, you should announce it so people can start requesting invites.
+    = render_admin_prompt("Local Welcome #{has_unannounced_events.first.name}'s next event hasn't been announced yet",
+                          "announce it now", admin_chapter_event_path(next_event.chapter, next_event),
+                          "Announcing an event sends emails to everyone who's signed up for your chapter, inviting them to sign up. When you've added all the details to your event, you should announce it so people can start requesting invites.")
