@@ -39,8 +39,10 @@ html
               ' |
               => link_to t('site.sign_in'), new_user_session_path
         - if current_user.try(:more_info_required?)
-          .more-info-required-banner.bg-warning.text-warning
+          .more-info-required.banner.bg-warning.text-warning
             p = t('profile.more_info_required', link: edit_profile_path).html_safe
+
+        = render "shared/admin_prompts"
 
         - if flash.key?(:notice) || flash.key?(:alert)
           .container

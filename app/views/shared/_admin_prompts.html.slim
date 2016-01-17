@@ -1,0 +1,9 @@
+- if current_user.try(:admin?) || current_user.try(:organiser?)
+  - blank_descriptions = current_user.organised_chapters.select { |c| c.description.blank? }
+  - if blank_descriptions.any?
+    .banner.bg-warning.text-warning
+      .container
+        h1
+          ' Local Welcome #{blank_descriptions.first.name} is missing a description &ndash;
+          = link_to "add one &raquo;".html_safe, edit_admin_chapter_path(blank_descriptions.first)
+        p Your chapter's description is shown to all visitors, and is the best way to tell them about your local group. It's what's going to get them interested in coming along, and learn more about how you operate. It should include details about how often you meet, what kind of volunteers you're looking for, and who they can contact for more information.

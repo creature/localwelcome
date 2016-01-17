@@ -104,14 +104,27 @@ footer {
   }
 }
 
-.more-info-required-banner {
-  text-align: center;
+.banner {
   margin-top: $nav-margin * -1;
   padding: 1rem;
+
+  h1 {
+    text-align: center;
+    font-size: 140%;
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 
   p {
     margin: 0;
   }
+}
+
+.more-info-required p {
+  text-align: center;
 }
 
 h1, h2, h3 {

@@ -38,13 +38,13 @@ feature "Managing users" do
     login user
 
     visit root_path
-    expect(page).to have_selector ".more-info-required-banner"
+    expect(page).to have_selector ".more-info-required.banner"
     visit chapter_event_path(event.chapter, event)
-    expect(page).to have_selector ".more-info-required-banner"
+    expect(page).to have_selector ".more-info-required.banner"
 
     user.update_attributes(more_info_required: false)
     visit root_path
-    expect(page).not_to have_selector ".more-info-required-banner"
+    expect(page).not_to have_selector ".more-info-required.banner"
   end
 
   def check_user_can_be_flagged
