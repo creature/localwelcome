@@ -55,5 +55,5 @@
       .container
         h1
           ' Local Welcome #{has_unannounced_events.first.name}'s next event hasn't been announced yet &ndash;
-          = link_to "announce it now &raquo;".html_safe, edit_admin_chapter_event_path(next_event.chapter, next_event)
+          = link_to "announce it now &raquo;".html_safe, admin_chapter_event_path(next_event.chapter, next_event)
         p Announcing an event sends emails to everyone who's signed up for your chapter, inviting them to sign up. When you've added all the details to your event, you should announce it so people can start requesting invites.
