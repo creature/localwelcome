@@ -3,6 +3,12 @@ html, body {
   height: 100%;
 }
 
+body.arabic {
+  p, li, h1, h2, h3 {
+    text-align: right;
+  }
+}
+
 .wrap {
   min-height: 100%;
 }

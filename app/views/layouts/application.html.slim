@@ -16,54 +16,59 @@ html
     meta property="og:description" content="#{content_for(:page_description) || t('site.hero_text')}"
     meta property="og:locale" content="en_GB"
     meta property="og:site_name" content="#{t('site.title')}"
-  body.no-js
-    script type="text/javascript"
-      | document.getElementsByTagName('body')[0].classList.remove("no-js")
 
-    .wrap
-      / Everything but the footer
-      .ebttf
-        nav
-          h1
-            = link_to content_for(:chapter_name) || t("site.title"), root_path
-          p.links
-            - if user_signed_in?
-              => t('site.signed_in_as', email: current_user.email, link: profile_path).html_safe
+  - if arabic_request?
+    body.no-js.arabic
+  - else
+    body.no-js
+
+  script type="text/javascript"
+    | document.getElementsByTagName('body')[0].classList.remove("no-js")
+
+  .wrap
+    / Everything but the footer
+    .ebttf
+      nav
+        h1
+          = link_to content_for(:chapter_name) || t("site.title"), root_path
+        p.links
+          - if user_signed_in?
+            => t('site.signed_in_as', email: current_user.email, link: profile_path).html_safe
+            ' |
+            - if current_user.admin? || current_user.organiser?
+              => link_to t('site.admin_dashboard'), admin_path
               ' |
-              - if current_user.admin? || current_user.organiser?
-                => link_to t('site.admin_dashboard'), admin_path
-                ' |
-              = link_to t('site.sign_out'), destroy_user_session_path, method: :delete
-            - else
-              => link_to t('site.sign_up'), new_user_registration_path
-              ' |
-              => link_to t('site.sign_in'), new_user_session_path
-        - if current_user.try(:more_info_required?)
-          .more-info-required.banner.bg-warning.text-warning
-            p = t('profile.more_info_required', link: edit_profile_path).html_safe
+            = link_to t('site.sign_out'), destroy_user_session_path, method: :delete
+          - else
+            => link_to t('site.sign_up'), new_user_registration_path
+            ' |
+            => link_to t('site.sign_in'), new_user_session_path
+      - if current_user.try(:more_info_required?)
+        .more-info-required.banner.bg-warning.text-warning
+          p = t('profile.more_info_required', link: edit_profile_path).html_safe
 
-        = render "shared/admin_prompts"
+      = render "shared/admin_prompts"
 
-        - if flash.key?(:notice) || flash.key?(:alert)
-          .container
-            .col-md-8.col-md-offset-2
-              - if flash.key? :notice
-                p.alert.alert-info = flash[:notice]
-              - if flash.key? :alert
-                p.alert.alert-danger = flash[:alert]
+      - if flash.key?(:notice) || flash.key?(:alert)
+        .container
+          .col-md-8.col-md-offset-2
+            - if flash.key? :notice
+              p.alert.alert-info = flash[:notice]
+            - if flash.key? :alert
+              p.alert.alert-danger = flash[:alert]
 
-        = yield
+      = yield
 
-    footer
-      .container
-        .row
-          .col-md-6
-            ul
-              li = t('site.footer.email').html_safe
-              li = t('site.footer.twitter').html_safe
-              li = t('site.footer.facebook').html_safe
+  footer
+    .container
+      .row
+        .col-md-6
+          ul
+            li = t('site.footer.email').html_safe
+            li = t('site.footer.twitter').html_safe
+            li = t('site.footer.facebook').html_safe
 
-          .col-md-6.text-right
-            p = t('site.footer.established')
-            p = t('site.footer.open_source').html_safe
+        .col-md-6.text-right
+          p = t('site.footer.established')
+          p = t('site.footer.open_source').html_safe
 
