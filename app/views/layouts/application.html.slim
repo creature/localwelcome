@@ -39,10 +39,19 @@ html
               => link_to t('site.admin_dashboard'), admin_path
               ' |
             = link_to t('site.sign_out'), destroy_user_session_path, method: :delete
-          - else
+
+            - if current_user.admin? # Language switcher for admins only, right now
+              br
+              - if arabic_request?
+                = link_to t('site.view_in_english'), english_current_url
+              - else
+                = link_to t('site.view_in_arabic'), arabic_current_url
+
+          - else # Logged-out user.
             => link_to t('site.sign_up'), new_user_registration_path
             ' |
             => link_to t('site.sign_in'), new_user_session_path
+
       - if current_user.try(:more_info_required?)
         .more-info-required.banner.bg-warning.text-warning
           p = t('profile.more_info_required', link: edit_profile_path).html_safe

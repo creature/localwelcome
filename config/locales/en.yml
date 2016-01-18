@@ -7,6 +7,8 @@ en:
     sign_out: Sign out
     sign_in: Sign in
     sign_up: Sign up
+    view_in_english: View in English
+    view_in_arabic: View in Arabic
     footer:
       email: Questions? Email us on <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
       twitter: Follow Local Welcome on <a href="https://twitter.com/localwelcome">Twitter</a>

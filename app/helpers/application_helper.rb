@@ -11,4 +11,18 @@ module ApplicationHelper
   def arabic_request?
     "ar" == request.subdomains.first
   end
+
+  # Generate a link to the English-language version of this page.
+  def english_current_url
+    "//" + request.domain + request.fullpath
+  end
+
+  # Generate a link to the Arabic-language version of this page.
+  def arabic_current_url
+    if arabic_request?
+      return request.original_url
+    else
+      "//ar." + request.domain + request.fullpath
+    end
+  end
 end

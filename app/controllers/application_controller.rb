@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
 
   # Change the locale to Arabic if we're on a subdomain like ar.local-welcome.org
   def set_locale
-    I18n.locale = "ar" if arabic_request?
+    if arabic_request?
+      I18n.locale = "ar"
+    else
+      I18n.locale = I18n.default_locale
+    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
