@@ -14,6 +14,7 @@ gem 'slim-rails' # Templating library
 gem 'factory_girl_rails' # Mock objects
 gem 'cancancan' # Allow for different kinds of users
 gem 'devise' # Authentication framework
+gem 'devise-i18n' # Translated strings for Devise
 gem 'twitter-bootstrap-rails' # CSS framework
 gem 'bourbon' # Useful CSS functions
 gem 'google-webfonts-rails' # Helpers for webfonts

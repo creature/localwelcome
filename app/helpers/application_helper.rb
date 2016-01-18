@@ -7,4 +7,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def arabic_request?
+    "ar" == request.subdomains.first
+  end
 end

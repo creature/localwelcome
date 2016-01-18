@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :set_locale
   before_action :force_empty_profiles_to_fill_out_info
 
   def force_empty_profiles_to_fill_out_info
@@ -11,6 +13,11 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You need to fill out your profile before continuing."
       redirect_to edit_profile_path
     end
+  end
+
+  # Change the locale to Arabic if we're on a subdomain like ar.local-welcome.org
+  def set_locale
+    I18n.locale = "ar" if arabic_request?
   end
 
   rescue_from CanCan::AccessDenied do |exception|
