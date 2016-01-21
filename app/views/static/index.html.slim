@@ -1,10 +1,13 @@
 .overview
   .container
     .col-md-8.col-md-offset-2
-      p = t('site.hero_text')
+      p
+        = t('site.hero_text')
+        br
+        = link_to t('site.learn_more').html_safe, how_it_works_path, class: "btn btn-lg btn-success hero"
 
 .container
-  .row.chapters
+  .row.chapters#chapters
     h1 = t('groups.group_header')
     - @chapters.each do |chapter|
       .col-md-4
