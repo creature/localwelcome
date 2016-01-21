@@ -78,6 +78,7 @@ html
             li = t('site.footer.facebook').html_safe
 
         .col-md-6.text-right
-          p = t('site.footer.established')
-          p = t('site.footer.open_source').html_safe
+          ul
+            li = t('site.footer.established', link: about_path).html_safe
+            li = t('site.footer.open_source').html_safe
 

@@ -13,7 +13,7 @@ en:
       email: Questions? Email us on <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
       twitter: Follow Local Welcome on <a href="https://twitter.com/localwelcome">Twitter</a>
       facebook: Like Local Welcome on <a href="https://www.facebook.com/LocalWelcome/">Facebook</a>
-      established: Local Welcome was established in 2015.
+      established: Local Welcome was established in 2015. Learn more <a href="%{link}">about the project</a>.
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
 
   groups:

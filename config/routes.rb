@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
 
   root to: 'static#index'
+  get '/about', to: "static#about", as: :about
+  get '/howitworks', to: "static#howitworks", as: :how_it_works
+
   resources :chapters, only: [:show] do
     resources :events, only: [:show]
   end
