@@ -3,6 +3,7 @@ require 'rails_helper'
 describe User do
   let(:user) { FactoryGirl.create(:user) }
   let(:empty_user) { FactoryGirl.create(:empty_user) }
+  let(:chapter_user) { FactoryGirl.create(:chapter_user) }
 
   it "Gives an empty profile a score of 0" do
     expect(empty_user.profile_completion_score).to eq 0
@@ -63,6 +64,13 @@ describe User do
       other_chapters.each do |oc|
         expect(chapters.first.id).not_to eq oc.id
       end
+    end
+  end
+
+  describe "#in_chapter?" do
+    it "Works" do
+      expect(user).not_to be_in_chapter
+      expect(chapter_user).to be_in_chapter
     end
   end
 end

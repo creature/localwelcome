@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     roles.chapter_organiser.exists?
   end
 
+  # Is this user a member of a chapter?
+  def in_chapter?
+    chapters.any?
+  end
+
   # Gets all chapters associated with this user - the ones they're subscribed to, and the ones they organise.
   def all_chapters
     (organised_chapters + chapters).uniq

@@ -6,7 +6,8 @@ class Admin::AdminController < ApplicationController
     if current_user.admin?
       @chapters = Chapter.all.includes(:users)
       @events = Event.all
-      @users = User.all.newest_first
+      @users = User.all.includes(:chapters).newest_first
+      @users_in_chapter_count = @users.select(&:in_chapter?).count
       @organisers = Role.chapter_organisers.includes(:user).map(&:user)
     elsif current_user.organiser?
       @chapters = current_user.organised_chapters
