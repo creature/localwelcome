@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def render_admin_prompt(heading, link_text, link_target, explanation, opts = {})
+  def render_prompt_banner(heading, link_text, link_target, explanation, opts = {})
     classes = %w{banner bg-warning text-warning} << opts.fetch(:class, "")
     content_tag :div, class: classes.join(" ") do
       content_tag :div, class: "container" do
