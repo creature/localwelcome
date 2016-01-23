@@ -1,0 +1,8 @@
+- if current_user.try(:more_info_required?) # Does the user have a blank profile?
+  .more-info-required.banner.bg-warning.text-warning
+    p = t('profile.more_info_required', link: edit_profile_path).html_safe
+- elsif current_user && !current_user.in_chapter? # Has the user joined a chapter?
+  = render_admin_prompt("You haven't joined any chapters yet", "join now", subscriptions_path,
+                        "We only email people about events near them. If you don't join any groups, then our organisers can't match you with people and you won't hear about our events.",
+                        class: "no-chapters")
+

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Admin prompts (to help them fix common omissions)" do
   let(:chapter) { FactoryGirl.create(:chapter) }
   let(:organiser) { FactoryGirl.create(:chapter_organiser, chapter: chapter) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:chapter_user, chapter: chapter) }
   let!(:event) { FactoryGirl.create(:announced_event, chapter: chapter) }
 
   before { login(organiser) }

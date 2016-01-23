@@ -7,7 +7,6 @@ feature "Managing users" do
   let(:event) { FactoryGirl.create(:event, chapter: chapter) }
   let!(:invite) { FactoryGirl.create(:invitation, event: event) }
   let!(:user) { FactoryGirl.create(:chapter_organiser, chapter: chapter) }
-  let!(:subscription) { FactoryGirl.create(:subscription, user: user, chapter: chapter) }
 
   before { login(admin) }
 

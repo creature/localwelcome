@@ -1,6 +1,7 @@
 module ApplicationHelper
-  def render_admin_prompt(heading, link_text, link_target, explanation)
-    content_tag :div, class: "banner bg-warning text-warning" do
+  def render_admin_prompt(heading, link_text, link_target, explanation, opts = {})
+    classes = %w{banner bg-warning text-warning} << opts.fetch(:class, "")
+    content_tag :div, class: classes.join(" ") do
       content_tag :div, class: "container" do
         content_tag(:h1, "#{heading} &ndash; ".html_safe + link_to("#{link_text} &raquo;".html_safe, link_target)) +
         content_tag(:p, explanation)

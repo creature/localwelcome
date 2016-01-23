@@ -29,8 +29,11 @@ FactoryGirl.define do
       after(:create) do |user, evaluator|
         if evaluator.chapter
           FactoryGirl.create(:chapter_role, user: user, chapter: evaluator.chapter)
+          FactoryGirl.create(:subscription, user: user, chapter: evaluator.chapter)
         else
-          FactoryGirl.create(:chapter_role, user: user)
+          chapter = FactoryGirl.create(:chapter)
+          FactoryGirl.create(:chapter_role, user: user, chapter: chapter)
+          FactoryGirl.create(:subscription, user: user, chapter: chapter)
         end
       end
     end

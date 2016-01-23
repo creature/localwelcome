@@ -2,6 +2,8 @@ require 'rails_helper'
 
 feature "Signing Up to Local Welcome" do
   let(:chapter) { FactoryGirl.create(:chapter) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:chapter_user) { FactoryGirl.create(:chapter_user, chapter: chapter) }
   let(:email) { Faker::Internet.safe_email }
   let(:password) { Faker::Lorem.characters(10) }
 
@@ -46,6 +48,25 @@ feature "Signing Up to Local Welcome" do
       fill_in_registration_form
       expect { click_button "Sign up" }.not_to change { Subscription.count }
       expect(User.where(email: email).exists?).to be true
+    end
+  end
+
+  context "The nag bar for people who aren't a member of any chapters" do
+    scenario "A logged-out user doesn't see a nag bar" do
+      visit root_path
+      expect(page).not_to have_selector(".no-chapters.banner")
+    end
+
+    scenario "A user who hasn't joined any chapters sees a nag bar" do
+      login(user)
+      visit root_path
+      expect(page).to have_selector(".no-chapters.banner")
+    end
+
+    scenario "A user who's joined at least one chapter doesn't see a nag bar" do
+      login(chapter_user)
+      visit root_path
+      expect(page).not_to have_selector(".no-chapters.banner")
     end
   end
 end
