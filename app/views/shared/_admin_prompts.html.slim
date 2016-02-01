@@ -20,7 +20,7 @@
     / Are there no upcoming events?
     - elsif chapter_with_no_event = no_next_events.first
       = render_prompt_banner("Local Welcome #{chapter_with_no_event.name} has no upcoming events",
-                             "add one", edit_admin_chapter_path(chapter_with_no_event),
+                             "add one", admin_chapter_path(chapter_with_no_event),
                              "Making sure that you always have an event listed on the site makes your group feel more active, and makes people more likely to get involved. Even if it's a long way off or you don't know all the details yet, it's a good idea to have something listed on the site.")
 
     / Is the next event missing a description?
