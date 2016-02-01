@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '4.2.5'
+gem 'rails', '~> 4.2.0'
 gem 'pg' # Postgres gem, used in production
 gem 'rails_12factor', group: :production # Makes some Heroku-friendly tweaks.
 gem 'sass-rails', '~> 5.0'
