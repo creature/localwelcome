@@ -1,6 +1,6 @@
 class StaticController < ApplicationController
   def index
-    @chapters = Chapter.all
+    @chapters = Chapter.includes(:subscriptions).sort { |a, b| b.subscriptions.count <=> a.subscriptions.count }
   end
 
   def about

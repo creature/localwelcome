@@ -4,7 +4,7 @@ class Admin::AdminController < ApplicationController
 
   def index
     if current_user.admin?
-      @chapters = Chapter.all.includes(:users)
+      @chapters = Chapter.all.includes(:users).includes(:subscriptions).sort { |a, b| b.subscriptions.count <=> a.subscriptions.count }
       @events = Event.all
       @users = User.all.includes(:chapters).newest_first
       @users_in_chapter_count = @users.select(&:in_chapter?).count
