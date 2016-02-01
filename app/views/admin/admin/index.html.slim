@@ -7,9 +7,9 @@
       h1 Some numbers
       p #{pluralize(@chapters.count, "chapter")}, #{pluralize(@events.count, "event")}, #{pluralize(@users.count, "user")}.
       p
-        ' #{pluralize(@users_in_chapter_count, "user")} in chapters, #{@users.count - @users_in_chapter_count} not in any chapter
-        ' (#{number_to_percentage (@users_in_chapter_count.to_f/@users.count) * 100, precision: 1}).
-
+        ' #{pluralize(@users_in_chapter_count, "user")} in chapters
+        ' (#{number_to_percentage (@users_in_chapter_count.to_f/@users.count) * 100, precision: 1}),
+        ' #{@users.count - @users_in_chapter_count} not in any chapter.
 
   - if current_user.admin?
     .row.col-md-12
