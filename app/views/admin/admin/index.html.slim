@@ -11,6 +11,36 @@
         ' (#{number_to_percentage (@users_in_chapter_count.to_f/@users.count) * 100, precision: 1}),
         ' #{@users.count - @users_in_chapter_count} not in any chapter.
 
+      h1 Chapter summary
+      table.chapter-summary
+        thead
+          tr
+            th Name
+            th Upcoming events
+            th New users
+            th Chapter admins
+        tbody
+          - @chapters.each do |c|
+            tr
+              td = c.name
+
+              - if c.next_event.nil?
+                td.bg-danger.text-danger No upcoming events
+              - else
+                td.bg-success.text-success Has an upcoming event
+
+              - if c.new_weekly_users.count > 0
+                td.bg-success.text-success #{pluralize(c.new_weekly_users.count, "user")} added over the last week
+              - else
+                td.bg-danger.text-danger No users joined over the last week
+
+              - if c.organisers.none?
+                td.bg-danger.text-danger No chapter organisers
+              - elsif c.last_organiser_login > 7.days.ago
+                td.bg-success.text-success Chapter organisers logged in recently
+              - else
+                td.bg-danger.text-danger Chapter organisers haven't logged in for #{time_ago_in_words c.last_organiser_login}
+
   - if current_user.admin?
     .row.col-md-12
       h2 Users (#{@users.count})

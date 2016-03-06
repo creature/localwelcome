@@ -1,3 +1,14 @@
+.chapter-summary {
+  th, td {
+    width: 25%;
+    padding: 0.5rem;
+  }
+
+  tr :first-child {
+    text-align: right;
+  }
+}
+
 .buttons {
   margin-top: 1rem;
 }

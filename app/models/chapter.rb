@@ -37,4 +37,12 @@ class Chapter < ActiveRecord::Base
   def has_unpublished_upcoming_events?
     upcoming_events.unpublished.any?
   end
+
+  def new_weekly_users
+    subscriptions.where("created_at > ?", 7.days.ago).map(&:user)
+  end
+
+  def last_organiser_login
+    organisers.order(last_sign_in_at: :desc).first().try(:last_sign_in_at)
+  end
 end
