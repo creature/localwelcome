@@ -48,13 +48,13 @@
 
   .row
     .col-md-12
-      h2
-        |Get involved with Local Welcome
-        =< @chapter.name
+      h2 Get involved with Local Welcome #{@chapter.name}
       p Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
       p
         - if user_signed_in?
           = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
         - else
           = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
+
+      p Not ready to sign up yet? #{ link_to "Learn more about Local Welcome first", how_it_works_path}.
 
