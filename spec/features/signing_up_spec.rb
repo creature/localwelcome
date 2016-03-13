@@ -49,6 +49,36 @@ feature "Signing Up to Local Welcome" do
       expect { click_button "Sign up" }.not_to change { Subscription.count }
       expect(User.where(email: email).exists?).to be true
     end
+
+    scenario "Signing up with a too-short password doesn't result in an application error" do
+      visit chapter_path(chapter)
+      click_link "Sign up to Local Welcome #{chapter.name}"
+      fill_in :user_email, with: email
+      fill_in :user_password, with: "asdf"
+      fill_in :user_password_confirmation, with: "asdf"
+
+      expect { click_button "Sign up" }.not_to change { User.count }
+      expect(current_path).to eq user_registration_path
+      expect(page).to have_selector "#error_explanation"
+      expect(page).to have_selector "form[action='#{user_registration_path}']"
+    end
+
+    scenario "A user ends up being auto-subscribed to their chosen chapter if they bounce off an error page first" do
+      visit chapter_path(chapter)
+      click_link "Sign up to Local Welcome #{chapter.name}"
+      fill_in :user_email, with: email
+      fill_in :user_password, with: "asdf"
+      fill_in :user_password_confirmation, with: "asdf"
+      click_button "Sign up" # First attempt at signing up, but the password's too short
+      fill_in :user_password, with: password
+      fill_in :user_password_confirmation, with: password
+
+      expect { click_button "Sign up" }.to change { User.count }.by 1
+      expect(User.last.subscriptions.count).to be 1
+      expect(User.last.chapters.first).to eq chapter
+      expect(current_path).to eq edit_profile_path
+    end
+
   end
 
   context "The nag bar for people who aren't a member of any chapters" do

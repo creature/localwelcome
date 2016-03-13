@@ -7,8 +7,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Create a new user, along with a subscription for a chapter if they came via a chapter page.
   def create
+    @chapter_id = params[:chapter_id] # Preserve chapter ID if they didn't successfully sign up
     super
-    if params[:chapter_id] && Chapter.exists?(params[:chapter_id])
+
+    if resource.persisted? && params[:chapter_id] && Chapter.exists?(params[:chapter_id])
       resource.subscriptions.create(chapter_id: params[:chapter_id])
     end
   end
