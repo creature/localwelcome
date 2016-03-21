@@ -56,5 +56,7 @@
         - else
           = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
+  .row
+    .col-md-12
       p Not ready to sign up yet? #{ link_to "Learn more about Local Welcome first", how_it_works_path}.
 
