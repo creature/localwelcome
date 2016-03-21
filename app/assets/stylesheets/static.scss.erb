@@ -1,5 +1,6 @@
 .overview {
   background: url(<%= image_url("coffeecups.jpg") %>) no-repeat center/cover;
+  background-attachment: fixed;
   margin-top: $nav-margin * -1; // No space between the nav bar and the hero image.
   min-height: 200px;
 
@@ -79,6 +80,8 @@
 /* Top section on the "how it works" page */
 .how-it-works {
   background: url(<%= image_url("meetup-background.jpg") %>) no-repeat center/cover;
+  background-attachment: fixed;
+
   padding: 2rem 0;
   margin-top: $nav-margin * -1;
 
@@ -98,5 +101,10 @@
     display: inline-block;
     max-width: 25%;
   }
+}
+
+.faq {
+  margin-top: 3rem;
+  border-top: 1px solid darken($flat-silver, 20%);
 }
 
