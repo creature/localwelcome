@@ -1,12 +1,11 @@
 .how-it-works
   .container
-    .col-md-8.intro
+    .col-md-12.intro
+      = image_tag "ben-portrait.jpg", class: "portrait-pic pull-right"
       h1 = t('static.how_it_works')
       p = t('static.how_it_works_intro').html_safe
       p = t('static.how_it_works_extra').html_safe
       p = link_to t('groups.group_header'), root_path(anchor: "chapters"), class: "btn btn-lg btn-success"
-    .col-md-4.portrait-pic
-      = image_tag "ben-portrait.jpg"
 
 .container
   .row
