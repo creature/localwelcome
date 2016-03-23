@@ -2,19 +2,19 @@ ar:
   site:
     title: Local Welcome
     hero_text: تعقد مؤسسة "لوكال ويلكم" اجتماعات شهرية في اماكن عامة لمساعدة اللاجئين لتعلم اللغة الانكليزية و التطوع ضمن المجتمع والعودة الى العمل
-    signed_in_as: Signed in as <a href="%{link}">%{email}</a>
-    admin_dashboard: Admin dashboard
+    signed_in_as: تسجيل الدخول كـ <a href="%{link}">%{email}</a>
+    admin_dashboard: لوحة التحكم
     sign_out: تسجيل الخروج
     sign_in: تسجيل الدخول
     sign_up: اشترك
     learn_more: اعرف أكثر
-    view_in_english: View in English
-    view_in_arabic: View in Arabic
+    view_in_english: عرض باللغة الانكليزية
+    view_in_arabic: عرض باللغة العربية
     footer:
-      email: Questions? Email us on <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
-      twitter: Follow Local Welcome on <a href="https://twitter.com/localwelcome">Twitter</a>
-      facebook: Like Local Welcome on <a href="https://www.facebook.com/LocalWelcome/">Facebook</a>
-      established: Local Welcome was established in 2015. Learn more <a href="%{link}">about the project</a>.
+      email: للاستفسارات? أرسل لنا على <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
+      تويتر: تابعونا على <a href="https://twitter.com/localwelcome">Twitter</a>
+      فيس بوك: تابعونا على <a href="https://www.facebook.com/LocalWelcome/">Facebook</a>
+      established: تم تأسيس Local Welcome في 2015. لمعرفة المزيد <a href="%{link}">about the project</a>.
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
 
   static:
@@ -33,7 +33,7 @@ ar:
   groups:
     group_header: اعثر على أقرب مجموعة إليك
     learn_more: اعرف أكثر عن هذه المجموعة
-    next_event: "Next event: %{event_name} (in %{time_in_future})"
+    next_event: "الفعاليات القادمة: %{event_name} (in %{time_in_future})"
     register:  سجل من أجل الحضور
 
   sponsors:
@@ -42,4 +42,4 @@ ar:
 
 
   profile:
-    more_info_required: We need more information about you before we can invite you to our meetups! Please <a href="%{link}">add more details to your profile</a>.
+    more_info_required: نحن بحاجة لمزيد من المعلومات عنك قبل أن نتمكن من دعوتك لحضور لقاءاتنا! يرجى <a href="%{link}">إضافة المزيد من التفاصيل لملفك الشخصي </a>.
