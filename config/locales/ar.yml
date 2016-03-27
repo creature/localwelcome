@@ -11,10 +11,10 @@ ar:
     view_in_english: عرض باللغة الانكليزية
     view_in_arabic: عرض باللغة العربية
     footer:
-      email: للاستفسارات? أرسل لنا على <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a>
-      تويتر: تابعونا على <a href="https://twitter.com/localwelcome">Twitter</a>
-      فيس بوك: تابعونا على <a href="https://www.facebook.com/LocalWelcome/">Facebook</a>
-      established: تم تأسيس Local Welcome في 2015. لمعرفة المزيد <a href="%{link}">about the project</a>.
+      email: <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a> للاستفسارات? أرسل لنا على
+      twitter: <a href="https://twitter.com/localwelcome">تويتر</a> تابعونا على
+      facebook: <a href="https://www.facebook.com/LocalWelcome/">فيس بوك</a> تابعونا على
+      established: 2015 Local Welcome تم تأسيس <a href="%{link}">لمعرفة المزيد</a> حول المشروع
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
 
   static:
@@ -33,7 +33,7 @@ ar:
   groups:
     group_header: اعثر على أقرب مجموعة إليك
     learn_more: اعرف أكثر عن هذه المجموعة
-    next_event: "الفعاليات القادمة: %{event_name} (in %{time_in_future})"
+    next_event: "الفعاليات القادمة: %{event_name} (في %{time_in_future})"
     register:  سجل من أجل الحضور
 
   sponsors:
