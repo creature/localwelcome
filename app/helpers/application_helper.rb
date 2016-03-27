@@ -1,3 +1,5 @@
+require 'redcarpet/render_strip'
+
 module ApplicationHelper
   def render_prompt_banner(heading, link_text, link_target, explanation, opts = {})
     classes = %w{banner bg-warning text-warning} << opts.fetch(:class, "")
@@ -9,6 +11,19 @@ module ApplicationHelper
     end
   end
 
+  # Render a Markdown string as HTML
+  def render_markdown(text)
+    markdown_parser = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, filter_html: true)
+    markdown_parser.render(text).html_safe
+  end
+
+  # Strip out any Markdown formatting and return a plaintext version
+  def render_markdown_as_text(text)
+    markdown_parser = Redcarpet::Markdown.new(Redcarpet::Render::StripDown, filter_html: true)
+    markdown_parser.render(text)
+  end
+
+  # Is this a web request that we should respond to with the Arabic locale/translations?
   def arabic_request?
     "ar" == request.subdomains.first
   end

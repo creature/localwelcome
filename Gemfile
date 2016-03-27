@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 gem 'rails', '~> 4.2.0'
-gem 'rails-i18n'
+gem 'rails-i18n' # Translations for standard Rails stuff (like time_ago_in_words)
 gem 'pg' # Postgres gem, used in production
 gem 'rails_12factor', group: :production # Makes some Heroku-friendly tweaks.
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0' # A nicer way of writing CSS.
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 
@@ -21,6 +21,7 @@ gem 'bourbon' # Useful CSS functions
 gem 'google-webfonts-rails' # Helpers for webfonts
 gem 'aasm' # Acts as state machine, used by invitations
 gem 'draper' # Decorator objects, to make view logic a little less repetitive
+gem 'redcarpet' # Render Markdown as HTML
 
 group :development, :test do
   gem 'sqlite3' # Lightweight DB used in development

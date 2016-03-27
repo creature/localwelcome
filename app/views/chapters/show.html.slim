@@ -4,7 +4,7 @@
   = t('chapter.description', name: @chapter.name).html_safe
 - unless @chapter.description.blank?
   - content_for :page_description
-    = @chapter.description
+    = render_markdown_as_text @chapter.description
 
 .container
   .row
@@ -18,7 +18,7 @@
         .buttons
           = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default"
       - unless @chapter.description.blank?
-        p.chapter-description = @chapter.description
+        p.chapter-description = render_markdown @chapter.description
 
   .row
     .col-md-6
