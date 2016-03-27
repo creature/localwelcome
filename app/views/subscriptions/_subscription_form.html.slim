@@ -2,7 +2,7 @@
   - if current_user.subscribed_to? chapter
     // TODO: The below looks crap when rendering in Arabic.
     p.pull-left.lead
-      i.fa.fa-check> = t('subscriptions.subscribe', name: chapter.name, link: chapter_path(chapter)).html_safe
+      i.fa.fa-check> = t('subscriptions.subscribed', name: chapter.name, link: chapter_path(chapter)).html_safe
     = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete, class: "subscribed form-inline" do
       = submit_tag t('subscriptions.unsubscribe'), class: "btn btn-danger"
   - else
