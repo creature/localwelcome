@@ -7,20 +7,20 @@ module DatesHelper
 
   # Format a datestamp as "December 26, 2015"
   def long_friendly_date(date)
-    date.strftime("%B %e, %Y")
+    l(date, format: "%B %e, %Y")
   end
 
   # Format a datestamp as "Dec 26 - 20:45"
   def short_friendly_datetime(date)
-    date.strftime("%b %e - %k:%M")
+    l(date, format: "%b %e - %k:%M")
   end
 
   # Format a datestamp as "Dec 26"
   def short_friendly_date(date)
-    date.strftime("%b %e")
+    l(date, format: "%b %e")
   end
 
   def friendly_time(date)
-    date.strftime("%l:%M%p")
+    l(date, format: "%l:%M%p")
   end
 end
