@@ -12,7 +12,7 @@
     - @chapters.each do |chapter|
       .col-md-4
         .chapter-block
-          h2 = link_to chapter.name, chapter_path(chapter)
+          h2.arabic-centered = link_to chapter.name, chapter_path(chapter)
           - if chapter.next_event.nil?
             = link_to t('groups.learn_more'), chapter_path(chapter), class: "btn btn-large btn-default"
           - else
@@ -20,7 +20,7 @@
             = link_to t('groups.register'), chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"
 
   .row.sponsors
-    .col.md-6.col-md-offset-4
+    .col-md-6.col-md-offset-4
       h2 = t('sponsors.title')
   .row.sponsor-details
     .col-md-2.col-md-offset-2

@@ -7,6 +7,15 @@ body.arabic {
   p, li, h1, h2, h3 {
     text-align: right;
   }
+
+  .arabic-left {
+    text-align: left;
+  }
+
+  .arabic-centered {
+    text-align: center;
+  }
+
 }
 
 .wrap {
@@ -176,3 +185,4 @@ h1, h2, h3 {
   display: inline-block;
   margin-right: 0.5rem;
 }
+
