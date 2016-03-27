@@ -4,9 +4,15 @@
 
 Local Welcome is a project to help new refugees meet people in their community. The big goal is to help people get back into their industry - for instance, introducing a Syrian dentist to a British dentist. Meetups are held around the country on the first Sunday of each month. 
 
-At the moment, all the meetups have been organised "by hand" using a combination of Eventbrite, Google Docs, and human co-ordinators. This project is a prototype to see if some custom software would help save time, allow other people to run local chapters independently, and give them their own permanent web presence. **It is a prototype**, so I don't know if it will ever hit production. 
+Previously, all the meetups were organised "by hand" using a combination of Eventbrite, Google Docs, and human co-ordinators. The aim of this webapp is to save time, allow other people to run local chapters independently, give the project its own permanent web presence, and remove the bottleneck/single point of failure of having a single overall co-ordinator. 
+
+The app is live at http://www.local-welcome.org/ now.
+
+## Videos
 
 I've been experimenting with [livestreaming my work on Twitch](http://twitch.tv/acotn). Feedback is welcomed! 
+
+I've also made a [screencast to show chapter organisers how to add & announce events](https://www.youtube.com/watch?v=YKF--Cfc_3U).
 
 
 ## Getting started
@@ -20,6 +26,7 @@ bundle exec rails server
 ```
 
 You can login as an admin with the username "admin@example.com" and the password "password".
+
 
 ## Running tests
 
