@@ -30,11 +30,30 @@ ar:
     after_the_event_intro: يقوم المتطوعين و الللاجئون باعلام المضيف بمدى رضاهم عن هذا اللقاء. بعد ذلك و في حال وافق الطرفان يتم مشاركة بيانات التواصل بينهما و يطلب منهما الالتزام باجتماع مرة كل شهر لمدة ست اشهر على الاقل – و الاجتماع عادة يكون في يوم الأحد و بأماكن عامة آمنة.
     after_the_event_extra: هدفنا أن يتمكن كل لاجئ بأن يقوم بفحص لغة بسيط على الانترنت و ان يكتب سيرة ذاتية و ايضا أن يتقدم على الأقل لعمل ماجور او تطوعي واحد و بمنطقته بعد مدة ستة اشهر.
 
+  chapter:
+    name: Local Welcome %{name}
+    description: Local Welcome %{name} &ndash; upcoming events and details of our meet-up.
+    manage: Manage this chapter
+    upcoming_events: Upcoming events
+    past_events: Past events
+    next_event: Our next event
+    no_upcoming_events: No upcoming events
+    no_past_events: No past events
+    get_involved: Get involved with Local Welcome %{name}
+    get_involved_text: Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
+    sign_up: Sign up to Local Welcome %{name}
+    not_ready: Not ready to sign up yet? <a href="%{link}">Learn more about Local Welcome first</a>.
+
   groups:
     group_header: اعثر على أقرب مجموعة إليك
     learn_more: اعرف أكثر عن هذه المجموعة
     next_event: "الفعاليات القادمة: %{event_name} (في %{time_in_future})"
     register:  سجل من أجل الحضور
+
+  subscriptions:
+    subscribe: Get emails from Local Welcome %{name}
+    subscribed: Subscribed to <a href="%{link}">Local Welcome %{name}</a>
+    unsubscribe: Unsubscribe
 
   sponsors:
     title: شكرا لمن يدعمنا

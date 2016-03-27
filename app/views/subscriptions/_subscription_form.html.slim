@@ -1,13 +1,12 @@
 .subscription-form
   - if current_user.subscribed_to? chapter
+    // TODO: The below looks crap when rendering in Arabic.
     p.pull-left.lead
-      i.fa.fa-check>
-      ' Subscribed to
-      => link_to "Local Welcome #{chapter.name}", chapter_path(chapter)
+      i.fa.fa-check> = t('subscriptions.subscribe', name: chapter.name, link: chapter_path(chapter)).html_safe
     = form_tag subscription_path(current_user.subscriptions.find_by(chapter: chapter)), method: :delete, class: "subscribed form-inline" do
-      = submit_tag "Unsubscribe", class: "btn btn-danger"
+      = submit_tag t('subscriptions.unsubscribe'), class: "btn btn-danger"
   - else
     = form_for Subscription.new(chapter: chapter), class: "new subscription" do |f|
       = f.hidden_field :chapter_id
-      = f.submit "Get emails from Local Welcome #{chapter.name}", class: "btn btn-default btn-lg"
+      = f.submit t('subscriptions.subscribe', name: chapter.name), class: "btn btn-default btn-lg"
 

@@ -1,7 +1,7 @@
 - content_for :chapter_name
-  | Local Welcome #{@chapter.name}
+  = t('chapter.name', name: @chapter.name)
 - content_for :page_title
-  | Local Welcome #{@chapter.name} &ndash; upcoming events and details of our meet-up.
+  = t('chapter.description', name: @chapter.name).html_safe
 - unless @chapter.description.blank?
   - content_for :page_description
     = @chapter.description
@@ -12,16 +12,17 @@
       h1
         = @chapter.name
 
-  - if can? :manage, @chapter
-    .row.col-md-12
-      .buttons
-        = link_to "Manage this chapter", admin_chapter_path(@chapter), class: "btn btn-default"
+  .row
+    .col-md-12
+      - if can? :manage, @chapter
+        .buttons
+          = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default"
       - unless @chapter.description.blank?
         p.chapter-description = @chapter.description
 
   .row
     .col-md-6
-      h2 Upcoming events
+      h2 = t('chapter.upcoming_events')
       - if @chapter.upcoming_events.published.any?
         - @chapter.upcoming_events.published.each_with_index do |event, i|
           p
@@ -30,12 +31,12 @@
               ':
               = event.name
             - if 0 == i
-              span.info-label.bg-warning Our next event
+              span.info-label.bg-warning = t('chapter.next_event')
       - else
-        p.system.message No upcoming events
+        p.system.message = t('chapter.no_upcoming_events')
 
     .col-md-6
-      h2 Past events
+      h2 = t('chapter.past_events')
       - if @chapter.past_events.published.any?
         - @chapter.past_events.published.each do |event|
           p
@@ -44,19 +45,19 @@
               |:
               =< event.name
       - else
-        p.system.message No past events
+        p.system.message = t('chapter.no_past_events')
 
   .row
     .col-md-12
-      h2 Get involved with Local Welcome #{@chapter.name}
-      p Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
+      h2 = t('chapter.get_involved', name: @chapter.name)
+      p = t('chapter.get_involved_text')
       p
         - if user_signed_in?
           = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
         - else
-          = link_to "Sign up to Local Welcome #{@chapter.name}", new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
+          = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
   .row
     .col-md-12
-      p Not ready to sign up yet? #{ link_to "Learn more about Local Welcome first", how_it_works_path}.
+      p = t('chapter.not_ready', link: how_it_works_path).html_safe
 

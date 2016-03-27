@@ -30,11 +30,32 @@ en:
     after_the_event_intro: Volunteers and refugees report back to the host after the meeting to confirm if they are happy with the match. If both sides agree, then contact details are shared and both are asked to commit to meeting monthly for at least 6 months, ideally at the Sunday meetings, but always in safe public spaces.
     after_the_event_extra: Our goal is for every refugee to have taken a simple online language test, written a CV, and applied to at least one paid or voluntary role locally after 6 months.
 
+
+  chapter:
+    name: Local Welcome %{name}
+    description: Local Welcome %{name} &ndash; upcoming events and details of our meet-up.
+    manage: Manage this chapter
+    upcoming_events: Upcoming events
+    past_events: Past events
+    next_event: Our next event
+    no_upcoming_events: No upcoming events
+    no_past_events: No past events
+    get_involved: Get involved with Local Welcome %{name}
+    get_involved_text: Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
+    sign_up: Sign up to Local Welcome %{name}
+    not_ready: Not ready to sign up yet? <a href="%{link}">Learn more about Local Welcome first</a>.
+
+  # TODO: These should probably be merged with the 'chapter' namespace above.
   groups:
     group_header: Find a group near you
     learn_more: "Learn more about this group"
     next_event: "Next event: %{event_name} (in %{time_in_future})"
     register:  "Register to attend"
+
+  subscriptions:
+    subscribe: Get emails from Local Welcome %{name}
+    subscribed: Subscribed to <a href="%{link}">Local Welcome %{name}</a>
+    unsubscribe: Unsubscribe
 
   sponsors:
     title: Thanks to our supporters
