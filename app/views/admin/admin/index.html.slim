@@ -2,78 +2,100 @@
   | Local welcome admin panel
 
 .container
-  .row.col-md-12
-    - if current_user.admin?
-      h1 Some numbers
-      p #{pluralize(@chapters.count, "chapter")}, #{pluralize(@events.count, "event")}, #{pluralize(@users.count, "user")}.
-      p
-        ' #{pluralize(@users_in_chapter_count, "user")} in chapters
-        ' (#{number_to_percentage (@users_in_chapter_count.to_f/@users.count) * 100, precision: 1}),
-        ' #{@users.count - @users_in_chapter_count} not in any chapter.
+  .row
+    .col-md-12
+      - if current_user.admin?
+        h1 Some numbers
+        p #{pluralize(@chapters.count, "chapter")}, #{pluralize(@events.count, "event")}, #{pluralize(@users.count, "user")}.
+        p
+          ' #{pluralize(@users_in_chapter_count, "user")} in chapters
+          ' (#{number_to_percentage (@users_in_chapter_count.to_f/@users.count) * 100, precision: 1}),
+          ' #{@users.count - @users_in_chapter_count} not in any chapter.
 
-      h1 Chapter summary
-      table.chapter-summary
-        thead
-          tr
-            th Name
-            th Upcoming events
-            th New users
-            th Chapter admins
-        tbody
-          - @chapters.each do |c|
+        h1 Chapter summary
+        table.chapter-summary
+          thead
             tr
-              td = c.name
+              th Name
+              th Upcoming events
+              th New users
+              th Chapter admins
+          tbody
+            - @chapters.each do |c|
+              tr
+                td = c.name
 
-              - if c.next_event.nil?
-                td.bg-danger.text-danger No upcoming events
-              - else
-                td.bg-success.text-success Has an upcoming event
+                - if c.next_event.nil?
+                  td.bg-danger.text-danger No upcoming events
+                - else
+                  td.bg-success.text-success Has an upcoming event
 
-              - if c.new_weekly_users.count > 0
-                td.bg-success.text-success #{pluralize(c.new_weekly_users.count, "user")} added over the last week
-              - else
-                td.bg-danger.text-danger No users joined over the last week
+                - if c.new_weekly_users.count > 0
+                  td.bg-success.text-success #{pluralize(c.new_weekly_users.count, "user")} added over the last week
+                - else
+                  td.bg-danger.text-danger No users joined over the last week
 
-              - if c.organisers.none?
-                td.bg-danger.text-danger No chapter organisers
-              - elsif c.last_organiser_login > 7.days.ago
-                td.bg-success.text-success Chapter organisers logged in recently
-              - else
-                td.bg-danger.text-danger Chapter organisers haven't logged in for #{time_ago_in_words c.last_organiser_login}
+                - if c.organisers.none?
+                  td.bg-danger.text-danger No chapter organisers
+                - elsif c.last_organiser_login > 7.days.ago
+                  td.bg-success.text-success Chapter organisers logged in recently
+                - else
+                  td.bg-danger.text-danger Chapter organisers haven't logged in for #{time_ago_in_words c.last_organiser_login}
 
   - if current_user.admin?
-    .row.col-md-12
-      h2 Users (#{@users.count})
-      = render partial: "admin/users/users_table", locals: { users: @users.first(10) }
-      - if @users.count > 10
-        = link_to "See more &raquo;".html_safe, admin_users_path
+    .row
+      .col-md-12
+        h2 Users (#{@users.count})
+        = render partial: "admin/users/users_table", locals: { users: @users.first(10) }
+        - if @users.count > 10
+          = link_to "See more &raquo;".html_safe, admin_users_path
 
-    .row.col-md-12
-      h2 Chapter organisers
-      - if @organisers.any?
-        ul
-        - @organisers.each do |organiser|
-          li
-            - if organiser.name.blank?
-              span.system.message> No name
-            - else
-              => organiser.name
-            ' (#{organiser.email}) &mdash;
-            ' runs #{organiser.organised_chapters.map(&:name).to_sentence} &mdash;
-            | last signed in on #{long_friendly_date organiser.current_sign_in_at}
-      - else
-        p.system.message No chapter organisers yet.
-
-  .row.col-md-12
-    h2 Chapters you organise
-    ul
-      - @chapters.each do |chapter|
-        li
-          = link_to chapter.name, admin_chapter_path(chapter)
-          ' ,
-          = pluralize(chapter.users.count, "user")
+    .row
+      .col-md-12
+        h2 Chapter organisers
+        - if @organisers.any?
           ul
-            - chapter.upcoming_events.first(3).each do |upcoming_event|
-              li = link_to "#{short_friendly_date upcoming_event.starts_at} - #{upcoming_event.name}", admin_chapter_event_path(chapter, upcoming_event)
-    - if @current_user.admin?
-      p = link_to "Create new chapter", new_admin_chapter_path, class: "btn btn-default"
+          - @organisers.each do |organiser|
+            li
+              - if organiser.name.blank?
+                span.system.message> No name
+              - else
+                => organiser.name
+              ' (#{organiser.email}) &mdash;
+              ' runs #{organiser.organised_chapters.map(&:name).to_sentence} &mdash;
+              | last signed in on #{long_friendly_date organiser.current_sign_in_at}
+        - else
+          p.system.message No chapter organisers yet.
+
+  .row
+    .col-md-12
+      h2 Chapters you organise
+      ul
+        - @chapters.each do |chapter|
+          li
+            = link_to chapter.name, admin_chapter_path(chapter)
+            ' ,
+            = pluralize(chapter.users.count, "user")
+            ul
+              - chapter.upcoming_events.first(3).each do |upcoming_event|
+                li = link_to "#{short_friendly_date upcoming_event.starts_at} - #{upcoming_event.name}", admin_chapter_event_path(chapter, upcoming_event)
+      - if @current_user.admin?
+        p = link_to "Create new chapter", new_admin_chapter_path, class: "btn btn-default"
+
+  .row.resources
+    .col-md-12
+      h2 Organiser resources
+  .row
+    .col-md-6
+      h3 Video guides
+      ul
+        li = link_to "Adding and announcing events", "https://www.youtube.com/watch?v=YKF--Cfc_3U"
+        li Sending invitations & managing invitees (coming soon!)
+
+    .col-md-6
+      h3 Playbook (coming soon!)
+      ul
+        li Example agenda for a Local Welcome meeting
+        li Friendly venues who can host meetings
+        li Tips for pairing people up
+        li Resources you can use at the meeting
