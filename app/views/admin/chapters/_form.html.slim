@@ -5,7 +5,8 @@
   .form-group
     = f.label :description
     = f.text_area :description, placeholder: "Local Welcome Ambridge meets on the first Sunday of each month in a local coffee shop. We aim to bring folk together from all walks of life.", class: "form-control"
-    p.help-block You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax"} for formatting in the description.
+    p.help-block
+      span.small You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax"} for formatting in the description.
   .form-group
     => f.submit "Save", class: "btn btn-primary"
     - if chapter.persisted?
