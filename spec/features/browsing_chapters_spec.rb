@@ -7,6 +7,17 @@ feature "Browsing chapters" do
   let (:organiser) { FactoryGirl.create(:chapter_organiser, chapter: chapter) }
   let (:other_organiser) { FactoryGirl.create(:chapter_organiser) }
 
+  context "Markdown support" do
+    scenario "Chapter descriptions support Markdown formatting" do
+      chapter.update_attributes(description: "A **sample** [Markdown](http://example.com/) _description_")
+      visit chapter_path(chapter)
+
+      expect(page).to have_link "Markdown", href: "http://example.com/"
+      expect(page).to have_selector "strong", text: "sample"
+      expect(page).to have_selector "em", text: "description"
+    end
+  end
+
   context "The 'manage this chapter' button" do
     scenario "An anonymous user doesn't see a manage button" do
       visit chapter_path(chapter)
