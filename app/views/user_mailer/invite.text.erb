@@ -3,7 +3,7 @@
 You requested an invite to <%= @event.name %>, an event ran by Local Welcome <%= @event.chapter.name %>. We'd love for you to come!
 <% if @event.has_email_info? %>
 
-<%= @event.email_info %>
+<%= @event.optional_email_info_as_text %>
 <% end %>
 
 <%= render partial: "events/venue_info", locals: { event: @event } %>

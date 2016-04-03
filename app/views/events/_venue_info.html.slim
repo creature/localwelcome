@@ -1,6 +1,7 @@
+// NB. event is expected to be an event decorator, not a bare event model
 - if event.has_venue_info?
   p
     ' We're meeting at #{event.friendly_venue_name}
     - unless event.google_map_url.blank?
       | (#{link_to "view map", event.google_map_url})
-    |. #{event.venue_info}
+    |. #{event.optional_venue_info}

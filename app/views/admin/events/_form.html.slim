@@ -8,6 +8,7 @@
       .form-group
         = f.label :description
         = f.text_area :description, class: "form-control"
+        p.help-block You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax"} for formatting in the description.
       .form-group
         => f.label :starts_at, "Start date"
         = f.date_select :starts_at, order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year + 1
@@ -25,6 +26,7 @@
       .form-group
         = f.label :email_info, "Email-only info"
         = f.text_area :email_info, class: "form-control", placeholder: "This text will be included in emails we send to attendees, but not visible on the website (except to people who are attending)."
+        p.help-block You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax"} for formatting in the email info.
       .form-group
         = f.label :venue_name
         = f.text_field :venue_name, class: "form-control", placeholder: "Starbucks (Victoria)"
@@ -34,6 +36,7 @@
       .form-group
         = f.label :venue_info
         = f.text_area :venue_info, class: "form-control", placeholder: "We'll be meeting upstairs, in a group of tables with a sign reading 'Local Welcome'."
+        p.help-block You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax"} for formatting in the venue info.
 
       h2.top-ruled Admin-only info
       .form-group

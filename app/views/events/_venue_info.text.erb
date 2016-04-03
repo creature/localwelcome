@@ -1,5 +1,5 @@
 <% if event.has_venue_info? %>
-We're meeting at <%= event.friendly_venue_name %>. <%= event.venue_info %>
+We're meeting at <%= event.friendly_venue_name %>. <%= event.optional_venue_info_as_text %>
 <% unless event.google_map_url.blank? %>
 
 Find us on Google Maps here:
