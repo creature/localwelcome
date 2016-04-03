@@ -19,7 +19,15 @@
             h3 = t('groups.next_event', event_name: chapter.next_event.name, time_in_future: distance_of_time_in_words(chapter.next_event.starts_at, Time.now))
             = link_to t('groups.register'), chapter_event_path(chapter, chapter.next_event), class: "btn btn-large btn-primary"
 
-  .row.sponsors
+  .row.videos
+    .col-md-6
+      .embed-container
+        iframe src="https://www.youtube.com/embed/W4rgVyrXp6E?rel=0&controls=0" frameborder="0" allowfullscreen=true
+    .col-md-6
+      .embed-container
+        iframe src="https://www.youtube.com/embed/8EPyYW5R8Bo?rel=0&controls=0" frameborder="0" allowfullscreen=true
+
+  .row.sponsors.top-ruled
     .col-md-6.col-md-offset-4
       h2 = t('sponsors.title')
   .row.sponsor-details
