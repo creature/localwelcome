@@ -28,6 +28,36 @@ feature "Browsing events" do
     expect(page).to have_selector('meta[property="og:description"]', visible: false)
   end
 
+  context "Markdown support" do
+    scenario "Markdown is supported on event descriptions" do
+      event.update_attributes(description: "We are meeting at [a venue](https://twitch.tv/) this week. This **has moved** from last time.")
+      visit chapter_event_path(event.chapter, event)
+
+      expect(page).to have_link "a venue", href: "https://twitch.tv/"
+      expect(page).to have_selector "strong", text: "has moved"
+    end
+
+    scenario "Markdown is supported in attendee-only info" do
+      event.update_attributes(email_info: "Please bring _everything_ you need.")
+      FactoryGirl.create(:accepted_invitation, user: user, event: event)
+      login_as user
+      visit chapter_event_path(event.chapter, event)
+
+      expect(page).to have_text "Please bring everything you need"
+      expect(page).to have_selector "em", text: "everything"
+    end
+
+    scenario "Markdown is supported in venue info" do
+      event.update_attributes(venue_info: "We are **downstairs** this month - bring [a book](https://amazon.com/).")
+      FactoryGirl.create(:accepted_invitation, user: user, event: event)
+      login_as user
+      visit chapter_event_path(event.chapter, event)
+
+      expect(page).to have_selector "strong", text: "downstairs"
+      expect(page).to have_link "a book", href: "https://amazon.com/"
+    end
+  end
+
   context "The 'manage this event' button" do
     scenario "An anonymous user doesn't see a manage button" do
       visit chapter_event_path(event.chapter, event)
