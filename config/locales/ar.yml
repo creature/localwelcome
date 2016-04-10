@@ -21,6 +21,8 @@ ar:
       youtube: Watch our videos on <a href="https://www.youtube.com/channel/UCnpIvBCeBJ7SLjYZ__KxVCw">YouTube</a>
       established: 2015 Local Welcome تم تأسيس لمعرفة المزيد <a href="%{link}">حول المشروع</a>
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
+    generic_error: Sorry, something went wrong.
+    error_with_details: "Sorry, something went wrong: %{details}"
 
   static:
     how_it_works: "آلية العمل"
@@ -55,6 +57,38 @@ ar:
     next_event: "الفعاليات القادمة: %{event_name} (في %{time_in_future})"
     register:  سجل من أجل الحضور
 
+  invite:
+    request_button: Request an invite
+    need_info: We need some information to help us match people up.
+    who_to_meet: Who would you like to meet at this event? (Please write in English)
+    your_invite: Your invite
+    accept_button: Accept invite
+    cannot_attend_button: I can no longer attend
+    more_info_needed: You requested an invitation to this event, <strong>but we need <a href="%{link}">more information about you</a> before we can grant it</strong>. <a href="%{link}">Update your profile now</a> and an organiser will review your request again.
+    # The below show up as notification bars to let the user know that their button click worked.
+    requested_notice: Invitation requested!
+    removed_notice: Invitation removed. Sorry that you can't make it.
+    accept_notice: Your place is confirmed. See you there!
+    accept_error: Sorry, we couldn't reserve you a place at this meeting.
+    decline_notice: Thanks for letting us know that you can't make it.
+
+  event:
+    # The &laquo; part gets rendered as a << arrow to indicate 'back'
+    back_to_chapter: "&laquo; Back to Local Welcome %{chapter_name} chapter page"
+    manage_button: Manage this event
+    times: "%{start_time} to %{end_time}"
+    attendee_info: Attendee information
+    update_profile: You should <a href="%{link}">update your profile</a> so we know more about your background, as that helps with the matching.
+    requested_invite: You've requested an invitation to this event. An organiser will review your profile, and email you an invite if we can match you with someone suitable.
+    sent_invite: You've been invited to attend this event! We'd love to see you there.
+    accepted_invite: You're coming to this event!
+    not_attending: You're not attending this event.
+    attended: You attended this event! Thanks for coming along.
+    no_show: <strong>You said you were attending this event, but didn't show up</strong>. Please let us know if you can't make it in future, so we can give your spot to someone else.
+    full: This event is full!
+    attending_full: <strong>Please note:</strong> This event is full up. If you can no longer make it, please let us know so we can give your slot to someone else.
+    no_space_left: Sorry, we've not got any space left at this event.
+    join_cta: If you join <a href="%{link}">Local Welcome %{chapter_name}</a> you'll get an email whenever we announce a new event.
   subscriptions:
     subscribe: Get emails from Local Welcome %{name}
     subscribed: Subscribed to <a href="%{link}">Local Welcome %{name}</a>
@@ -63,7 +97,6 @@ ar:
   sponsors:
     title: شكرا لمن يدعمنا
     blurb: Local Welcome has received financial support from The Indigo Trust, without which this project would not be possible. The Indigo Trust is a UK based grant making foundation that funds technology-driven projects to bring about social change. You can find out more about their work <a href="http://indigotrust.org.uk/">on their website</a>.
-
 
   profile:
     more_info_required: نحن بحاجة لمزيد من المعلومات عنك قبل أن نتمكن من دعوتك لحضور لقاءاتنا! يرجى <a href="%{link}">إضافة المزيد من التفاصيل لملفك الشخصي </a>.

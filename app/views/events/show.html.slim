@@ -14,19 +14,19 @@
         .modal-header
           button type="button" class="close" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
-          h4.modal-title#invite-modal-label Request an invite
+          h4.modal-title#invite-modal-label = t('invite.request_button')
         .modal-body
-          p We need some information to help us match people up.
+          p = t('invite.need_info')
           = hidden_field :invitation, :event_id, value: @event.id
           .form-group
-            = label_tag :invitation_who_do_you_want_to_meet, "Who would you like to meet at this event?"
+            = label_tag :invitation_who_do_you_want_to_meet, t('invite.who_to_meet')
             = text_area :invitation, :who_do_you_want_to_meet, value: nil, placeholder: @placeholders.sample, class: "form-control"
         .modal-footer
-          = submit_tag "Request an invite", class: "btn btn-primary"
+          = submit_tag t('invite.request_button'), class: "btn btn-primary"
 
 .container
   .row.col-md-12
-    p.breadcrumbs = link_to "&laquo; Back to Local Welcome #{@event.chapter.name} chapter page".html_safe, chapter_path(@event.chapter)
+    p.breadcrumbs = link_to t('event.back_to_chapter', chapter_name: @event.chapter.name).html_safe, chapter_path(@event.chapter)
 
     h1 = @event.name
 
@@ -35,73 +35,62 @@
     /* - if can?(:manage, @event) */
     .row.col-md-12
       .buttons
-        = link_to "Manage this event", admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
+        = link_to t('event.manage_button'), admin_chapter_event_path(@event.chapter, @event), class: "btn btn-default"
 
   .row.col-md-12
     h2.timing = long_friendly_date @event.starts_at
-    h2.timing
-      => friendly_time @event.starts_at
-      ' to
-      = friendly_time @event.ends_at
+    h2.timing = t('event.times', start_time: friendly_time(@event.starts_at), end_time: friendly_time(@event.ends_at))
 
     p.description = @event.friendly_description
 
     - if @invite.try(:accepted?) || @invite.try(:sent?) # Only show private details to people who are marked as attending
-      h2 Attendee information
+      h2 = t('event.attendee_info')
       - if @event.has_email_info?
         p = @event.email_info
       = render partial: "venue_info", locals: { event: @event }
 
     - unless @event.in_the_past?
       - if @invite
-        h2 Your invite
+        h2 = t('invite.your_invite')
         - if @invite.requested?
           - if current_user.more_info_required?
-            p
-              | You requested an invitation to this event,
-              strong< but we need #{link_to "more information about you", edit_profile_path} before we can grant it.
-              =<> link_to "Update your profile now", edit_profile_path
-              | and an organiser will review your request again.
+            p = t('invite.more_info_needed', link: edit_profile_path).html_safe
           - else
-            p You've requested an invitation to this event. An organiser will review your profile, and email you an invite if we can match you with someone suitable.
-            p You should #{link_to "update your profile", edit_profile_path} so we know more about your background, as that helps with the matching.
+            p = t('event.requested_invite')
+            p = t('event.update_profile', link: edit_profile_path).html_safe
           = form_tag invitation_path(@invite), method: :delete do
-            = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+            = submit_tag t('invite.cannot_attend_button'), class: "btn btn-lg btn-danger"
 
         - if @invite.sent?
-          p You've been invited to attend this event! We'd love to see you there.
+          p = t('event.sent_invite')
           div
             = form_tag accept_invitation_path(@invite.token), method: :post, class: "form-inline" do
-              = submit_tag "Accept invite", class: "btn btn-lg btn-success"
+              = submit_tag t('invite.accept_button'), class: "btn btn-lg btn-success"
             = form_tag invitation_path(@invite), method: :delete, class: "form-inline" do
-              = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+              = submit_tag t('invite.cannot_attend_button'), class: "btn btn-lg btn-danger"
         - elsif @invite.accepted?
-          p You're coming to this event!
+          p = t('event.accepted_invite')
           - if @event.full?
-            p
-              strong> Please note:
-              | This event is full up. If you can no longer make it, please let us know so we can give your slot to someone else.
+            p = t('event.attending_full').html_safe
           = form_tag invitation_path(@invite), method: :delete do
-            = submit_tag "I can no longer attend", class: "btn btn-lg btn-danger"
+            = submit_tag t('invite.cannot_attend_button'), class: "btn btn-lg btn-danger"
         - elsif @invite.declined? || @invite.cancelled?
-          p You're not attending this event.
+          p = t('event.not_attending')
         - elsif @invite.attended?
-          p You attended this event! Thanks for coming along.
+          p = t('event.attended')
         - elsif @invite.no_show?
-          p
-            strong You said you were attending this event, but didn't show up
-            | . Please let us know if you can't make it in future, so we can give your spot to someone else.
+          p = t('event.no_show').html_safe
       - else
         - if @event.full?
-          h2 This event is full!
-          p Sorry, we've not got any space left at this event.
+          h2 = t('event.full')
+          p = t('event.no_space_left')
           - unless current_user.try(:subscribed_to?, @event.chapter)
-            p If you join #{link_to "Local Welcome #{@event.chapter.name}", chapter_path(@event.chapter)} you'll get an email whenever we announce a new event.
+            p = t('event.join_cta', chapter_name: @event.chapter.name, link: chapter_path(@event.chapter)).html_safe
 
         - else
           = form_tag invitations_path, method: :post, class: "new-invite" do
             = hidden_field :invitation, :event_id, value: @event.id
             .form-group.who-do-you-want-to-meet
-              = label_tag :invitation_who_do_you_want_to_meet, "Who would you like to meet at this event?"
+              = label_tag :invitation_who_do_you_want_to_meet, t('invite.who_to_meet')
               = text_area :invitation, :who_do_you_want_to_meet, value: nil, placeholder: @placeholders.sample, class: "form-control"
-            = submit_tag "Request an invite", class: "btn btn-lg btn-primary"
+            = submit_tag t('invite.request_button'), class: "btn btn-lg btn-primary"

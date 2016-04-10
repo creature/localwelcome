@@ -5,9 +5,9 @@ class InvitationsController < ApplicationController
   def create
     @invite = Invitation.new(invitation_params.merge(user: current_user))
     if @invite.save
-      redirect_to :back, notice: "Invitation requested!"
+      redirect_to :back, notice: t('invite.requested_notice')
     else
-      redirect_to :back, alert: "Sorry, something went wrong: #{@invite.errors.full_messages.join(", ")}"
+      redirect_to :back, alert: t('site.error_with_details', details: @invite.errors.full_messages.join(", "))
     end
   end
 
@@ -17,9 +17,9 @@ class InvitationsController < ApplicationController
   def destroy
     @invite = Invitation.find(params[:id])
     if @invite.destroy
-      redirect_to :back, notice: "Invitation removed. Sorry that you can't make it."
+      redirect_to :back, notice: t('invite.removed_notice')
     else
-      redirect_to :back, alert: "Sorry, something went wrong."
+      redirect_to :back, alert: t('site.generic_error')
     end
   end
 
@@ -27,9 +27,9 @@ class InvitationsController < ApplicationController
   def accept
     @invite = Invitation.find_by_token(params[:token])
     if @invite.accept_invite!
-      redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: "Your place is confirmed. See you there!"
+      redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: t('invite.accept_notice')
     else
-      redirect_to chapter_event_path(@invite.event.chapter, @invite.event), alert: "Sorry, we couldn't reserve you a place at this meeting."
+      redirect_to chapter_event_path(@invite.event.chapter, @invite.event), alert: t('invite.accept_error')
     end
   end
 
@@ -37,7 +37,7 @@ class InvitationsController < ApplicationController
   def decline
     @invite = Invitation.find_by_token(params[:token])
     @invite.decline_invite!
-    redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: "Thanks for letting us know that you can't make it."
+    redirect_to chapter_event_path(@invite.event.chapter, @invite.event), notice: t('invite.decline_notice')
   end
 
   protected
