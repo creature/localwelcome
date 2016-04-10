@@ -1,8 +1,12 @@
+# If you're inserting English content in a string, you should probably wrap it in a tag to declare it as left-to-right content:
+# <span dir="ltr">English words</span> ﻉﺮﺿ ﺏﺎﻠﻠﻏﺓ ﺍﻼﻨﻜﻠﻳﺰﻳﺓ
+# More details: https://www.w3.org/International/articles/inline-bidi-markup/
+
 ar:
   site:
     title: Local Welcome
     hero_text: تعقد مؤسسة "لوكال ويلكم" اجتماعات شهرية في اماكن عامة لمساعدة اللاجئين لتعلم اللغة الانكليزية و التطوع ضمن المجتمع والعودة الى العمل
-    signed_in_as: تسجيل الدخول كـ <a href="%{link}">%{email}</a>
+    signed_in_as: تسجيل الدخول كـ <span dir="ltr"><a href="%{link}">%{email}</a></span>
     admin_dashboard: لوحة التحكم
     sign_out: تسجيل الخروج
     sign_in: تسجيل الدخول
@@ -11,10 +15,11 @@ ar:
     view_in_english: عرض باللغة الانكليزية
     view_in_arabic: عرض باللغة العربية
     footer:
-      email: <a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a> للاستفسارات? أرسل لنا على
-      twitter: <a href="https://twitter.com/localwelcome">تويتر</a> تابعونا على
-      facebook: <a href="https://www.facebook.com/LocalWelcome/">فيس بوك</a> تابعونا على
-      established: 2015 Local Welcome تم تأسيس <a href="%{link}">لمعرفة المزيد</a> حول المشروع
+      email: <span dir="ltr"><a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a></span> للاستفسارات؟ أرسل لنا على
+      twitter: <span dir="ltr"><a href="https://twitter.com/localwelcome">Twitter</a></span> تابعونا على
+      facebook: <span dir="ltr"><a href="https://www.facebook.com/LocalWelcome/">Facebook</a></span> تابعونا على
+      youtube: Watch our videos on <a href="https://www.youtube.com/channel/UCnpIvBCeBJ7SLjYZ__KxVCw">YouTube</a>
+      established: 2015 Local Welcome تم تأسيس لمعرفة المزيد <a href="%{link}">حول المشروع</a>
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
 
   static:
