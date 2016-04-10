@@ -21,7 +21,7 @@ feature "Attending events" do
 
     within(".new-invite") do
       fill_in :invitation_who_do_you_want_to_meet, with: description
-      expect { click_link_or_button "Request an invite" }.to change { Invitation.count }.by 1
+      expect { click_link_or_button I18n.t('invite.request_button') }.to change { Invitation.count }.by 1
     end
     invite = Invitation.last
 

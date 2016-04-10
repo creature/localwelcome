@@ -13,11 +13,11 @@ FactoryGirl.define do
     venue_postcode { Faker::Address.postcode }
     venue_info { Faker::Lorem.sentence }
 
-    factory :unpublished_event do
+    trait :unpublished do
       published false
     end
 
-    factory :announced_event do
+    trait :announced do
       announced true
     end
 

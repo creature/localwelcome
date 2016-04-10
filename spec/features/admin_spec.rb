@@ -37,7 +37,7 @@ feature "The admin panel" do
     end
 
     it "Allows an admin to publish an unpublished event" do
-      event = FactoryGirl.create(:unpublished_event)
+      event = FactoryGirl.create(:event, :unpublished)
       visit admin_chapter_event_path(event.chapter, event)
       click_button "Publish"
       event.reload

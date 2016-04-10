@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Browsing events" do
   let (:event) { FactoryGirl.create(:event) }
-  let (:unpublished_event) { FactoryGirl.create(:unpublished_event) }
+  let (:unpublished_event) { FactoryGirl.create(:event, :unpublished) }
   let (:user) { FactoryGirl.create(:user) }
   let (:admin) { FactoryGirl.create(:admin) }
   let (:organiser) { FactoryGirl.create(:chapter_organiser, chapter: event.chapter) }

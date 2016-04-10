@@ -3,8 +3,8 @@ require 'rails_helper'
 feature "Managing events" do
   let(:admin) { FactoryGirl.create(:admin) }
   let(:event) { FactoryGirl.create(:event) }
-  let(:unpublished_event) { FactoryGirl.create(:unpublished_event) }
-  let(:announced_event) { FactoryGirl.create(:announced_event) }
+  let(:unpublished_event) { FactoryGirl.create(:event, :unpublished) }
+  let(:announced_event) { FactoryGirl.create(:event, :announced) }
 
   before { login(admin) }
 
