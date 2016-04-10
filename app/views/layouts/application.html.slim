@@ -14,7 +14,10 @@ html
     meta property="og:url" content="#{request.original_url}"
     meta property="og:type" content="website"
     meta property="og:description" content="#{content_for(:page_description) || t('site.hero_text')}"
-    meta property="og:locale" content="en_GB"
+    - if arabic_request?
+      meta property="og:locale" content="ar"
+    - else
+      meta property="og:locale" content="en_GB"
     meta property="og:site_name" content="#{t('site.title')}"
 
   - if arabic_request?
