@@ -7,35 +7,48 @@
     = render_markdown_as_text @chapter.description
 
 .container
-  .row
-    .col-md-12
-      h1
-        = @chapter.name
-
-  .row
-    .col-md-12
-      - if can? :manage, @chapter
-        .buttons
-          = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default"
-      - unless @chapter.description.blank?
-        p.chapter-description = render_markdown @chapter.description
-
-  .row
-    .col-md-6
-      h2 = t('chapter.upcoming_events')
-      - if @chapter.upcoming_events.published.any?
-        - @chapter.upcoming_events.published.each_with_index do |event, i|
-          p
-            => link_to chapter_event_path(@chapter, event) do
-              = short_friendly_date event.starts_at
-              ':
-              = event.name
-            - if 0 == i
-              span.info-label.bg-warning = t('chapter.next_event')
+  .row.chapter-description
+    .col-md-3.chapter-description__image-container
+      = image_tag('starbucks-meeting.jpg')
+    .col-md-9
+      - if @chapter.description.blank?
+        p HI I AM A DEFAULT DESCRIPTION
       - else
-        p.system.message = t('chapter.no_upcoming_events')
+        = render_markdown @chapter.description
 
+      /* - if can? :manage, @chapter */
+      /*   .buttons */
+      /*     = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default" */
+
+  .row.event-listings
+    .col-md-2
+      .calendar
+        = link_to chapter_event_path(@chapter, @chapter.upcoming_events.published.first)
+          p.calendar__day = @chapter.upcoming_events.published.first.starts_at.day
+          p.calendar__month = l(@chapter.upcoming_events.published.first.starts_at, format: '%B')
+
+            /*       h2 = t('chapter.upcoming_events') */
+            /*       - if @chapter.upcoming_events.published.any? */
+            /*         - @chapter.upcoming_events.published.each_with_index do |event, i| */
+            /*           p */
+            /*             => link_to chapter_event_path(@chapter, event) do */
+            /*               = short_friendly_date event.starts_at */
+            /*               ': */
+            /*               = event.name */
+            /*             - if 0 == i */
+            /*               span.info-label.bg-warning = t('chapter.next_event') */
+            /*       - else */
+            /*         p.system.message = t('chapter.no_upcoming_events') */
     .col-md-6
+      h2
+        = link_to chapter_event_path(@chapter, @chapter.upcoming_events.published.first)
+          = t('chapter.next_event')
+          ':
+          = @chapter.upcoming_events.published.first.name
+      p = @chapter.upcoming_events.published.first.description
+      = link_to "Request an invite &raquo;".html_safe, chapter_event_path(@chapter, @chapter.upcoming_events.published.first), class: "btn btn-default"
+
+    .col-md-3.col-md-offset-1
       h2 = t('chapter.past_events')
       - if @chapter.past_events.published.any?
         - @chapter.past_events.published.each do |event|
@@ -47,7 +60,7 @@
       - else
         p.system.message = t('chapter.no_past_events')
 
-  .row
+  .row.get-involved
     .col-md-12
       h2 = t('chapter.get_involved', name: @chapter.name)
       p = t('chapter.get_involved_text')
