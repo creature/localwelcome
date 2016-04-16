@@ -4,18 +4,15 @@
   border-radius: 1rem;
 
   .chapter-description__image-container {
+    overflow: hidden;
     padding-left: 0;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
   }
 
-  img {
-    max-width: 100%;
-  }
-
   p {
     &:first-child {
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
 
     font-size: 140%;
@@ -79,6 +76,10 @@
 }
 
 .get-involved {
-  margin-top: 10rem;
-  border-top: 1px solid $flat-ebony-clay;
+  margin: 10rem 0;
+  border-top: 1px solid $flat-edward;
+
+  .cta {
+    margin-top: 2rem;
+  }
 }

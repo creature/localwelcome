@@ -9,12 +9,13 @@
 .container
   .row.chapter-description
     .col-md-3.chapter-description__image-container
-      = image_tag('starbucks-meeting.jpg')
+      = image_tag('starbucks-meeting.jpg', class: "img-responsive")
     .col-md-9
       - if @chapter.description.blank?
         p HI I AM A DEFAULT DESCRIPTION
       - else
         = render_markdown @chapter.description
+      p = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
       /* - if can? :manage, @chapter */
       /*   .buttons */
@@ -64,13 +65,9 @@
     .col-md-12
       h2 = t('chapter.get_involved', name: @chapter.name)
       p = t('chapter.get_involved_text')
-      p
-        - if user_signed_in?
-          = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
-        - else
-          = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
-
-  .row
-    .col-md-12
-      p = t('chapter.not_ready', link: how_it_works_path).html_safe
-
+      - if user_signed_in?
+        p.cta = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+      - else
+        p.cta
+          => link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary"
+          = t('chapter.not_ready', link: how_it_works_path).html_safe

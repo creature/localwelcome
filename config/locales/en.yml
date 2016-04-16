@@ -46,7 +46,7 @@ en:
     get_involved: Get involved with Local Welcome %{name}
     get_involved_text: Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
     sign_up: Sign up to Local Welcome %{name}
-    not_ready: Not ready to sign up yet? <a href="%{link}">Learn more about Local Welcome first</a>.
+    not_ready: or <a href="%{link}">learn more about Local Welcome first</a>.
 
   # TODO: These should probably be merged with the 'chapter' namespace above.
   groups:
