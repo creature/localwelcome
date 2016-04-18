@@ -38,18 +38,18 @@ ar:
     after_the_event_extra: هدفنا أن يتمكن كل لاجئ بأن يقوم بفحص لغة بسيط على الانترنت و ان يكتب سيرة ذاتية و ايضا أن يتقدم على الأقل لعمل ماجور او تطوعي واحد و بمنطقته بعد مدة ستة اشهر.
 
   chapter:
-    name: Local Welcome %{name}
-    description: Local Welcome %{name} &ndash; upcoming events and details of our meet-up.
+    name: لوكال ويلكم %{name}
+    description: لوكال ويلكم %{name} &ndash; الفعاليات القادمة وتفاصيل عن لقاءاتنا
     manage: Manage this chapter
-    upcoming_events: Upcoming events
-    past_events: Past events
-    next_event: Our next event
-    no_upcoming_events: No upcoming events
-    no_past_events: No past events
-    get_involved: Get involved with Local Welcome %{name}
-    get_involved_text: Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
-    sign_up: Sign up to Local Welcome %{name}
-    not_ready: Not ready to sign up yet? <a href="%{link}">Learn more about Local Welcome first</a>.
+    upcoming_events: الفعاليات القادمة
+    past_events: الفعاليات السابقة
+    next_event: نشاطنا التالي
+    no_upcoming_events: لا توجد فعاليات قادمة
+    no_past_events: لا توجد فعاليات سابقة
+    get_involved: شارك مع "لوكال ويلكم" في نوتنغهام %{name}
+    get_involved_text: تُدار "لوكال ويلكم" بشكل كامل من قِبل متطوعين. نحن بحاجة إلى أشخاص ممّن يستطيعون تقديم بضع ساعات من وقتهم لمشاركة معارفهم، مهاراتهم، و ودهم مع الأشخاص الواصلين مؤخراً. اشترك مع "لوكال ويلكم" لتصلك إيميلات حول الفعاليات القادمة، بالإضافة لتفاصيل المهارات التي نبحث عنها.
+    sign_up: اشترك مع "لوكال ويلكم" %{name}
+    not_ready: غير مستعد للإشتراك بعد؟ <a href="%{link}">اعرف المزيد عن "لوكال ويلكم" أولاً</a>.
 
   groups:
     group_header: اعثر على أقرب مجموعة إليك
