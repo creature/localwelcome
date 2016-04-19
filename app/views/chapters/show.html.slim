@@ -12,59 +12,43 @@
       = image_tag('starbucks-meeting.jpg', class: "img-responsive")
     .col-md-9
       - if @chapter.description.blank?
-        p HI I AM A DEFAULT DESCRIPTION
+        p = t('static.how_it_works_intro').html_safe
       - else
         = render_markdown @chapter.description
-      p = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
-      /* - if can? :manage, @chapter */
-      /*   .buttons */
-      /*     = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default" */
+      - if user_signed_in?
+        = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+      - else
+        p.cta = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
+          /* = t('chapter.not_ready', link: how_it_works_path).html_safe */
 
   .row.event-listings
-    .col-md-2
-      .calendar
-        = link_to chapter_event_path(@chapter, @chapter.upcoming_events.published.first)
-          p.calendar__day = @chapter.upcoming_events.published.first.starts_at.day
-          p.calendar__month = l(@chapter.upcoming_events.published.first.starts_at, format: '%B')
+    - if @next_event
+      .col-md-2
+        .calendar
+          = link_to chapter_event_path(@chapter, @next_event)
+            p.calendar__day = @next_event.starts_at.day
+            p.calendar__month = l(@next_event.starts_at, format: '%B')
 
-            /*       h2 = t('chapter.upcoming_events') */
-            /*       - if @chapter.upcoming_events.published.any? */
-            /*         - @chapter.upcoming_events.published.each_with_index do |event, i| */
-            /*           p */
-            /*             => link_to chapter_event_path(@chapter, event) do */
-            /*               = short_friendly_date event.starts_at */
-            /*               ': */
-            /*               = event.name */
-            /*             - if 0 == i */
-            /*               span.info-label.bg-warning = t('chapter.next_event') */
-            /*       - else */
-            /*         p.system.message = t('chapter.no_upcoming_events') */
-    .col-md-6
-      h2
-        = link_to chapter_event_path(@chapter, @chapter.upcoming_events.published.first)
-          = t('chapter.next_event')
-          ':
-          = @chapter.upcoming_events.published.first.name
-      p = @chapter.upcoming_events.published.first.description
-      = link_to "Request an invite &raquo;".html_safe, chapter_event_path(@chapter, @chapter.upcoming_events.published.first), class: "btn btn-default"
+      .col-md-6
+        h2 = link_to t('chapter.next_event', name: @next_event.name), chapter_event_path(@chapter, @next_event)
+        p = render_markdown @next_event.description
+        = link_to t('chapter.request_an_invite_button').html_safe, chapter_event_path(@chapter, @next_event), class: "btn btn-default"
 
-    .col-md-3.col-md-offset-1
-      h2 = t('chapter.past_events')
-      - if @chapter.past_events.published.any?
-        - @chapter.past_events.published.each do |event|
-          p
-            = link_to chapter_event_path(@chapter, event) do
-              = short_friendly_date event.starts_at
-              |:
-              =< event.name
-      - else
-        p.system.message = t('chapter.no_past_events')
+      .col-md-3.col-md-offset-1
+        h2 = t('chapter.past_events')
+        - if @chapter.past_events.published.any?
+          - @chapter.past_events.published.each do |event|
+            p = link_to "#{short_friendly_date event.starts_at}: #{event.name}", chapter_event_path(@chapter, event)
+        - else
+          p.system.message = t('chapter.no_past_events')
 
-  .row.get-involved
-    .col-md-12
-      h2 = t('chapter.get_involved', name: @chapter.name)
-      p = t('chapter.get_involved_text')
+  - unless current_user.try(:subscribed_to?, @chapter)
+    .row.get-involved
+      .col-md-12
+        h2 = t('chapter.get_involved', name: @chapter.name)
+        p = t('chapter.get_involved_text')
+
       - if user_signed_in?
         p.cta = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
       - else

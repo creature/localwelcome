@@ -39,8 +39,9 @@ en:
     description: Local Welcome %{name} &ndash; upcoming events and details of our meet-up.
     manage: Manage this chapter
     upcoming_events: Upcoming events
+    request_an_invite_button: Request an invite &raquo;
     past_events: Past events
-    next_event: Our next event
+    next_event: "Our next event: %{name}"
     no_upcoming_events: No upcoming events
     no_past_events: No past events
     get_involved: Get involved with Local Welcome %{name}

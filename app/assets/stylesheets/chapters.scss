@@ -1,7 +1,8 @@
-.chapter-description {
+.row.chapter-description {
   margin-top: 2rem;
   background-color: rgba($flat-bootstrap-blue, 0.33);
   border-radius: 1rem;
+  display: flex;
 
   .chapter-description__image-container {
     overflow: hidden;
@@ -17,10 +18,20 @@
 
     font-size: 140%;
   }
+
+  .subscription-form {
+    position: absolute;
+    bottom: 0;
+
+    p {
+      margin-top: 5px;
+      font-size: 100%;
+    }
+  }
 }
 
 .event-listings {
-  margin-top: 2rem;
+  margin: 2rem 0 10rem;
 
   // TODO: This override and override-the-override is gross and should be tidied up.
   h2 {
@@ -76,7 +87,7 @@
 }
 
 .get-involved {
-  margin: 10rem 0;
+  margin-bottom: 10rem;
   border-top: 1px solid $flat-edward;
 
   .cta {
