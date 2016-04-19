@@ -14,7 +14,8 @@
       - if @chapter.description.blank?
         p = t('static.how_it_works_intro').html_safe
       - else
-        = render_markdown @chapter.description
+        .chapter-description__description-container
+          = render_markdown @chapter.description
 
       - if user_signed_in?
         = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }

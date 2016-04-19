@@ -11,11 +11,14 @@
     border-bottom-left-radius: 1rem;
   }
 
+  .chapter-description__description-container {
+    margin-bottom: 60px;
+  }
+
   p {
     &:first-child {
       margin-top: 1rem;
     }
-
     font-size: 140%;
   }
 
