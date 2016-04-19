@@ -24,7 +24,7 @@
           /* = t('chapter.not_ready', link: how_it_works_path).html_safe */
 
   .row.event-listings
-    - if @next_event
+    - if @next_event # Chapter has an upcoming event: display its details
       .col-md-2
         .calendar
           = link_to chapter_event_path(@chapter, @next_event)
@@ -35,14 +35,21 @@
         h2 = link_to t('chapter.next_event', name: @next_event.name), chapter_event_path(@chapter, @next_event)
         p = render_markdown @next_event.description
         = link_to t('chapter.request_an_invite_button').html_safe, chapter_event_path(@chapter, @next_event), class: "btn btn-default"
+    - else # No published upcoming event: display a blurb based on whether they're a member or not.
+      .col-md-8
+        h2 = t('chapter.next_event', name: "soon!")
+        p = t('chapter.next_event_none', name: @chapter.name)
 
+        - if current_user.try(:subscribed_to?, @chapter)
+          p = t('chapter.next_event_member_cta')
+        - else
+          p = t('chapter.next_event_nonmember_cta')
+
+    - if @chapter.past_events.published.any? # Show a small column of past events, if there are any.
       .col-md-3.col-md-offset-1
         h2 = t('chapter.past_events')
-        - if @chapter.past_events.published.any?
-          - @chapter.past_events.published.each do |event|
-            p = link_to "#{short_friendly_date event.starts_at}: #{event.name}", chapter_event_path(@chapter, event)
-        - else
-          p.system.message = t('chapter.no_past_events')
+        - @chapter.past_events.published.each do |event|
+          p = link_to "#{short_friendly_date event.starts_at}: #{event.name}", chapter_event_path(@chapter, event)
 
   - unless current_user.try(:subscribed_to?, @chapter)
     .row.get-involved
