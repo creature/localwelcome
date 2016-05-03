@@ -1,18 +1,23 @@
 .row.chapter-description {
+  min-height: 400px;
   margin-top: 2rem;
   background-color: rgba($flat-bootstrap-blue, 0.33);
   border-radius: 1rem;
+  @media (max-width: $mobile-breakpoint) {
+    border-radius: 0;
+  }
   display: flex;
 
   .chapter-description__image-container {
-    overflow: hidden;
+    background: image-url("starbucks-meeting.jpg") no-repeat left/cover;
     padding-left: 0;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
+
   }
 
   .chapter-description__description-container {
-    margin-bottom: 60px;
+    margin-bottom: 90px;
   }
 
   p {
@@ -20,21 +25,40 @@
       margin-top: 1rem;
     }
     font-size: 140%;
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 120%;
+    }
   }
 
-  .subscription-form {
+  .cta { // Buttons at the bottom of the blue description (subscribe/unsubscribe/manage)
     position: absolute;
     bottom: 0;
+    width: 100%;
 
-    p {
-      margin-top: 5px;
-      font-size: 100%;
+    @media (max-width: $mobile-breakpoint) {
+      width: calc(100% - 30px); /* Full width of page, minus Bootstrap's padding gutters. */
     }
+  }
+
+  .subscription-form p {
+    margin-top: 5px;
+    font-size: 100%;
   }
 }
 
 .event-listings {
-  margin: 2rem 0 10rem;
+
+  /* Cols are floated, so to add margins consistently, we need to add it to all the columns within this row.
+     On mobile, though, the calendar widget is an inline element, so its margins make the flowed text look weird.
+     So we reset those margins back to 0 for that case. */
+  & > [class^="col-md-"] {
+    margin: 2rem 0 4rem;
+    @media (max-width: $mobile-breakpoint) {
+      &.calendar-container {
+        margin: 0;
+      }
+    }
+  }
 
   // TODO: This override and override-the-override is gross and should be tidied up.
   h2 {
@@ -48,17 +72,34 @@
       color: #2a6496;
     }
   }
+}
 
+@media (max-width: $mobile-breakpoint) {
+  .event-listings__next-event {
+    h2 {
+      text-align: left;
+    }
+
+    .btn {
+      display: block;
+    }
+
+  }
 }
 
 .calendar {
   width: 180px;
+  max-width: 100%;
+  margin-top: 20px; // Same as Bootstrap's header margin
   height: 180px;
+  @media (max-width: $mobile-breakpoint) {
+    margin-top: 0;
+    height: 100px;
+  }
   display: inline-block;
   position: relative;
   border-radius: 1rem;
   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
-  margin-top: 20px; // Same as Bootstrap's header margin
   text-align: center;
 
   a, a:hover {
@@ -70,6 +111,10 @@
     background-color: white;
     border-radius: 1rem;
     font-size: 600%;
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 300%;
+    }
+
     height: 100%;
     line-height: 175%; // No logic to this value, I just eyeballed it until it looked OK
   }
@@ -95,5 +140,16 @@
 
   .cta {
     margin-top: 2rem;
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .subscription-form {
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 100%;
   }
 }
