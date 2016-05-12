@@ -39,14 +39,18 @@ en:
     description: Local Welcome %{name} &ndash; upcoming events and details of our meet-up.
     manage: Manage this chapter
     upcoming_events: Upcoming events
+    see_more_button: More details &raquo;
     past_events: Past events
-    next_event: Our next event
+    next_event: "Our next event: %{name}"
+    next_event_none: Local Welcome %{name} hasn't announced its next event yet, but we're working on it! We'll have some details on it soon.
+    next_event_nonmember_cta: If you join our mailing list, we'll email you automatically as soon as it's announced.
+    next_event_member_cta: You're a member of this chapter, so you'll automatically get an email as soon as it's announced.
     no_upcoming_events: No upcoming events
     no_past_events: No past events
     get_involved: Get involved with Local Welcome %{name}
     get_involved_text: Local Welcome is run entirely by volunteers. We need people who can give a few hours of their time to share their knowledge, skills, and friendliness with people who have arrived recently. Sign up for Local Welcome and you'll receive emails about our upcoming events, as well as details of the skills we're looking for.
     sign_up: Sign up to Local Welcome %{name}
-    not_ready: Not ready to sign up yet? <a href="%{link}">Learn more about Local Welcome first</a>.
+    not_ready: or <a href="%{link}">learn more about Local Welcome first</a>.
 
   # TODO: These should probably be merged with the 'chapter' namespace above.
   groups:

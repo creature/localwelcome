@@ -7,57 +7,64 @@
     = render_markdown_as_text @chapter.description
 
 .container
-  .row
-    .col-md-12
-      h1
-        = @chapter.name
-
-  .row
-    .col-md-12
-      - if can? :manage, @chapter
-        .buttons
-          = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default"
-      - unless @chapter.description.blank?
-        p.chapter-description = render_markdown @chapter.description
-
-  .row
-    .col-md-6
-      h2 = t('chapter.upcoming_events')
-      - if @chapter.upcoming_events.published.any?
-        - @chapter.upcoming_events.published.each_with_index do |event, i|
-          p
-            => link_to chapter_event_path(@chapter, event) do
-              = short_friendly_date event.starts_at
-              ':
-              = event.name
-            - if 0 == i
-              span.info-label.bg-warning = t('chapter.next_event')
+  .row.chapter-description
+    .col-md-3.chapter-description__image-container.hidden-xs
+      /* Image set by CSS background */
+    .col-md-9
+      - if @chapter.description.blank?
+        p = t('static.how_it_works_intro').html_safe
       - else
-        p.system.message = t('chapter.no_upcoming_events')
+        .chapter-description__description-container
+          = render_markdown @chapter.description
 
-    .col-md-6
-      h2 = t('chapter.past_events')
-      - if @chapter.past_events.published.any?
-        - @chapter.past_events.published.each do |event|
-          p
-            = link_to chapter_event_path(@chapter, event) do
-              = short_friendly_date event.starts_at
-              |:
-              =< event.name
-      - else
-        p.system.message = t('chapter.no_past_events')
-
-  .row
-    .col-md-12
-      h2 = t('chapter.get_involved', name: @chapter.name)
-      p = t('chapter.get_involved_text')
-      p
+      .cta
         - if user_signed_in?
-          = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+          - if can? :manage, @chapter
+            p = link_to t('chapter.manage'), admin_chapter_path(@chapter), class: "btn btn-default"
+          - else
+            = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
         - else
-          = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
+          p = link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary btn-lg"
 
   .row
-    .col-md-12
-      p = t('chapter.not_ready', link: how_it_works_path).html_safe
+    .event-listings
+      - if @next_event # Chapter has an upcoming event: display its details
+        .col-md-2.col-xs-3.calendar-container
+          .calendar
+            = link_to chapter_event_path(@chapter, @next_event)
+              p.calendar__day = @next_event.starts_at.day
+              p.calendar__month.hidden-xs = l(@next_event.starts_at, format: '%B')
+              p.calendar__month.visible-xs-block = l(@next_event.starts_at, format: '%b')
 
+        .col-md-6.event-listings__next-event
+          h2 = link_to t('chapter.next_event', name: @next_event.name), chapter_event_path(@chapter, @next_event)
+          p = render_markdown @next_event.description
+          = link_to t('chapter.see_more_button').html_safe, chapter_event_path(@chapter, @next_event), class: "btn btn-default"
+      - else # No published upcoming event: display a blurb based on whether they're a member or not.
+        .col-md-8
+          h2 = t('chapter.next_event', name: "soon!")
+          p = t('chapter.next_event_none', name: @chapter.name)
+
+          - if current_user.try(:subscribed_to?, @chapter)
+            p = t('chapter.next_event_member_cta')
+          - else
+            p = t('chapter.next_event_nonmember_cta')
+
+      - if @chapter.past_events.published.any? # Show a small column of past events, if there are any.
+        .col-md-3.col-md-offset-1
+          h2 = t('chapter.past_events')
+          - @chapter.past_events.published.each do |event|
+            p = link_to "#{short_friendly_date event.starts_at}: #{event.name}", chapter_event_path(@chapter, event)
+
+  - unless current_user.try(:subscribed_to?, @chapter)
+    .row.get-involved
+      .col-md-12
+        h2 = t('chapter.get_involved', name: @chapter.name)
+        p = t('chapter.get_involved_text')
+
+        - if user_signed_in?
+          p.cta = render partial: "subscriptions/subscription_form", locals: { chapter: @chapter }
+        - else
+          p.cta
+            => link_to t('chapter.sign_up', name: @chapter.name), new_user_registration_path(chapter: @chapter.id), class: "btn btn-primary"
+            = t('chapter.not_ready', link: how_it_works_path).html_safe

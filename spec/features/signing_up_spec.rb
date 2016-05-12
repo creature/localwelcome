@@ -34,7 +34,7 @@ feature "Signing Up to Local Welcome" do
   context "Signing up from a chapter page" do
     scenario "Signing up subscribes the user to a given mailing list" do
       visit chapter_path(chapter)
-      click_link "Sign up to Local Welcome #{chapter.name}"
+      first(:link, "Sign up to Local Welcome #{chapter.name}").click
       fill_in_registration_form
 
       expect { click_button "Sign up" }.to change { Subscription.count }.by 1
@@ -52,7 +52,7 @@ feature "Signing Up to Local Welcome" do
 
     scenario "Signing up with a too-short password doesn't result in an application error" do
       visit chapter_path(chapter)
-      click_link "Sign up to Local Welcome #{chapter.name}"
+      first(:link, "Sign up to Local Welcome #{chapter.name}").click
       fill_in :user_email, with: email
       fill_in :user_password, with: "asdf"
       fill_in :user_password_confirmation, with: "asdf"
@@ -65,7 +65,7 @@ feature "Signing Up to Local Welcome" do
 
     scenario "A user ends up being auto-subscribed to their chosen chapter if they bounce off an error page first" do
       visit chapter_path(chapter)
-      click_link "Sign up to Local Welcome #{chapter.name}"
+      first(:link, "Sign up to Local Welcome #{chapter.name}").click
       fill_in :user_email, with: email
       fill_in :user_password, with: "asdf"
       fill_in :user_password_confirmation, with: "asdf"
