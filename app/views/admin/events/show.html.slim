@@ -74,7 +74,8 @@
             tr
               td = invite.user.admin_link_with_popover(@event.chapter)
               td.who_do_you_want_to_meet = invite.who_do_you_want_to_meet
-              td = invite.friendly_status
+              td
+                = invite.friendly_status_with_color
               - if invite.user.more_info_required? # No options until they fill out more info
                 td &nbsp;
               - else # Tools to manage the state of this invite
@@ -87,7 +88,7 @@
                         = submit_tag "Send invitation", class: "btn btn-success"
                     =< form_tag admin_more_info_required_path(invite), method: :post, class: "form-inline" do
                       = submit_tag "More profile info required", class: "btn btn-default"
-                - elsif invite.accepted?
+                - elsif invite.accepted? && @event.starts_at.beginning_of_day <= Date.today
                   td
                     = form_tag admin_mark_as_attended_path(invite), method: :post, class: "form-inline" do
                       = submit_tag "Mark as attended", class: "btn btn-success"

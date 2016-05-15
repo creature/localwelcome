@@ -12,6 +12,18 @@ class InvitationDecorator < Draper::Decorator
     return "No-show" if object.no_show?
   end
 
+  def friendly_status_with_color
+    if object.accepted? || object.attended?
+      h.content_tag :span, friendly_status, class: "text-success"
+    elsif object.requested? || object.sent? || object.user.more_info_required?
+      h.content_tag :span, friendly_status, class: "text-warning"
+    elsif object.declined? || object.cancelled? || object.no_show?
+      h.content_tag :span, friendly_status, class: "text-danger"
+    else
+      friendly_status
+    end
+  end
+
   def user
     object.user.decorate
   end

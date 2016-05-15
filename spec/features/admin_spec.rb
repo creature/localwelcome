@@ -91,24 +91,36 @@ feature "The admin panel" do
       expect(invitation).to be_sent
     end
 
-    it "Allows an admin to mark a user as attended" do
-      expect(accepted_invite).to be_accepted
+    context "Managing attendance" do
+      it "Hides attendance buttons when it's not the day of the event" do
+        visit admin_chapter_event_path(event.chapter, event)
+        expect(page).not_to have_button "Mark as attended"
+        expect(page).not_to have_button "Mark as no-show"
+      end
 
-      visit admin_chapter_event_path(event.chapter, event)
-      click_button "Mark as attended"
+      context "On the day of the event" do
+        let (:event) { FactoryGirl.create(:event, starts_at: Date.today, ends_at: Date.tomorrow) }
 
-      accepted_invite.reload
-      expect(accepted_invite).to be_attended
-    end
+        it "Allows an admin to mark a user as attended" do
+          expect(accepted_invite).to be_accepted
 
-    it "Allows an admin to mark a user as a no-show" do
-      expect(accepted_invite).to be_accepted
+          visit admin_chapter_event_path(event.chapter, event)
+          click_button "Mark as attended"
 
-      visit admin_chapter_event_path(event.chapter, event)
-      click_button "Mark as no-show"
+          accepted_invite.reload
+          expect(accepted_invite).to be_attended
+        end
 
-      accepted_invite.reload
-      expect(accepted_invite).to be_no_show
+        it "Allows an admin to mark a user as a no-show" do
+          expect(accepted_invite).to be_accepted
+
+          visit admin_chapter_event_path(event.chapter, event)
+          click_button "Mark as no-show"
+
+          accepted_invite.reload
+          expect(accepted_invite).to be_no_show
+        end
+      end
     end
   end
 
