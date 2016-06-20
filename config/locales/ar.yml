@@ -18,11 +18,11 @@ ar:
       email: <span dir="ltr"><a href="mailto:localwelcometeam@gmail.com">localwelcometeam@gmail.com</a></span> للاستفسارات؟ أرسل لنا على
       twitter: <span dir="ltr"><a href="https://twitter.com/localwelcome">Twitter</a></span> تابعونا على
       facebook: <span dir="ltr"><a href="https://www.facebook.com/LocalWelcome/">Facebook</a></span> تابعونا على
-      youtube: Watch our videos on <a href="https://www.youtube.com/channel/UCnpIvBCeBJ7SLjYZ__KxVCw">YouTube</a>
+      youtube: شاهد فيديوهاتنا على <a href="https://www.youtube.com/channel/UCnpIvBCeBJ7SLjYZ__KxVCw">YouTube</a>
       established: 2015 Local Welcome تم تأسيس لمعرفة المزيد <a href="%{link}">حول المشروع</a>
       open_source: Our website is <a href="https://github.com/creature/localwelcome">open source</a>.
-    generic_error: Sorry, something went wrong.
-    error_with_details: "Sorry, something went wrong: %{details}"
+    generic_error: عذراً، حدث خطأ ما
+    error_with_details: "عذراً، حدث خطأ ما: %{details}"
 
   static:
     how_it_works: "آلية العمل"
@@ -46,7 +46,7 @@ ar:
     next_event: نشاطنا التالي
     no_upcoming_events: لا توجد فعاليات قادمة
     no_past_events: لا توجد فعاليات سابقة
-    get_involved: شارك مع "لوكال ويلكم" في نوتنغهام %{name}
+    get_involved: شارك مع "لوكال ويلكم" في %{name}
     get_involved_text: تُدار "لوكال ويلكم" بشكل كامل من قِبل متطوعين. نحن بحاجة إلى أشخاص ممّن يستطيعون تقديم بضع ساعات من وقتهم لمشاركة معارفهم، مهاراتهم، و ودهم مع الأشخاص الواصلين مؤخراً. اشترك مع "لوكال ويلكم" لتصلك إيميلات حول الفعاليات القادمة، بالإضافة لتفاصيل المهارات التي نبحث عنها.
     sign_up: اشترك مع "لوكال ويلكم" %{name}
     not_ready: غير مستعد للإشتراك بعد؟ <a href="%{link}">اعرف المزيد عن "لوكال ويلكم" أولاً</a>.
@@ -58,19 +58,19 @@ ar:
     register:  سجل من أجل الحضور
 
   invite:
-    request_button: Request an invite
-    need_info: We need some information to help us match people up.
-    who_to_meet: Who would you like to meet at this event? (Please write in English)
-    your_invite: Your invite
-    accept_button: Accept invite
-    cannot_attend_button: I can no longer attend
-    more_info_needed: You requested an invitation to this event, <strong>but we need <a href="%{link}">more information about you</a> before we can grant it</strong>. <a href="%{link}">Update your profile now</a> and an organiser will review your request again.
+    request_button: أرسل دعوة
+    need_info: نحن بحاجة لبعض المعلومات لمساعدتنا في إيصال الناس مع بعضها البعض
+    who_to_meet: من مع ترغب أن تلتقي في هذا الاجتماع؟ (نرجو الكتابة باللغة الانكليزية)
+    your_invite: دعوتك
+    accept_button: قبول الدعوة
+    cannot_attend_button: لا يمكنني الحضور
+    more_info_needed: لقد طلبت دعوة لحضور هذا الاجتماع، <strong> لكن نحتاج <a href="%{link}"> معلومات أكثر عنك </a> قبل منحك إيّاها. </strong>. <a href="%{link}"> قم بتحديث ملفك الشخصي الآن</a> وسيقوم المنظم بمراجعة طلبك مرة أخرى
     # The below show up as notification bars to let the user know that their button click worked.
-    requested_notice: Invitation requested!
-    removed_notice: Invitation removed. Sorry that you can't make it.
-    accept_notice: Your place is confirmed. See you there!
-    accept_error: Sorry, we couldn't reserve you a place at this meeting.
-    decline_notice: Thanks for letting us know that you can't make it.
+    requested_notice: تم طلب دعوة!
+    removed_notice: تم حذف الدعوة. نأسف بأنه لا يمكنك القيام بها
+    accept_notice: تم تأكيد مكانك. نراك هنا!
+    accept_error: عذراً، لم نتمكن من حجز مكان لك في هذا الاجتماع.
+    decline_notice: شكراً لإعلامنا بأنه لا يمكنك القيام بها.
 
   event:
     # The &laquo; part gets rendered as a << arrow to indicate 'back'
@@ -78,21 +78,21 @@ ar:
     manage_button: Manage this event
     times: "%{start_time} to %{end_time}"
     attendee_info: Attendee information
-    update_profile: You should <a href="%{link}">update your profile</a> so we know more about your background, as that helps with the matching.
-    requested_invite: You've requested an invitation to this event. An organiser will review your profile, and email you an invite if we can match you with someone suitable.
-    sent_invite: You've been invited to attend this event! We'd love to see you there.
-    accepted_invite: You're coming to this event!
-    not_attending: You're not attending this event.
-    attended: You attended this event! Thanks for coming along.
-    no_show: <strong>You said you were attending this event, but didn't show up</strong>. Please let us know if you can't make it in future, so we can give your spot to someone else.
-    full: This event is full!
-    attending_full: <strong>Please note:</strong> This event is full up. If you can no longer make it, please let us know so we can give your slot to someone else.
-    no_space_left: Sorry, we've not got any space left at this event.
+    update_profile: ينبغي عليك <a href="%{link}">تحديث ملفك الشخصي</a> لنستطيع أن نعرف أكثر عن خلفيتك، حيث ذلك يساعدنا على المطابقة
+    requested_invite: لقد طلبت دعوة لحضور هذا اللقاء. سيقوم المنظم بمراجعة ملفك الشخصي، والرد عليك ببريد إلكتروني (إيميل) في حال استطعنا وصلك مع الشخص المناسب
+    sent_invite: لقد تمت دعوتك لحضور هذا اللقاء! يسعدنا أن نراك هناك
+    accepted_invite: سوف تحضر هذا اللقاء!
+    not_attending: لن تحضر هذا اللقاء.
+    attended: لقد حضرت هذا اللقاء! شكراً لحضورك
+    no_show: <strong>لقد قلت بأنك سوف تحضر هذا اللقاء، ولكنك لم تفعل</strong>. نرجو إعلامنا في حال لن تستطيع الحضور في المستقبل، لنتمكن من إعطاء مكانك لشخص آخر
+    full: هذا اللقاء مليء
+    attending_full: <strong>يرجى الانتباه:</strong> هذا اللقاء مملتئ. في حال لن تستطيع حضوره، نرجو إعلامنا حيث يمكننا إعطاء مكانك لشخص آخر
+    no_space_left: عذراً، لم يعد لدينا أية أماكن لهذا اللقاء
     join_cta: If you join <a href="%{link}">Local Welcome %{chapter_name}</a> you'll get an email whenever we announce a new event.
   subscriptions:
-    subscribe: Get emails from Local Welcome %{name}
-    subscribed: Subscribed to <a href="%{link}">Local Welcome %{name}</a>
-    unsubscribe: Unsubscribe
+    subscribe: تلقى رسائل الكترونية (إيميلات) من لوكال ويلكم %{name}
+    subscribed: اشترك مع <a href="%{link}">لوكال ويلكم %{name}</a>
+    unsubscribe: إلغاء الاشتراك
 
   sponsors:
     title: شكرا لمن يدعمنا
